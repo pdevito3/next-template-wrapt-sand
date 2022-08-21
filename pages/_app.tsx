@@ -1,7 +1,8 @@
-import { SessionProvider, signIn } from "next-auth/react";
+import AccessDenied from "components/auth/AccessDenied";
+import { SessionProvider } from "next-auth/react";
 import type { AppProps } from "next/app";
+import "styles/globals.css";
 import useAuthUser from "utils/auth/useAuthUser";
-import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -23,10 +24,7 @@ function RouteGuard({ children, isPublic = false }: RouteGuardProps) {
   if (isPublic) return <>{children}</>;
 
   if (typeof window !== undefined && isLoading) return null;
-  if (!isLoggedIn) {
-    signIn("oidc");
-    return null;
-  }
+  if (!isLoggedIn) return <AccessDenied />;
 
   return <>{children}</>;
 }
