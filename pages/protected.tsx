@@ -1,7 +1,7 @@
+import useAuthUser from "components/auth/hooks/useAuthUser";
 import Layout from "components/layout";
-import useAuthUser from "utils/auth/useAuthUser";
 
-Protected.isPublic = false;
+// Protected.isPublic = false;
 export default function Protected() {
   const { session } = useAuthUser();
 

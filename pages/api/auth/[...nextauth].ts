@@ -1,4 +1,4 @@
-import axios from "axios";
+import { client } from "lib/axios";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import querystring from "query-string";
@@ -38,7 +38,7 @@ export const authOptions: NextAuthOptions = {
       var refreshToken = token.refreshToken;
       let headers = { "Content-Type": "application/x-www-form-urlencoded" };
       try {
-        await axios.post(
+        await client.post(
           "http://localhost:3255/auth/realms/DevRealm/protocol/openid-connect/logout",
           querystring.stringify({
             refresh_token: refreshToken,
