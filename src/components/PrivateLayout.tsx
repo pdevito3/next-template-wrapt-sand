@@ -5,7 +5,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-export default function Layout({ children }: Props) {
+export default function PrivateLayout({ children }: Props) {
   return (
     <div className="flex w-full h-full">
       <PrivateSideNav />

@@ -1,4 +1,4 @@
-import Layout from "@/components/layout";
+import PrivateLayout from "@/components/PrivateLayout";
 import Head from "next/head";
 
 export default function Home() {
@@ -10,7 +10,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Layout>home</Layout>
+      <PrivateLayout>home</PrivateLayout>
     </>
   );
 }

@@ -1,6 +1,5 @@
-// import AccessDenied from "components/auth/AccessDenied";
-import Login from "@/components/auth/components/login";
-import useAuthUser from "@/components/auth/hooks/useAuthUser";
+import Login from "@/features/auth/components/login";
+import useAuthUser from "@/features/auth/hooks/useAuthUser";
 import "@/styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 import type { AppProps } from "next/app";

@@ -1,5 +1,5 @@
-import useAuthUser from "@/components/auth/hooks/useAuthUser";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import useAuthUser from "@/features/auth/hooks/useAuthUser";
 import { Menu, Transition } from "@headlessui/react";
 import clsx from "clsx";
 import { signOut } from "next-auth/react";
