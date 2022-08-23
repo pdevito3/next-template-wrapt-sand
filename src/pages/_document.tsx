@@ -24,6 +24,8 @@ class MyDocument extends Document {
         lang="en"
       >
         <Head>
+          <title>New Wrapt App in Next</title>
+          <link rel="icon" href="/favicon.svg" />
           <link rel="preconnect" href="https://fonts.bunny.net" />
           <link
             rel="stylesheet"

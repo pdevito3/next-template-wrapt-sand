@@ -7,7 +7,7 @@ export default function Home() {
       {/* TODO head update */}
       <Head>
         <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.svg" />
       </Head>
 
       <PrivateLayout>home</PrivateLayout>
