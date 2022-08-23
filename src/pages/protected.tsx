@@ -1,5 +1,5 @@
-import PrivateLayout from "@/components/layout";
-import useAuthUser from "@/features/auth/hooks/useAuthUser";
+import PrivateLayout from "@/components/PrivateLayout";
+import useAuthUser from "@/domain/auth/hooks/useAuthUser";
 
 // Protected.isPublic = false;
 export default function Protected() {

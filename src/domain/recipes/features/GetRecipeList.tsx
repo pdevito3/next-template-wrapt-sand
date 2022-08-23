@@ -1,6 +1,6 @@
 import { PaginatedTable, usePaginatedTableContext } from "@/components/Forms";
 import { Notifications } from "@/components/Notifications";
-import { RecipeDto } from "@/features/recipes/types";
+import { RecipeDto } from "@/domain/recipes/types";
 import "@tanstack/react-table";
 import { createColumnHelper, SortingState } from "@tanstack/react-table";
 import { useRouter } from "next/router";

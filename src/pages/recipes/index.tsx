@@ -1,6 +1,6 @@
 import { PaginatedTableProvider, useGlobalFilter } from "@/components/Forms";
 import DebouncedInput from "@/components/Forms/DebouncedInput";
-import { RecipeListTable } from "@/features/Recipes";
+import { RecipeListTable } from "@/domain/Recipes";
 import "@tanstack/react-table";
 import Link from "next/link";
 import PrivateLayout from "../../components/PrivateLayout";
