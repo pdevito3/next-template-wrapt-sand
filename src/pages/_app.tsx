@@ -1,15 +1,23 @@
-import Login from "@/features/auth/components/login";
-import useAuthUser from "@/features/auth/hooks/useAuthUser";
+import { Notifications } from "@/components/Notifications";
+import Login from "@/domain/auth/components/login";
+import useAuthUser from "@/domain/auth/hooks/useAuthUser";
 import "@/styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 import type { AppProps } from "next/app";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+import "react-toastify/dist/ReactToastify.min.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <SessionProvider session={pageProps.session} refetchInterval={0}>
-      <RouteGuard isPublic={Component.isPublic}>
-        <Component {...pageProps} />
-      </RouteGuard>
+      <QueryClientProvider client={new QueryClient()}>
+        <RouteGuard isPublic={Component.isPublic}>
+          <Component {...pageProps} />
+          <ReactQueryDevtools initialIsOpen={false} />
+          <Notifications />
+        </RouteGuard>
+      </QueryClientProvider>
     </SessionProvider>
   );
 }
