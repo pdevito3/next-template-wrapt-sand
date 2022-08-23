@@ -7,8 +7,10 @@ export default function Protected() {
 
   return (
     <Layout>
-      ProtectedPage
-      <pre>{JSON.stringify(session, null, 2)}</pre>
+      <div className="max-w-lg whitespace-pre-wrap">
+        ProtectedPage
+        <p className="whitespace-wrap">{JSON.stringify(session, null, 2)}</p>
+      </div>
     </Layout>
   );
 }
