@@ -1,9 +1,9 @@
+import useAuthUser from "@/components/auth/hooks/useAuthUser";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { Menu, Transition } from "@headlessui/react";
 import clsx from "clsx";
 import { signOut } from "next-auth/react";
 import { Fragment } from "react";
-import useAuthUser from "./auth/hooks/useAuthUser";
-import { ThemeToggle } from "./ThemeToggle";
 
 function PrivateHeader() {
   const { user } = useAuthUser();

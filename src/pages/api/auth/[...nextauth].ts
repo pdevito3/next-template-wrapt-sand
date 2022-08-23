@@ -1,4 +1,4 @@
-import { client } from "lib/axios";
+import { client } from "@/lib/axios";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import querystring from "query-string";

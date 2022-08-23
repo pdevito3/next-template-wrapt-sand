@@ -1,8 +1,8 @@
 // source: https://github.com/tailwindlabs/tailwindcss.com/blob/c011a496f2bc2781db54412bdd5a98e174a8a8c6/src/components/ThemeToggle.js
 
+import { useIsomorphicLayoutEffect } from "@/hooks/useIsomorphicLayoutEffect";
 import { Listbox } from "@headlessui/react";
 import clsx from "clsx";
-import { useIsomorphicLayoutEffect } from "hooks/useIsomorphicLayoutEffect";
 import { Fragment, useEffect, useRef } from "react";
 import create from "zustand";
 

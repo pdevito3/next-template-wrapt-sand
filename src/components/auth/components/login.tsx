@@ -1,4 +1,4 @@
-import useAuthUser from "components/auth/hooks/useAuthUser";
+import useAuthUser from "@/components/auth/hooks/useAuthUser";
 import { signIn } from "next-auth/react";
 
 Login.isPublic = true;

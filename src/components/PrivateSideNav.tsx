@@ -1,6 +1,6 @@
+import logo from "@/images/logo.svg";
 import { Dialog, Transition } from "@headlessui/react";
 import clsx from "clsx";
-import logo from "images/logo.svg";
 import Image from "next/future/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
