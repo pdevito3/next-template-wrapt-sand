@@ -5,6 +5,9 @@ export const clients = {
   recipeManagement: buildApiClient({
     baseURL: `${env.clientUrls.recipeManagement()}/api`,
   }),
+  authServer: Axios.create({
+    baseURL: env.clientUrls.authServer(),
+  }),
 };
 
 interface ApiClientProps {

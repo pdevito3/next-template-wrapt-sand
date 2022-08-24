@@ -11,5 +11,13 @@ export const env = {
           throw "Environment variable not set for 'recipeManagement'";
       }
     },
+    authServer: () => {
+      switch (_env) {
+        case "development":
+          return "http://localhost:3255/auth/realms/DevRealm";
+        default:
+          throw "Environment variable not set for 'authServer'";
+      }
+    },
   },
 };

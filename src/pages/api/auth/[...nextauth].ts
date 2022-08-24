@@ -1,10 +1,8 @@
-import { client } from "@/lib/axios";
+import { clients } from "@/lib/axios";
 import { env } from "@/utils/environmentService";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import querystring from "query-string";
-// import AppleProvider from "next-auth/providers/apple"
-// import EmailProvider from "next-auth/providers/email"
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
@@ -15,8 +13,7 @@ export const authOptions: NextAuthOptions = {
       id: "oidc",
       name: "OIDC",
       type: "oauth",
-      wellKnown:
-        "http://localhost:3255/auth/realms/DevRealm/.well-known/openid-configuration",
+      wellKnown: `${env.clientUrls.authServer()}/.well-known/openid-configuration`,
       authorization: {
         params: { scope: "openid email profile recipe_management" },
       },
@@ -39,8 +36,8 @@ export const authOptions: NextAuthOptions = {
       var refreshToken = token.refreshToken;
       let headers = { "Content-Type": "application/x-www-form-urlencoded" };
       try {
-        await client.post(
-          "http://localhost:3255/auth/realms/DevRealm/protocol/openid-connect/logout",
+        await clients.authServer.post(
+          `/protocol/openid-connect/logout`,
           querystring.stringify({
             refresh_token: refreshToken,
             client_secret: "974d6f71-d41b-4601-9a7a-a33081f82188",
@@ -122,7 +119,8 @@ async function refreshAccessToken(token: JWT) {
       grant_type: "refresh_token",
       refresh_token: token.refreshToken,
     });
-    const url = `http://localhost:3255/auth/realms/DevRealm/protocol/openid-connect/token?${params}`;
+    const url =
+      env.clientUrls.authServer() + "/protocol/openid-connect/token?" + params;
 
     const response = await fetch(url, {
       headers: {
