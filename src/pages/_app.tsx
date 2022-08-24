@@ -10,15 +10,19 @@ import "react-toastify/dist/ReactToastify.min.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <SessionProvider session={pageProps.session} refetchInterval={0}>
-      <QueryClientProvider client={new QueryClient()}>
-        <RouteGuard isPublic={Component.isPublic}>
-          <Component {...pageProps} />
-          <ReactQueryDevtools initialIsOpen={false} />
-          <Notifications />
-        </RouteGuard>
-      </QueryClientProvider>
-    </SessionProvider>
+    <>
+      <title>New Wrapt App in Next</title>
+
+      <SessionProvider session={pageProps.session} refetchInterval={0}>
+        <QueryClientProvider client={new QueryClient()}>
+          <RouteGuard isPublic={Component.isPublic}>
+            <Component {...pageProps} />
+            <ReactQueryDevtools initialIsOpen={false} />
+            <Notifications />
+          </RouteGuard>
+        </QueryClientProvider>
+      </SessionProvider>
+    </>
   );
 }
 
