@@ -1,4 +1,5 @@
 import { client } from "@/lib/axios";
+import { env } from "@/utils/environmentService";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import querystring from "query-string";
@@ -83,7 +84,7 @@ export const authOptions: NextAuthOptions = {
       name: `__Secure-next-auth.session-token`,
       options: {
         httpOnly: true,
-        sameSite: process.env.NODE_ENV === "development" ? "lax" : "strict",
+        sameSite: env.isDevelopment ? "lax" : "strict",
         path: "/",
         secure: true,
       },
@@ -91,7 +92,7 @@ export const authOptions: NextAuthOptions = {
     callbackUrl: {
       name: `__Secure-next-auth.callback-url`,
       options: {
-        sameSite: process.env.NODE_ENV === "development" ? "lax" : "strict",
+        sameSite: env.isDevelopment ? "lax" : "strict",
         path: "/",
         secure: true,
       },
@@ -100,7 +101,7 @@ export const authOptions: NextAuthOptions = {
       name: `__Host-next-auth.csrf-token`,
       options: {
         httpOnly: true,
-        sameSite: process.env.NODE_ENV === "development" ? "lax" : "strict",
+        sameSite: env.isDevelopment ? "lax" : "strict",
         path: "/",
         secure: true,
       },

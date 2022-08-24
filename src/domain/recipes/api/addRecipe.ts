@@ -1,24 +1,27 @@
-import { api } from '@/lib/axios';
-import { AxiosError } from 'axios';
-import { UseMutationOptions, useQueryClient, useMutation } from 'react-query';
-import { RecipeKeys } from './recipe.keys';
-import { RecipeDto, RecipeForCreationDto } from '../types';
+import { clients } from "@/lib/axios";
+import { AxiosError } from "axios";
+import { useMutation, UseMutationOptions, useQueryClient } from "react-query";
+import { RecipeDto, RecipeForCreationDto } from "../types";
+import { RecipeKeys } from "./recipe.keys";
 
 const addRecipe = (data: RecipeForCreationDto) => {
-	return api
-		.post('/api/recipes', data)
-		.then((response) => response.data as RecipeDto);
+  return clients.recipeManagement
+    .post("/recipes", data)
+    .then((response) => response.data as RecipeDto);
 };
 
-export function useAddRecipe(options?: UseMutationOptions<RecipeDto, AxiosError, RecipeForCreationDto>) {
-	const queryClient = useQueryClient()
+export function useAddRecipe(
+  options?: UseMutationOptions<RecipeDto, AxiosError, RecipeForCreationDto>
+) {
+  const queryClient = useQueryClient();
 
-	return useMutation(
-		(newRecipe: RecipeForCreationDto) => addRecipe(newRecipe),
-		{
-			onSuccess: () => {
-				queryClient.invalidateQueries(RecipeKeys.lists())
-			},
-			...options
-		});
+  return useMutation(
+    (newRecipe: RecipeForCreationDto) => addRecipe(newRecipe),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(RecipeKeys.lists());
+      },
+      ...options,
+    }
+  );
 }
