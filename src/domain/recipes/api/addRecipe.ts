@@ -4,8 +4,10 @@ import { useMutation, UseMutationOptions, useQueryClient } from "react-query";
 import { RecipeDto, RecipeForCreationDto } from "../types";
 import { RecipeKeys } from "./recipe.keys";
 
-const addRecipe = (data: RecipeForCreationDto) => {
-  return clients.recipeManagement
+const addRecipe = async (data: RecipeForCreationDto) => {
+  const axios = await clients.recipeManagement();
+  console.log(data);
+  return axios
     .post("/recipes", data)
     .then((response) => response.data as RecipeDto);
 };

@@ -24,18 +24,19 @@ const getRecipes = async ({
 
   delayInMs = hasArtificialDelay ? delayInMs : 0;
 
-  const client = await clients.recipeManagement();
   const [json] = await Promise.all([
-    client
-      .get(`/recipes${queryString}`)
-      .then((response: AxiosResponse<RecipeDto[]>) => {
-        return {
-          data: response.data as RecipeDto[],
-          pagination: JSON.parse(
-            response.headers["x-pagination"]
-          ) as Pagination,
-        } as PagedResponse<RecipeDto>;
-      }),
+    clients.recipeManagement().then((axios) =>
+      axios
+        .get(`/recipes${queryString}`)
+        .then((response: AxiosResponse<RecipeDto[]>) => {
+          return {
+            data: response.data as RecipeDto[],
+            pagination: JSON.parse(
+              response.headers["x-pagination"] ?? ""
+            ) as Pagination,
+          } as PagedResponse<RecipeDto>;
+        })
+    ),
     new Promise((resolve) => setTimeout(resolve, delayInMs)),
   ]);
   return json;

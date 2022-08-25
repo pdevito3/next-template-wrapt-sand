@@ -4,7 +4,8 @@ import { useMutation, UseMutationOptions, useQueryClient } from "react-query";
 import { RecipeKeys } from "./recipe.keys";
 
 async function deleteRecipe(id: string) {
-  return clients.recipeManagement.delete(`/recipes/${id}`).then(() => {});
+  const axios = await clients.recipeManagement();
+  return axios.delete(`/recipes/${id}`).then(() => {});
 }
 
 export function useDeleteRecipe(
