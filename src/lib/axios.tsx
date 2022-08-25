@@ -1,10 +1,13 @@
 import { env } from "@/utils/environmentService";
 import Axios from "axios";
+import { getSession } from "next-auth/react";
 
 export const clients = {
-  recipeManagement: buildApiClient({
-    baseURL: `${env.clientUrls.recipeManagement()}/api`,
-  }),
+  recipeManagement: (headers?: { [key: string]: string }) =>
+    buildApiClient({
+      baseURL: `${env.clientUrls.recipeManagement()}/api`,
+      customHeaders: headers,
+    }),
   authServer: Axios.create({
     baseURL: env.clientUrls.authServer(),
   }),
@@ -12,15 +15,23 @@ export const clients = {
 
 interface ApiClientProps {
   baseURL?: string;
+  customHeaders?: {
+    [key: string]: string;
+  };
 }
 
-function buildApiClient({ baseURL }: ApiClientProps) {
+async function buildApiClient({ baseURL, customHeaders }: ApiClientProps) {
+  var session = await getSession();
+  var token = session?.accessToken;
+
   const client = Axios.create({
     baseURL,
     withCredentials: true,
     timeout: 30_000, // If you want to increase this, do it for a specific call, not the global app API.
     headers: {
       "X-CSRF": "1",
+      Authorization: `Bearer ${token}`,
+      ...customHeaders,
     },
   });
 

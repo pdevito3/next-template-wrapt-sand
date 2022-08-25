@@ -24,8 +24,9 @@ const getRecipes = async ({
 
   delayInMs = hasArtificialDelay ? delayInMs : 0;
 
+  const client = await clients.recipeManagement();
   const [json] = await Promise.all([
-    clients.recipeManagement
+    client
       .get(`/recipes${queryString}`)
       .then((response: AxiosResponse<RecipeDto[]>) => {
         return {
@@ -56,6 +57,8 @@ export const useRecipes = ({
     filters,
     sortOrder: sortOrderString,
   });
+  // var temp = useSession();
+  // console.log(temp.data.accessToken);
 
   return useQuery(RecipeKeys.list(queryParams ?? ""), () =>
     getRecipes({ queryString: queryParams, hasArtificialDelay, delayInMs })
