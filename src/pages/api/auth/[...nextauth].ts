@@ -1,7 +1,6 @@
 import { clients } from "@/lib/axios";
 import { env } from "@/utils/environmentService";
 import NextAuth, { NextAuthOptions } from "next-auth";
-import { JWT } from "next-auth/jwt";
 import querystring from "query-string";
 
 // For more information on each option (and a full list of options) go to
@@ -20,7 +19,7 @@ export const authOptions: NextAuthOptions = {
       idToken: true,
       checks: ["pkce", "state"],
       clientId: "recipe_management.next",
-      clientSecret: "974d6f71-d41b-4601-9a7a-a33081f82188",
+      clientSecret: env.auth.secret,
       profile(profile) {
         return {
           id: profile.sub,
@@ -40,7 +39,7 @@ export const authOptions: NextAuthOptions = {
           `/protocol/openid-connect/logout`,
           querystring.stringify({
             refresh_token: refreshToken,
-            client_secret: "974d6f71-d41b-4601-9a7a-a33081f82188",
+            client_secret: env.auth.secret,
             client_id: "recipe_management.next",
           }),
           { headers }
@@ -114,7 +113,7 @@ export const authOptions: NextAuthOptions = {
 async function refreshAccessToken(token: JWT) {
   try {
     var params = querystring.stringify({
-      client_secret: "974d6f71-d41b-4601-9a7a-a33081f82188",
+      client_secret: env.auth.secret,
       client_id: "recipe_management.next",
       grant_type: "refresh_token",
       refresh_token: token.refreshToken,

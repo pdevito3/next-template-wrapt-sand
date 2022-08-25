@@ -2,6 +2,9 @@ const _env = process.env.NODE_ENV;
 export const env = {
   environment: _env,
   isDevelopment: _env === "development",
+  auth: {
+    secret: "974d6f71-d41b-4601-9a7a-a33081f82188", // TODO change to env var ref
+  },
   clientUrls: {
     recipeManagement: () => {
       switch (_env) {
