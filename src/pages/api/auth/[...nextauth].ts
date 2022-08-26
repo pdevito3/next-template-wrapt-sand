@@ -51,12 +51,14 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user, account }) {
       // Initial sign in
       if (account && user) {
-        return {
+        const decodedAccessToken = parseJwt(account.access_token);
+        const nextAuthToken = {
           accessToken: account.access_token,
-          accessTokenExpires: Date.now() + account.expires_at * 1000,
+          accessTokenExpires: decodedAccessToken.exp * 1000,
           refreshToken: account.refresh_token,
           user,
         };
+        return nextAuthToken;
       }
 
       // Return previous token if the access token has not expired yet
