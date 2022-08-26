@@ -33,7 +33,9 @@ module.exports = {
 				"private-header": 'var(--private-header-height)',
 			},
       maxWidth: {
-        '2xl': '40rem',
+        '8xl': '88rem',
+        '9xl': '96rem',
+        '10xl': '104rem',
       },
 		},
   },

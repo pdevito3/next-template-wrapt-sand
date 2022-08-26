@@ -16,10 +16,10 @@ export default function RecipeList() {
 
   return (
     <PrivateLayout>
-      <div className="space-y-6">
+      <div className="space-y-6 max-w-9xl">
         <div className="">
           <h1 className="max-w-4xl text-2xl font-medium tracking-tight font-display text-slate-900 dark:text-gray-50 sm:text-4xl">
-            Recipes Table
+            Recipes
           </h1>
           <div className="py-4">
             {/* prefer this. more composed approach */}
@@ -48,7 +48,7 @@ export default function RecipeList() {
                     onChange={(value) =>
                       calculateAndSetQueryFilterForRecipes(String(value))
                     }
-                    className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                    className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg outline-none w-80 bg-gray-50 focus:border-violet-500 focus:ring-violet-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-violet-500 dark:focus:ring-violet-500"
                     placeholder="Search all columns..."
                   />
                 </div>

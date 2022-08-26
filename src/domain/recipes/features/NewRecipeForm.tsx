@@ -1,5 +1,6 @@
 import { Notifications } from "@/components/Notifications";
 import { DevTool } from "@hookform/devtools";
+import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useAddRecipe } from "../api";
 import { RecipeForCreationDto } from "../types/index";
@@ -10,16 +11,23 @@ function NewRecipeForm() {
     handleSubmit,
     reset,
     control,
+    setFocus,
     formState: { errors },
   } = useForm<RecipeForCreationDto>({
     defaultValues: {
       visibility: "public",
     },
   });
+  useEffect(() => {
+    setFocus("title");
+  }, [setFocus]);
 
   const createRecipeApi = useAddRecipe();
-  const onSubmit: SubmitHandler<RecipeForCreationDto> = (data) =>
+  const onSubmit: SubmitHandler<RecipeForCreationDto> = (data) => {
     createRecipe(data);
+    setFocus("title");
+  };
+
   function createRecipe(data: RecipeForCreationDto) {
     createRecipeApi
       .mutateAsync(data)
