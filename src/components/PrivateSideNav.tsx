@@ -24,7 +24,7 @@ const navigation = [
 export default function PrivateSideNav() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const router = useRouter();
-  const { pathname, asPath } = router;
+  const { pathname } = router;
 
   useEffect(() => {
     setSidebarOpen(false);
@@ -95,7 +95,7 @@ export default function PrivateSideNav() {
                         key={item.name}
                         href={item.href}
                         className={clsx(
-                          asPath === item.href
+                          pathname === item.href
                             ? "border-l-4 border-white bg-slate-300 text-slate-900 dark:bg-slate-900 dark:text-white"
                             : "text-slate-900 hover:bg-slate-200 dark:text-white dark:hover:bg-slate-700 dark:hover:bg-opacity-75",
                           "group flex items-center p-4 text-base font-medium"
@@ -135,7 +135,7 @@ export default function PrivateSideNav() {
                   key={item.name}
                   href={item.href}
                   className={clsx(
-                    asPath === item.href
+                    pathname === item.href
                       ? "border-l-4 border-violet-500 bg-slate-300 text-slate-900 dark:border-white dark:bg-slate-900 dark:text-white"
                       : "text-slate-900 hover:bg-slate-200 dark:text-white dark:hover:bg-slate-700 dark:hover:bg-opacity-75",
                     "group flex items-center px-3 py-3 text-sm font-medium"
