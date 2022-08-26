@@ -125,7 +125,7 @@ export default function PrivateSideNav() {
         <div className="flex flex-col flex-1 min-h-0 bg-slate-50 dark:bg-slate-800">
           <div className="flex items-center flex-shrink-0 h-16 px-4 shadow-md bg-slate-100 shadow-violet-500/40 dark:bg-slate-800">
             <Link href={"/"}>
-              <img className="w-auto h-8" src={logo} alt="Logo" />
+              <Image className="w-auto h-8" src={logo} alt="Logo" />
             </Link>
           </div>
           <div className="flex flex-col flex-1 py-2 overflow-y-auto">
