@@ -60,7 +60,8 @@ export const authOptions: NextAuthOptions = {
       }
 
       // Return previous token if the access token has not expired yet
-      if (Date.now() < token.accessTokenExpires) {
+      const decodedAccessToken = parseJwt(token.accessToken);
+      if (Date.now() < decodedAccessToken.exp * 1000) {
         return token;
       }
 
@@ -105,6 +106,10 @@ export const authOptions: NextAuthOptions = {
   },
 };
 
+function parseJwt(token) {
+  return JSON.parse(Buffer.from(token.split(".")[1], "base64").toString());
+}
+
 /**
  * Takes a token, and returns a new token with updated
  * `accessToken` and `accessTokenExpires`. If an error occurs,
@@ -112,20 +117,20 @@ export const authOptions: NextAuthOptions = {
  */
 async function refreshAccessToken(token: JWT) {
   try {
-    var params = querystring.stringify({
+    var params = {
       client_secret: env.auth.secret,
       client_id: "recipe_management.next",
       grant_type: "refresh_token",
       refresh_token: token.refreshToken,
-    });
-    const url =
-      env.clientUrls.authServer() + "/protocol/openid-connect/token?" + params;
+    };
+    const url = env.clientUrls.authServer() + "/protocol/openid-connect/token";
 
     const response = await fetch(url, {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       method: "POST",
+      body: new URLSearchParams(params),
     });
 
     const refreshedTokens = await response.json();
