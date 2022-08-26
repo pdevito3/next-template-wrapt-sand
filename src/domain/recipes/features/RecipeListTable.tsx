@@ -1,10 +1,10 @@
 import { PaginatedTable, usePaginatedTableContext } from "@/components/Forms";
-import { Notifications } from "@/components/Notifications";
 import { RecipeDto } from "@/domain/recipes/types";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import "@tanstack/react-table";
 import { createColumnHelper, SortingState } from "@tanstack/react-table";
 import { useRouter } from "next/router";
+import toast from "react-hot-toast";
 import { useDeleteRecipe, useRecipes } from "../api";
 
 interface RecipeListTableProps {
@@ -17,15 +17,14 @@ export function RecipeListTable({ queryFilter }: RecipeListTableProps) {
 
   const deleteRecipeApi = useDeleteRecipe();
   function deleteRecipe(id: string) {
-    // TODO are you sure modal
-
     deleteRecipeApi
       .mutateAsync(id)
       .then(() => {
-        Notifications.success("Recipe deleted successfully");
+        // TODO are you sure modal *****************************************
+        toast.success("Recipe deleted successfully");
       })
       .catch((e) => {
-        Notifications.error("There was an error deleting the recipe");
+        toast.error("There was an error deleting the recipe");
         console.error(e);
       });
   }
