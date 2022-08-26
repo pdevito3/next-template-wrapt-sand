@@ -1,6 +1,7 @@
 import { clients } from "@/lib/axios";
 import { env } from "@/utils/environmentService";
-import NextAuth, { NextAuthOptions } from "next-auth";
+import NextAuth, { NextAuthOptions, User } from "next-auth";
+import { JWT } from "next-auth/jwt";
 import querystring from "query-string";
 
 // For more information on each option (and a full list of options) go to
@@ -62,8 +63,7 @@ export const authOptions: NextAuthOptions = {
       }
 
       // Return previous token if the access token has not expired yet
-      const decodedAccessToken = parseJwt(token.accessToken);
-      if (Date.now() < decodedAccessToken.exp * 1000) {
+      if (Date.now() < Number(token.accessTokenExpires)) {
         return token;
       }
 
@@ -71,7 +71,7 @@ export const authOptions: NextAuthOptions = {
       return refreshAccessToken(token);
     },
     async session({ session, token }) {
-      session.user = token.user;
+      session.user = token.user as User;
       session.accessToken = token.accessToken;
       session.error = token.error;
 
@@ -124,6 +124,8 @@ async function refreshAccessToken(token: JWT) {
       client_id: "recipe_management.next",
       grant_type: "refresh_token",
       refresh_token: token.refreshToken,
+    } as {
+      [key: string]: string;
     };
     const url = env.clientUrls.authServer() + "/protocol/openid-connect/token";
 
