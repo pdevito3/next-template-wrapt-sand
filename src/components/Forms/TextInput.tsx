@@ -1,3 +1,4 @@
+import { getTestSelector } from "@/utils/testing";
 import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
 import { useTextField } from "react-aria";
@@ -16,6 +17,7 @@ interface InputProps extends UseControllerProps<any> {
   defaultValue?: string;
   type: "number" | "text" | "search" | "tel" | "url" | "email" | "password";
   hasLabel?: boolean;
+  testSelector?: string;
 }
 
 const InputStates = ["valid", "invalid", "disabled"] as const;
@@ -24,6 +26,8 @@ export default function TextInput({
   disabled = false,
   required = false,
   hasLabel = true,
+  label,
+  testSelector = getTestSelector(label),
   ...rest
 }: InputProps) {
   const { field, fieldState } = useController(rest);
@@ -44,11 +48,6 @@ export default function TextInput({
       </label>
       <div className={clsx("relative", hasLabel && "pt-1")}>
         <input
-          {...inputProps}
-          {...field}
-          type={rest.type}
-          defaultValue={rest.defaultValue}
-          disabled={inputState === "disabled"}
           className={clsx(
             "block w-full p-2 text-sm rounded-md outline-none",
             inputState === "valid" &&
@@ -58,7 +57,11 @@ export default function TextInput({
             inputState === "disabled" &&
               "cursor-not-allowed border bg-slate-200/60 text-slate-300 dark:bg-slate-700 dark:text-slate-50"
           )}
-          placeholder={rest.placeholder}
+          {...inputProps}
+          {...field}
+          {...rest}
+          data-cy={testSelector}
+          disabled={inputState === "disabled"}
         />
         {inputState === "invalid" && (
           <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
