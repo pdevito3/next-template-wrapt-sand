@@ -10,6 +10,7 @@ import { useController, UseControllerProps } from "react-hook-form";
 // };
 
 interface InputProps extends UseControllerProps<any> {
+  id?: string;
   label: string;
   placeholder?: string | undefined;
   disabled?: boolean;
