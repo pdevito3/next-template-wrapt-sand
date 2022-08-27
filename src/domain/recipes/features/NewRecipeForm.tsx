@@ -1,5 +1,5 @@
+import TextInput from "@/components/Forms/TextInput";
 import { DevTool } from "@hookform/devtools";
-import clsx from "clsx";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -7,18 +7,12 @@ import { useAddRecipe } from "../api";
 import { RecipeForCreationDto } from "../types/index";
 
 function NewRecipeForm() {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    control,
-    setFocus,
-    formState: { errors },
-  } = useForm<RecipeForCreationDto>({
-    defaultValues: {
-      visibility: "public",
-    },
-  });
+  const { register, handleSubmit, reset, control, setFocus } =
+    useForm<RecipeForCreationDto>({
+      defaultValues: {
+        visibility: "public",
+      },
+    });
   useEffect(() => {
     setFocus("title");
   }, [setFocus]);
@@ -65,20 +59,14 @@ function NewRecipeForm() {
         <button onClick={() => makeToast()}>toast 🥂</button>
       </div>
       <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-        <div className="space-y-0.5">
-          <input
-            {...register("title", { required: "Title is required." })}
-            className={clsx(
-              "block p-2 text-sm text-gray-900  rounded-lg w-80 bg-gray-50   dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 outline-none",
-              errors.title === undefined
-                ? "border-gray-300 focus:border-violet-500 focus:ring-violet-500 dark:focus:border-violet-500 dark:focus:ring-violet-500 dark:border-gray-600 border"
-                : "border-red-400 border focus:border-red-400 focus:ring-red-400 dark:focus:border-red-400 dark:focus:ring-red-400 focus:ring-1"
-            )}
-            placeholder="Title..."
+        <div className="w-80">
+          <TextInput
+            label={"Title"}
+            control={control}
+            name="title"
+            rules={{ required: "Title is required." }}
+            placeholder={"Title..."}
           />
-          {errors.title?.type === "required" && (
-            <p className="text-sm text-red-400">Title is required</p>
-          )}
         </div>
 
         <input
@@ -96,6 +84,14 @@ function NewRecipeForm() {
           className="block p-2 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:border-violet-500 focus:ring-violet-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-violet-500 dark:focus:ring-violet-500"
           placeholder="Rating..."
         />
+        {/* <NumberField
+          register={register}
+          label={"Rating"}
+          fieldName={"rating"}
+          placeholder={"Rating..."}
+          minValue={0}
+          maxValue={5}
+        /> */}
 
         <div className="">
           <input

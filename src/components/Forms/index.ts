@@ -1,2 +1,3 @@
-export * from './DebouncedInput';
-export * from './PaginatedTable';
+export * from "./DebouncedInput";
+export * from "./PaginatedTable";
+export * from "./TextInput";
