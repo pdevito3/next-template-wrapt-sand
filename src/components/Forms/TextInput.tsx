@@ -1,4 +1,4 @@
-import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
+import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
 import { useTextField } from "react-aria";
 import { useController, UseControllerProps } from "react-hook-form";
@@ -13,6 +13,9 @@ interface InputProps extends UseControllerProps<any> {
   placeholder?: string | undefined;
   disabled?: boolean;
   required?: boolean;
+  defaultValue?: string;
+  type: "number" | "text" | "search" | "tel" | "url" | "email" | "password";
+  hasLabel?: boolean;
 }
 
 const InputStates = ["valid", "invalid", "disabled"] as const;
@@ -20,6 +23,7 @@ const InputStates = ["valid", "invalid", "disabled"] as const;
 export default function TextInput({
   disabled = false,
   required = false,
+  hasLabel = true,
   ...rest
 }: InputProps) {
   const { field, fieldState } = useController(rest);
@@ -34,17 +38,19 @@ export default function TextInput({
 
   return (
     <div className="">
-      <label {...labelProps}>
+      <label className={clsx(!hasLabel && "sr-only")} {...labelProps}>
         {rest.label}
         {required && <span className="pl-1 text-red-400">*</span>}
       </label>
-      <div className="relative pt-1">
+      <div className={clsx("relative", hasLabel && "pt-1")}>
         <input
           {...inputProps}
           {...field}
+          type={rest.type}
+          defaultValue={rest.defaultValue}
           disabled={inputState === "disabled"}
           className={clsx(
-            "block w-full p-2 text-sm rounded-lg outline-none",
+            "block w-full p-2 text-sm rounded-md outline-none",
             inputState === "valid" &&
               "text-gray-900 bg-gray-50 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 border-gray-300 focus:border-violet-500 focus:ring-violet-500 dark:focus:border-violet-500 dark:focus:ring-violet-500 dark:border-gray-600 border",
             inputState === "invalid" &&

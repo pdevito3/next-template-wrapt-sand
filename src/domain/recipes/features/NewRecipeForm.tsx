@@ -63,9 +63,10 @@ function NewRecipeForm() {
           <TextInput
             label={"Title"}
             control={control}
-            name="title"
+            name={"title"}
             rules={{ required: "Title is required." }}
             placeholder={"Title..."}
+            type={"text"}
           />
         </div>
 
