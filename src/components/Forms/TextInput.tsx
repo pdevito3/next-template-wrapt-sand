@@ -1,3 +1,5 @@
+import FormControlWrapper from "@/components/Forms/FormControlWrapper";
+import { FormControlState } from "@/components/types";
 import { getTestSelector } from "@/utils/testing";
 import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
@@ -21,8 +23,6 @@ interface InputProps extends UseControllerProps<any> {
   testSelector?: string;
 }
 
-const InputStates = ["valid", "invalid", "disabled"] as const;
-
 export default function TextInput({
   disabled = false,
   required = false,
@@ -37,16 +37,20 @@ export default function TextInput({
     field.ref
   );
 
-  let inputState = "valid" as typeof InputStates[number];
+  let inputState = "valid" as typeof FormControlState[number];
   if (fieldState.error) inputState = "invalid";
   if (disabled) inputState = "disabled";
 
   return (
-    <div className="">
-      <label className={clsx(!labelIsVisible && "sr-only")} {...labelProps}>
-        {label}
-        {required && <span className="pl-1 text-red-400">*</span>}
-      </label>
+    <FormControlWrapper
+      label={label}
+      required={required}
+      labelIsVisible={labelIsVisible}
+      controlState={inputState}
+      labelProps={labelProps}
+      errorMessageProps={errorMessageProps}
+      errorMessage={fieldState.error?.message}
+    >
       <div className={clsx("relative", labelIsVisible && "pt-1")}>
         <input
           className={clsx(
@@ -70,12 +74,6 @@ export default function TextInput({
           </div>
         )}
       </div>
-
-      {inputState === "invalid" && (
-        <p {...errorMessageProps} className="text-sm text-red-400 pt-0.5">
-          {fieldState?.error?.message}
-        </p>
-      )}
-    </div>
+    </FormControlWrapper>
   );
 }
