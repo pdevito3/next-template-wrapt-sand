@@ -17,7 +17,7 @@ interface InputProps extends UseControllerProps<any> {
   required?: boolean;
   defaultValue?: string;
   type: "number" | "text" | "search" | "tel" | "url" | "email" | "password";
-  hasLabel?: boolean;
+  labelIsVisible?: boolean;
   testSelector?: string;
 }
 
@@ -26,7 +26,7 @@ const InputStates = ["valid", "invalid", "disabled"] as const;
 export default function TextInput({
   disabled = false,
   required = false,
-  hasLabel = true,
+  labelIsVisible = true,
   label,
   testSelector = getTestSelector(label),
   ...rest
@@ -43,11 +43,11 @@ export default function TextInput({
 
   return (
     <div className="">
-      <label className={clsx(!hasLabel && "sr-only")} {...labelProps}>
-        {rest.label}
+      <label className={clsx(!labelIsVisible && "sr-only")} {...labelProps}>
+        {label}
         {required && <span className="pl-1 text-red-400">*</span>}
       </label>
-      <div className={clsx("relative", hasLabel && "pt-1")}>
+      <div className={clsx("relative", labelIsVisible && "pt-1")}>
         <input
           className={clsx(
             "block w-full p-2 text-sm rounded-md outline-none",
