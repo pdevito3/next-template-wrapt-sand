@@ -12,25 +12,32 @@ interface InputProps extends UseControllerProps<any> {
   label: string;
   placeholder?: string | undefined;
   disabled?: boolean;
+  required?: boolean;
 }
 
 const InputStates = ["valid", "invalid", "disabled"] as const;
-// Then use as --> status: Status;
 
-export default function TextInput(props: InputProps) {
-  const { field, fieldState } = useController(props);
+export default function TextInput({
+  disabled = false,
+  required = false,
+  ...rest
+}: InputProps) {
+  const { field, fieldState } = useController(rest);
   let { labelProps, inputProps, errorMessageProps } = useTextField(
-    props,
+    rest,
     field.ref
   );
 
   let inputState = "valid" as typeof InputStates[number];
   if (fieldState.error) inputState = "invalid";
-  if (props.disabled) inputState = "disabled";
+  if (disabled) inputState = "disabled";
 
   return (
     <div className="">
-      <label {...labelProps}>{props.label}</label>
+      <label {...labelProps}>
+        {rest.label}
+        {required && <span className="pl-1 text-red-400">*</span>}
+      </label>
       <div className="relative pt-1">
         <input
           {...inputProps}
@@ -45,7 +52,7 @@ export default function TextInput(props: InputProps) {
             inputState === "disabled" &&
               "cursor-not-allowed border bg-slate-200/60 text-slate-300 dark:bg-slate-700 dark:text-slate-50"
           )}
-          placeholder={props.placeholder}
+          placeholder={rest.placeholder}
         />
         {inputState === "invalid" && (
           <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
