@@ -25,7 +25,7 @@ module.exports = {
         '4xl': '2rem',
       },
       fontFamily: {
-        sans: ['Inter', ...defaultTheme.fontFamily.sans],
+        sans: ['Lexend', 'Inter', ...defaultTheme.fontFamily.sans],
         display: ['Lexend', ...defaultTheme.fontFamily.sans],
       },
 			height: {

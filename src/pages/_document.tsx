@@ -8,7 +8,7 @@ class MyDocument extends Document {
   render() {
     return (
       <Html
-        className="h-full scroll-smooth antialiased [font-feature-settings:'ss01']"
+        className="h-full scroll-smooth antialiased [font-feature-settings:'ss01'] font-sans"
         lang="en"
       >
         <Head>
@@ -16,7 +16,8 @@ class MyDocument extends Document {
           <link rel="preconnect" href="https://fonts.bunny.net" />
           <link
             rel="stylesheet"
-            href="https://fonts.bunny.net/css2?family=Inter:wght@100..900&family=Lexend:wght@400;500&display=swap"
+            // href="https://fonts.bunny.net/css2?family=Inter:wght@100..900&family=Lexend:wght@400;500&display=swap"
+            href="https://fonts.bunny.net/css2?family=Lexend:wght@100..900&display=swap"
           />
         </Head>
         <body className="flex flex-col h-full">

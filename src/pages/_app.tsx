@@ -19,9 +19,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <QueryClientProvider client={new QueryClient()}>
           <RouteGuard isPublic={Component.isPublic}>
             <MantineProvider
-              // emotionCache={appendCache}
-              withGlobalStyles
-              withNormalizeCSS
+            // emotionCache={appendCache}
+            // withGlobalStyles
+            // withNormalizeCSS
             >
               <Component {...pageProps} />
               <ReactQueryDevtools initialIsOpen={false} />
