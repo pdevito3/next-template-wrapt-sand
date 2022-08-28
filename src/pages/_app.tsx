@@ -2,6 +2,7 @@ import { Notifications } from "@/components/Notifications";
 import Login from "@/domain/auth/components/login";
 import useAuthUser from "@/domain/auth/hooks/useAuthUser";
 import "@/styles/globals.css";
+import { MantineProvider } from "@mantine/core";
 import { SessionProvider } from "next-auth/react";
 import type { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -15,9 +16,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       <SessionProvider session={pageProps.session} refetchInterval={0}>
         <QueryClientProvider client={new QueryClient()}>
           <RouteGuard isPublic={Component.isPublic}>
-            <Component {...pageProps} />
-            <ReactQueryDevtools initialIsOpen={false} />
-            <Notifications />
+            <MantineProvider withGlobalStyles withNormalizeCSS>
+              <Component {...pageProps} />
+              <ReactQueryDevtools initialIsOpen={false} />
+              <Notifications />
+            </MantineProvider>
           </RouteGuard>
         </QueryClientProvider>
       </SessionProvider>

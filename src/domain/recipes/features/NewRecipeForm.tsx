@@ -1,7 +1,12 @@
+import Autocomplete from "@/components/Forms/Autocomplete";
 import TextInput from "@/components/Forms/TextInput";
 import { DevTool } from "@hookform/devtools";
+import {
+  Autocomplete as MantineAutocomplete,
+  createStyles,
+} from "@mantine/core";
 import { useEffect } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useAddRecipe } from "../api";
 import { RecipeForCreationDto } from "../types/index";
@@ -53,6 +58,12 @@ function NewRecipeForm() {
     );
   }
 
+  const useStyles = createStyles({
+    input: {},
+    dropdown: {},
+  });
+  const { classes, cx } = useStyles();
+
   return (
     <>
       <div className="py-5">
@@ -70,11 +81,32 @@ function NewRecipeForm() {
           />
         </div>
 
-        <input
-          {...register("visibility")}
-          className="block p-2 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:border-violet-500 focus:ring-violet-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-violet-500 dark:focus:ring-violet-500"
-          placeholder="Visibility..."
+        <Controller
+          name="visibility"
+          control={control}
+          render={({ field, fieldState }) => (
+            <MantineAutocomplete
+              data={["public", "private"]}
+              {...field}
+              classNames={{
+                input: cx(
+                  classes.input,
+                  "block w-full p-2 text-sm rounded-md outline-none text-gray-900 bg-gray-50 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 border-gray-300 focus:border-violet-500 focus:ring-violet-500 dark:focus:border-violet-500 dark:focus:ring-violet-500 dark:border-gray-600 border"
+                ),
+                dropdown: cx(classes.dropdown, "bg-blue-500"),
+              }}
+              placeholder="let's see"
+            />
+          )}
         />
+        <Controller
+          name="visibility"
+          control={control}
+          render={({ field }) => (
+            <Autocomplete data={["public", "private"]} {...field} />
+          )}
+        />
+
         <input
           {...register("directions")}
           className="block p-2 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:border-violet-500 focus:ring-violet-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-violet-500 dark:focus:ring-violet-500"
@@ -85,14 +117,6 @@ function NewRecipeForm() {
           className="block p-2 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:border-violet-500 focus:ring-violet-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-violet-500 dark:focus:ring-violet-500"
           placeholder="Rating..."
         />
-        {/* <NumberField
-          register={register}
-          label={"Rating"}
-          fieldName={"rating"}
-          placeholder={"Rating..."}
-          minValue={0}
-          maxValue={5}
-        /> */}
 
         <div className="">
           <input
