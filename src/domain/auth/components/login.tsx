@@ -1,4 +1,5 @@
 import useAuthUser from "@/domain/auth/hooks/useAuthUser";
+import { env } from "@/utils/environmentService";
 import { signIn } from "next-auth/react";
 
 Login.isPublic = true;
@@ -71,7 +72,7 @@ function Login() {
             <button
               onClick={(e) => {
                 e.preventDefault();
-                signIn("oidc");
+                signIn(env.auth.nextAuthId);
               }}
               className="p-4 text-center transition-colors ease-in-out border rounded-md sm:p-2 border-gray sm:w-36 hover:bg-gray-800"
             >

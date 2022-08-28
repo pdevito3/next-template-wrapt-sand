@@ -10,7 +10,7 @@ export const authOptions: NextAuthOptions = {
   // https://next-auth.js.org/configuration/providers/oauth
   providers: [
     {
-      id: "oidc",
+      id: env.auth.nextAuthId,
       name: "OIDC",
       type: "oauth",
       wellKnown: `${env.clientUrls.authServer()}/.well-known/openid-configuration`,

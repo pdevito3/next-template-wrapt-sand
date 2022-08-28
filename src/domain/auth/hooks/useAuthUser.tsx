@@ -1,3 +1,4 @@
+import { env } from "@/utils/environmentService";
 import { signIn, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
@@ -8,7 +9,8 @@ export default function useAuthUser() {
   useEffect(() => {
     setIsLoggedIn(!!session);
 
-    if (session?.error === "RefreshAccessTokenError") signIn("oidc"); // Force sign in to hopefully resolve error
+    if (session?.error === "RefreshAccessTokenError")
+      signIn(env.auth.nextAuthId); // Force sign in to hopefully resolve error
   }, [session]);
 
   return {

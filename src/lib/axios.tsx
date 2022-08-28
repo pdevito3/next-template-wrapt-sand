@@ -1,6 +1,6 @@
 import { env } from "@/utils/environmentService";
 import Axios from "axios";
-import { getSession, signOut } from "next-auth/react";
+import { getSession, signIn } from "next-auth/react";
 
 export const clients = {
   recipeManagement: (headers?: { [key: string]: string }) =>
@@ -54,7 +54,7 @@ async function buildApiClient({ baseURL, customHeaders }: ApiClientProps) {
       }
 
       if (error && error.response && error.response.status === 401) {
-        signOut();
+        signIn(env.auth.nextAuthId);
       }
       console.log((error && error.toJSON && error.toJSON()) || undefined);
 
