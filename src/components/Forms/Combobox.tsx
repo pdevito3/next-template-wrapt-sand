@@ -1,27 +1,36 @@
 import { FormControlState } from "@/components/types";
 import {
-  Autocomplete as MantineAutocomplete,
-  AutocompleteProps as MantineAutocompleteProps,
-  createStyles,
-} from "@mantine/core";
+  ChevronDownIcon,
+  ExclamationCircleIcon,
+} from "@heroicons/react/24/solid";
+// import {
+//   ChevronDownIcon,
+//   ExclamationCircleIcon,
+// } from "@heroicons/react/24/solid";
+import { createStyles, Select, SelectProps } from "@mantine/core";
 import clsx from "clsx";
 
-interface AutocompleteProps extends MantineAutocompleteProps {
+interface ComboBoxProps extends SelectProps {
   testSelector?: string;
 }
 
-function Autocomplete({
+function ComboBox({
   // testSelector = getTestSelector(labelProps.),
   ...rest
-}: AutocompleteProps) {
+}: ComboBoxProps) {
   const useStyles = createStyles({});
   const { cx } = useStyles();
 
   let inputState = "valid" as typeof FormControlState[number];
   if (rest.error) inputState = "invalid";
   if (rest.disabled) inputState = "disabled";
+
+  const showClearable =
+    rest.clearable && rest.value !== null && rest.value !== undefined;
+  console.log(showClearable);
+
   return (
-    <MantineAutocomplete
+    <Select
       {...rest}
       size="md"
       classNames={{
@@ -37,17 +46,35 @@ function Autocomplete({
         disabled: cx(
           "cursor-not-allowed border bg-slate-200/60 text-slate-300 dark:bg-slate-700 dark:text-slate-50"
         ),
+        error: cx("text-sm text-red-400"),
         dropdown: cx(
           "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-r-lg border-l-gray-100 dark:border-l-gray-700 border-l-2 focus:ring-violet-500 focus:border-violet-500 block w-full py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-violet-500 dark:focus:border-violet-500"
         ),
         itemsWrapper: cx("p-0 text-sm text-gray-700 dark:text-gray-200 w-full"),
         item: cx(clsx("py-2 w-full text-sm text-gray-700 dark:text-gray-400")),
-        hovered: cx(
-          "text-gray-700 bg-gray-100 dark:text-gray-400 dark:bg-gray-600"
-        ),
+        rightSection: cx(clsx(!showClearable && "pointer-events-none")),
       }}
+      transition="pop"
+      transitionDuration={80}
+      transitionTimingFunction="ease"
+      rightSection={
+        !showClearable && (
+          <div className="flex items-center justify-center space-x-2">
+            {inputState === "invalid" && (
+              <ExclamationCircleIcon className="w-6 h-6 text-red-400" />
+            )}
+            <ChevronDownIcon
+              className={clsx(
+                "w-4 h-4",
+                inputState === "invalid" && "text-red-400"
+              )}
+            />
+          </div>
+        )
+      }
+      rightSectionWidth={inputState === "invalid" ? 70 : 40}
     />
   );
 }
 
-export default Autocomplete;
+export default ComboBox;

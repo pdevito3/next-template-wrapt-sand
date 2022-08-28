@@ -8,6 +8,8 @@ import type { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
+// const appendCache = createEmotionCache({ key: "mantine", prepend: false });
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
@@ -16,7 +18,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       <SessionProvider session={pageProps.session} refetchInterval={0}>
         <QueryClientProvider client={new QueryClient()}>
           <RouteGuard isPublic={Component.isPublic}>
-            <MantineProvider withGlobalStyles withNormalizeCSS>
+            <MantineProvider
+              // emotionCache={appendCache}
+              withGlobalStyles
+              withNormalizeCSS
+            >
               <Component {...pageProps} />
               <ReactQueryDevtools initialIsOpen={false} />
               <Notifications />

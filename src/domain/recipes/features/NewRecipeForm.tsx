@@ -1,10 +1,7 @@
-import Autocomplete from "@/components/Forms/Autocomplete";
+import ComboBox from "@/components/Forms/Combobox";
 import TextInput from "@/components/Forms/TextInput";
 import { DevTool } from "@hookform/devtools";
-import {
-  Autocomplete as MantineAutocomplete,
-  createStyles,
-} from "@mantine/core";
+import { createStyles } from "@mantine/core";
 import { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -81,7 +78,7 @@ function NewRecipeForm() {
           />
         </div>
 
-        <Controller
+        {/* <Controller
           name="visibility"
           control={control}
           render={({ field, fieldState }) => (
@@ -99,13 +96,32 @@ function NewRecipeForm() {
             />
           )}
         />
-        <Controller
-          name="visibility"
-          control={control}
-          render={({ field }) => (
-            <Autocomplete data={["public", "private"]} {...field} />
-          )}
-        />
+        <div className="w-80">
+          <Controller
+            name="visibility"
+            control={control}
+            render={({ field }) => (
+              <Autocomplete data={["public", "private"]} {...field} />
+            )}
+          />
+        </div> */}
+
+        <div className="w-80">
+          <Controller
+            name="visibility"
+            control={control}
+            rules={{ required: "Visibility is required" }}
+            render={({ field, fieldState }) => (
+              <ComboBox
+                data={["public", "private"]}
+                {...field}
+                searchable
+                clearable
+                error={fieldState.error?.message}
+              />
+            )}
+          />
+        </div>
 
         <input
           {...register("directions")}
