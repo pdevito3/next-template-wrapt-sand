@@ -36,7 +36,7 @@ function ComboBox({
       classNames={{
         input: cx(
           clsx(
-            "block w-full p-2 text-sm rounded-md outline-none",
+            "block w-full p-2 text-sm rounded-md outline-none font-sans",
             inputState === "valid" &&
               "text-gray-900 bg-gray-50 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 border-gray-300 focus:border-violet-500 focus:ring-violet-500 dark:focus:border-violet-500 dark:focus:ring-violet-500 dark:border-gray-600 border",
             inputState === "invalid" &&
@@ -46,13 +46,15 @@ function ComboBox({
         disabled: cx(
           "cursor-not-allowed border bg-slate-200/60 text-slate-300 dark:bg-slate-700 dark:text-slate-50"
         ),
-        error: cx("text-sm text-red-400"),
+        error: cx("text-sm text-red-400 -mt-1"),
         dropdown: cx(
           "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-r-lg border-l-gray-100 dark:border-l-gray-700 border-l-2 focus:ring-violet-500 focus:border-violet-500 block w-full py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-violet-500 dark:focus:border-violet-500"
         ),
         itemsWrapper: cx("p-0 text-sm text-gray-700 dark:text-gray-200 w-full"),
         item: cx(clsx("py-2 w-full text-sm text-gray-700 dark:text-gray-400")),
         rightSection: cx(clsx(!showClearable && "pointer-events-none")),
+        label: cx("text-slate-900 dark:text-white pb-1 font-sans"),
+        required: cx("text-red-400"),
       }}
       transition="pop"
       transitionDuration={80}

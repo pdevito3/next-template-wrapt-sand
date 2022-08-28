@@ -78,34 +78,6 @@ function NewRecipeForm() {
           />
         </div>
 
-        {/* <Controller
-          name="visibility"
-          control={control}
-          render={({ field, fieldState }) => (
-            <MantineAutocomplete
-              data={["public", "private"]}
-              {...field}
-              classNames={{
-                input: cx(
-                  classes.input,
-                  "block w-full p-2 text-sm rounded-md outline-none text-gray-900 bg-gray-50 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 border-gray-300 focus:border-violet-500 focus:ring-violet-500 dark:focus:border-violet-500 dark:focus:ring-violet-500 dark:border-gray-600 border"
-                ),
-                dropdown: cx(classes.dropdown, "bg-blue-500"),
-              }}
-              placeholder="let's see"
-            />
-          )}
-        />
-        <div className="w-80">
-          <Controller
-            name="visibility"
-            control={control}
-            render={({ field }) => (
-              <Autocomplete data={["public", "private"]} {...field} />
-            )}
-          />
-        </div> */}
-
         <div className="w-80">
           <Controller
             name="visibility"
@@ -113,11 +85,12 @@ function NewRecipeForm() {
             rules={{ required: "Visibility is required" }}
             render={({ field, fieldState }) => (
               <ComboBox
+                label={"Visibility"}
                 data={["public", "private"]}
-                {...field}
-                searchable
                 clearable
+                required
                 error={fieldState.error?.message}
+                {...field}
               />
             )}
           />
