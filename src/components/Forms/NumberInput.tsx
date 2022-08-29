@@ -59,6 +59,7 @@ function NumberInput({
               "flex items-center justify-center w-8 h-8 sm:w-7 sm:h-7 p-1 border rounded-l-md border-slate-300 dark:border-slate-500 hover:bg-slate-200 hover:dark:bg-slate-800 hover:text-slate-800 hover:dark:text-white transition-colors",
               inputState === "invalid" && "text-red-400 border-red-400"
             )}
+            type="button"
             onClick={() => handlers.current?.decrement()}
           >
             <MinusIcon />
@@ -68,6 +69,7 @@ function NumberInput({
               "flex items-center justify-center w-8 h-8 sm:w-7 sm:h-7 p-1 border rounded-r-md border-slate-300 dark:border-slate-500 hover:bg-slate-200 hover:dark:bg-slate-800 hover:text-slate-800 hover:dark:text-white transition-colors -ml-[1px]",
               inputState === "invalid" && "text-red-400 border-red-400"
             )}
+            type="button"
             onClick={() => handlers.current?.increment()}
           >
             <PlusIcon />
