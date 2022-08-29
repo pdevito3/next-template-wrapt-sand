@@ -1,7 +1,6 @@
 import ComboBox from "@/components/Forms/Combobox";
 import TextInput from "@/components/Forms/TextInput";
 import { DevTool } from "@hookform/devtools";
-import { createStyles } from "@mantine/core";
 import { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -55,12 +54,6 @@ function NewRecipeForm() {
     );
   }
 
-  const useStyles = createStyles({
-    input: {},
-    dropdown: {},
-  });
-  const { classes, cx } = useStyles();
-
   return (
     <>
       <div className="py-5">
@@ -89,6 +82,7 @@ function NewRecipeForm() {
                 data={["public", "private"]}
                 clearable
                 required
+                searchable
                 error={fieldState.error?.message}
                 {...field}
               />

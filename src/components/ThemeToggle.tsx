@@ -6,9 +6,14 @@ import clsx from "clsx";
 import { Fragment, useEffect, useRef } from "react";
 import create from "zustand";
 
-const useSetting = create((set) => ({
+interface ThemeSettings {
+  setting: string;
+  setSetting: (setting: string) => void;
+}
+
+export const useSetting = create<ThemeSettings>((set) => ({
   setting: "system",
-  setSetting: (setting: any) => set({ setting }),
+  setSetting: (setting: string) => set({ setting }),
 }));
 
 function update() {
@@ -129,7 +134,7 @@ function PcIcon({ selected, ...props }) {
   );
 }
 
-function useTheme() {
+export function useTheme() {
   let { setting, setSetting } = useSetting();
   let initial = useRef(true);
 
