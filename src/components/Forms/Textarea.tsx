@@ -1,20 +1,21 @@
 import { FormControlState } from "@/components/types";
-import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
 import {
   createStyles,
-  TextInput as MantineTextInput,
-  TextInputProps as MantineTextInputProps,
+  Textarea as MantineTextarea,
+  TextareaProps as MantineTextareaProps,
 } from "@mantine/core";
 import clsx from "clsx";
 
-interface TextInputProps extends MantineTextInputProps {
+interface TextareaProps extends MantineTextareaProps {
   testSelector?: string;
+  resize?: "none" | "y" | "x" | "both";
 }
 
-function TextInput({
+function Textarea({
   // testSelector = getTestSelector(labelProps.),
+  resize = "none",
   ...rest
-}: TextInputProps) {
+}: TextareaProps) {
   const useStyles = createStyles({});
   const { cx } = useStyles();
 
@@ -22,8 +23,13 @@ function TextInput({
   if (rest.error) inputState = "invalid";
   if (rest.disabled) inputState = "disabled";
 
+  var resizeClass = "resize-none";
+  if (resize === "x") resizeClass = "resize-x";
+  if (resize === "y") resizeClass = "resize-y";
+  if (resize === "both") resizeClass = "resize";
+
   return (
-    <MantineTextInput
+    <MantineTextarea
       {...rest}
       size="md"
       error={rest.error}
@@ -31,6 +37,7 @@ function TextInput({
         input: cx(
           clsx(
             "input",
+            resizeClass,
             inputState === "valid" && "input-valid",
             inputState === "invalid" && "input-invalid"
           )
@@ -50,4 +57,4 @@ function TextInput({
   );
 }
 
-export default TextInput;
+export default Textarea;

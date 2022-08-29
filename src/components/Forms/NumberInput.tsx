@@ -28,6 +28,7 @@ function NumberInput({
   let inputState = "valid" as typeof FormControlState[number];
   if (rest.error) inputState = "invalid";
   if (rest.disabled) inputState = "disabled";
+
   return (
     <MantineNumberInput
       {...rest}
