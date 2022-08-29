@@ -2,7 +2,6 @@ import ComboBox from "@/components/Forms/Combobox";
 import NumberInput from "@/components/Forms/NumberInput";
 import TextInput from "@/components/Forms/TextInput";
 import { DevTool } from "@hookform/devtools";
-import { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useAddRecipe } from "../api";
@@ -15,14 +14,14 @@ function NewRecipeForm() {
         visibility: "public",
       },
     });
-  useEffect(() => {
-    setFocus("title");
-  }, [setFocus]);
+  // useEffect(() => {
+  //   setFocus("title");
+  // }, [setFocus]);
 
   const createRecipeApi = useAddRecipe();
   const onSubmit: SubmitHandler<RecipeForCreationDto> = (data) => {
     createRecipe(data);
-    setFocus("title");
+    // setFocus("title");
   };
 
   function createRecipe(data: RecipeForCreationDto) {
@@ -63,13 +62,19 @@ function NewRecipeForm() {
       {/* Need `noValidate` to allow RHF validation to trump browser validation when field is required */}
       <form className="space-y-4" onSubmit={handleSubmit(onSubmit)} noValidate>
         <div className="w-80">
-          <TextInput
-            label={"Title"}
+          <Controller
+            name="title"
             control={control}
-            name={"title"}
-            rules={{ required: "Title is required." }}
-            placeholder={"Title..."}
-            type={"text"}
+            rules={{ required: "Title is required" }}
+            render={({ field, fieldState }) => (
+              <TextInput
+                label={"Title"}
+                placeholder="Title..."
+                required
+                error={fieldState.error?.message}
+                {...field}
+              />
+            )}
           />
         </div>
 
@@ -81,6 +86,7 @@ function NewRecipeForm() {
             render={({ field, fieldState }) => (
               <ComboBox
                 label={"Visibility"}
+                placeholder="Visibility..."
                 data={["public", "private"]}
                 clearable
                 required
@@ -97,30 +103,23 @@ function NewRecipeForm() {
           className="block p-2 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:border-violet-500 focus:ring-violet-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-violet-500 dark:focus:ring-violet-500"
           placeholder="Directions..."
         />
-        {/* <input
-          {...register("rating")}
-          className="block p-2 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:border-violet-500 focus:ring-violet-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-violet-500 dark:focus:ring-violet-500"
-          placeholder="Rating..."
-        /> */}
 
         <div className="w-80">
           <Controller
             name="rating"
             control={control}
             rules={{ required: "Rating is required" }}
-            render={({ field, fieldState }) => {
-              console.log(fieldState.error);
-              return (
-                <NumberInput
-                  label={"Rating"}
-                  min={0}
-                  max={5}
-                  required
-                  error={fieldState.error?.message}
-                  {...field}
-                />
-              );
-            }}
+            render={({ field, fieldState }) => (
+              <NumberInput
+                label={"Rating"}
+                placeholder="Rating..."
+                min={0}
+                max={5}
+                required
+                error={fieldState.error?.message}
+                {...field}
+              />
+            )}
           />
         </div>
 
