@@ -37,18 +37,14 @@ function NumberInput({
       classNames={{
         input: cx(
           clsx(
-            "block w-full p-2 text-sm rounded-md outline-none font-sans",
-            inputState === "valid" &&
-              "text-slate-900 bg-slate-50 dark:bg-slate-700 dark:text-white dark:placeholder-slate-400 border-slate-300 focus:border-violet-500 focus:ring-violet-500 dark:focus:border-violet-500 dark:focus:ring-violet-500 dark:border-slate-500 border",
-            inputState === "invalid" &&
-              "text-slate-900 bg-slate-50 dark:bg-slate-700 dark:text-white dark:placeholder-slate-400 border-red-400 border focus:border-red-400 focus:ring-red-400 dark:focus:border-red-400 dark:focus:ring-red-400 focus:ring-1"
+            "input",
+            inputState === "valid" && "input-valid",
+            inputState === "invalid" && "input-invalid"
           )
         ),
-        disabled: cx(
-          "cursor-not-allowed border bg-slate-200/60 text-slate-300 dark:bg-slate-700 dark:text-slate-50"
-        ),
-        error: cx("text-sm text-red-400 -mt-1"),
-        label: cx("text-slate-900 dark:text-white pb-1 font-sans"),
+        disabled: cx("input-disabled"),
+        error: cx("form-error"),
+        label: cx("form-label"),
         required: cx("text-red-400"),
       }}
       rightSection={
