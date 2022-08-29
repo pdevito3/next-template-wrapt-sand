@@ -33,12 +33,13 @@ function NumberInput({
       {...rest}
       handlersRef={handlers}
       size="md"
+      formNoValidate={true}
       classNames={{
         input: cx(
           clsx(
             "block w-full p-2 text-sm rounded-md outline-none font-sans",
             inputState === "valid" &&
-              "text-slate-900 bg-slate-50 dark:bg-slate-700 dark:text-white dark:placeholder-slate-400 border-slate-300 focus:border-violet-500 focus:ring-violet-500 dark:focus:border-violet-500 dark:focus:ring-violet-500 dark:border-slate-600 border",
+              "text-slate-900 bg-slate-50 dark:bg-slate-700 dark:text-white dark:placeholder-slate-400 border-slate-300 focus:border-violet-500 focus:ring-violet-500 dark:focus:border-violet-500 dark:focus:ring-violet-500 dark:border-slate-500 border",
             inputState === "invalid" &&
               "text-slate-900 bg-slate-50 dark:bg-slate-700 dark:text-white dark:placeholder-slate-400 border-red-400 border focus:border-red-400 focus:ring-red-400 dark:focus:border-red-400 dark:focus:ring-red-400 focus:ring-1"
           )
@@ -59,7 +60,7 @@ function NumberInput({
           </div>
           <button
             className={clsx(
-              "flex items-center justify-center w-8 h-8 sm:w-7 sm:h-7 p-1 border rounded-l-md border-violet-500 hover:bg-violet-500 hover:dark:bg-violet-500 hover:text-white hover:dark:text-white transition-colors",
+              "flex items-center justify-center w-8 h-8 sm:w-7 sm:h-7 p-1 border rounded-l-md border-slate-300 dark:border-slate-500 hover:bg-slate-200 hover:dark:bg-slate-800 hover:text-slate-800 hover:dark:text-white transition-colors",
               inputState === "invalid" && "text-red-400 border-red-400"
             )}
             onClick={() => handlers.current?.decrement()}
@@ -68,7 +69,7 @@ function NumberInput({
           </button>
           <button
             className={clsx(
-              "flex items-center justify-center w-8 h-8 sm:w-7 sm:h-7 p-1 border rounded-r-md border-violet-500 hover:bg-violet-500 hover:dark:bg-violet-500 hover:text-white hover:dark:text-white transition-colors -ml-[1px]",
+              "flex items-center justify-center w-8 h-8 sm:w-7 sm:h-7 p-1 border rounded-r-md border-slate-300 dark:border-slate-500 hover:bg-slate-200 hover:dark:bg-slate-800 hover:text-slate-800 hover:dark:text-white transition-colors -ml-[1px]",
               inputState === "invalid" && "text-red-400 border-red-400"
             )}
             onClick={() => handlers.current?.increment()}
