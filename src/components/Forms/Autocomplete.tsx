@@ -1,5 +1,5 @@
 import { FormControlState } from "@/components/types";
-import { ChevronDownIcon } from "@heroicons/react/24/solid";
+import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
 import {
   Autocomplete as MantineAutocomplete,
   AutocompleteProps as MantineAutocompleteProps,
@@ -80,12 +80,11 @@ function Autocomplete({
         required: cx("text-red-400"),
       }}
       rightSection={
-        <ChevronDownIcon
-          className={clsx(
-            "w-4 h-4",
-            inputState === "invalid" && "text-red-400"
+        <>
+          {inputState === "invalid" && (
+            <ExclamationCircleIcon className="w-6 h-6 text-red-400" />
           )}
-        />
+        </>
       }
     />
   );
