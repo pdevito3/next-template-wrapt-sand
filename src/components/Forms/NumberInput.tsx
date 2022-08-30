@@ -57,20 +57,30 @@ function NumberInput({
           </div>
           <button
             className={clsx(
-              "flex items-center justify-center w-8 h-8 sm:w-7 sm:h-7 p-1 border rounded-l-md border-slate-300 dark:border-slate-500 hover:bg-slate-200 hover:dark:bg-slate-800 hover:text-slate-800 hover:dark:text-white transition-colors",
-              inputState === "invalid" && "text-red-400 border-red-400"
+              "flex items-center justify-center w-8 h-8 sm:w-7 sm:h-7 p-1 border rounded-l-md transition-colors",
+              inputState === "invalid" && "text-red-400 border-red-400",
+              rest.value == rest.min
+                ? "cursor-not-allowed bg-slate-200/60 text-slate-400 dark:bg-slate-900/75 dark:text-slate-40 border-slate-300 dark:border-slate-500"
+                : "border-slate-300 dark:border-slate-500 hover:bg-slate-200 hover:dark:bg-slate-800 hover:text-slate-800 hover:dark:text-white"
             )}
             type="button"
+            disabled={rest.value == rest.min}
+            aria-disabled={rest.value == rest.min}
             onClick={() => handlers.current?.decrement()}
           >
             <MinusIcon />
           </button>
           <button
             className={clsx(
-              "flex items-center justify-center w-8 h-8 sm:w-7 sm:h-7 p-1 border rounded-r-md border-slate-300 dark:border-slate-500 hover:bg-slate-200 hover:dark:bg-slate-800 hover:text-slate-800 hover:dark:text-white transition-colors -ml-[1px]",
-              inputState === "invalid" && "text-red-400 border-red-400"
+              "flex items-center justify-center w-8 h-8 sm:w-7 sm:h-7 p-1 border rounded-r-md transition-colors -ml-[1px]",
+              inputState === "invalid" && "text-red-400 border-red-400",
+              rest.value == rest.max
+                ? "cursor-not-allowed bg-slate-200/60 text-slate-400 dark:bg-slate-900/75 dark:text-slate-40 border-slate-300 dark:border-slate-500"
+                : "border-slate-300 dark:border-slate-500 hover:bg-slate-200 hover:dark:bg-slate-800 hover:text-slate-800 hover:dark:text-white"
             )}
             type="button"
+            disabled={rest.value == rest.max}
+            aria-disabled={rest.value == rest.max}
             onClick={() => handlers.current?.increment()}
           >
             <PlusIcon />
