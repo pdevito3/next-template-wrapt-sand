@@ -1,4 +1,5 @@
 import { FormControlState } from "@/components/types";
+import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
 import {
   createStyles,
   Textarea as MantineTextarea,
