@@ -1,10 +1,12 @@
 import { FormControlState } from "@/components/types";
 import {
+  CheckIcon,
   ChevronDownIcon,
   ExclamationCircleIcon,
 } from "@heroicons/react/24/solid";
 import { createStyles, Select, SelectProps } from "@mantine/core";
 import clsx from "clsx";
+import { forwardRef } from "react";
 import { useTailwindColors } from "../../hooks/useTailwindConfig";
 import { useSetting } from "../ThemeToggle";
 
@@ -21,42 +23,40 @@ function ComboBox({
   const useStyles = createStyles({
     // TODO abstract out
     item: {
-      color:
-        themeSetting === "dark"
-          ? twColors?.slate["400"]
-          : twColors?.slate["700"],
-      "&[data-hovered]": {
-        color:
-          themeSetting === "dark"
-            ? twColors?.slate["100"]
-            : twColors?.slate["600"],
-        backgroundColor:
-          themeSetting === "dark"
-            ? twColors?.slate["600"]
-            : twColors?.slate["200"],
-      },
-
-      "&[data-selected]": {
-        color:
-          themeSetting === "dark"
-            ? twColors?.violet["100"]
-            : twColors?.violet["600"],
-        backgroundColor:
-          themeSetting === "dark"
-            ? twColors?.violet["600"]
-            : twColors?.violet["200"],
-      },
-
-      "&[data-selected]&:hover": {
-        color:
-          themeSetting === "dark"
-            ? twColors?.slate["100"]
-            : twColors?.slate["600"],
-        backgroundColor:
-          themeSetting === "dark"
-            ? twColors?.slate["600"]
-            : twColors?.slate["200"],
-      },
+      // color:
+      //   themeSetting === "dark"
+      //     ? twColors?.slate["400"]
+      //     : twColors?.slate["700"],
+      // "&[data-hovered]": {
+      //   color:
+      //     themeSetting === "dark"
+      //       ? twColors?.slate["100"]
+      //       : twColors?.slate["600"],
+      //   backgroundColor:
+      //     themeSetting === "dark"
+      //       ? twColors?.slate["600"]
+      //       : twColors?.slate["200"],
+      // },
+      // "&[data-selected]": {
+      //   color:
+      //     themeSetting === "dark"
+      //       ? twColors?.violet["100"]
+      //       : twColors?.violet["600"],
+      //   backgroundColor:
+      //     themeSetting === "dark"
+      //       ? twColors?.violet["600"]
+      //       : twColors?.violet["200"],
+      // },
+      // "&[data-selected]&:hover": {
+      //   color:
+      //     themeSetting === "dark"
+      //       ? twColors?.slate["100"]
+      //       : twColors?.slate["600"],
+      //   backgroundColor:
+      //     themeSetting === "dark"
+      //       ? twColors?.slate["600"]
+      //       : twColors?.slate["200"],
+      // },
     },
   });
   const { classes, cx } = useStyles();
@@ -68,6 +68,65 @@ function ComboBox({
   const showClearable =
     rest.clearable && rest.value !== null && rest.value !== undefined;
 
+  interface ItemProps extends React.ComponentPropsWithoutRef<"div"> {
+    label: string;
+    value: string;
+    "data-selected": boolean;
+    "data-hovered": boolean;
+  }
+
+  const SelectItem = forwardRef<HTMLDivElement, ItemProps>(
+    (
+      {
+        label,
+        value,
+        "data-selected": isSelected,
+        "data-hovered": isHovered,
+        ...others
+      }: ItemProps,
+      ref
+    ) => {
+      return (
+        <div
+          ref={ref}
+          {...others}
+          className={clsx(
+            "relative cursor-default select-none py-2 pl-10 pr-4",
+            isHovered
+              ? "bg-slate-200 text-slate-600 dark:bg-slate-600 dark:text-white"
+              : "text-slate-900 dark:text-white"
+          )}
+        >
+          <span
+            className={clsx(
+              "block truncate",
+              isSelected ? "font-medium" : "font-normal"
+            )}
+          >
+            {isSelected ? (
+              <span
+                className={clsx(
+                  `absolute inset-y-0 left-0 flex items-center pl-3`
+                )}
+              >
+                <CheckIcon
+                  className={clsx(
+                    "w-5 h-5",
+                    isHovered
+                      ? "text-slate-00 dark:text-white"
+                      : "text-violet-500 dark:text-violet-500"
+                  )}
+                  aria-hidden="true"
+                />
+              </span>
+            ) : null}
+            <p>{label}</p>
+          </span>
+        </div>
+      );
+    }
+  );
+
   return (
     <Select
       {...rest}
@@ -75,6 +134,7 @@ function ComboBox({
       transition="pop"
       transitionDuration={80}
       transitionTimingFunction="ease"
+      itemComponent={SelectItem}
       classNames={{
         input: cx(
           clsx(
