@@ -35,6 +35,28 @@ function Autocomplete({
             ? twColors?.slate["600"]
             : twColors?.slate["200"],
       },
+
+      "&[data-selected]": {
+        color:
+          themeSetting === "dark"
+            ? twColors?.violet["100"]
+            : twColors?.violet["600"],
+        backgroundColor:
+          themeSetting === "dark"
+            ? twColors?.violet["600"]
+            : twColors?.violet["200"],
+      },
+
+      "&[data-selected]&:hover": {
+        color:
+          themeSetting === "dark"
+            ? twColors?.slate["100"]
+            : twColors?.slate["600"],
+        backgroundColor:
+          themeSetting === "dark"
+            ? twColors?.slate["600"]
+            : twColors?.slate["200"],
+      },
     },
   });
   const { classes, cx } = useStyles();

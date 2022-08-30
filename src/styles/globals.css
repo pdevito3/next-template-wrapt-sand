@@ -26,7 +26,7 @@
     @apply p-0 text-sm text-slate-700 dark:text-slate-200 w-full
   }
   .input-item {
-    @apply py-2 w-full text-sm transition-colors duration-100
+    @apply py-2 w-full text-sm transition-colors duration-100 ease-in
   }
   .form-label {
     @apply text-slate-900 dark:text-white pb-1 font-sans
