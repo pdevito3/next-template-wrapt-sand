@@ -1,11 +1,11 @@
 import { FormControlState } from "@/components/types";
-import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
 import {
   createStyles,
   TextInput as MantineTextInput,
   TextInputProps as MantineTextInputProps,
 } from "@mantine/core";
 import clsx from "clsx";
+import { IconAlertCircle } from "tabler-icons";
 
 interface TextInputProps extends MantineTextInputProps {
   testSelector?: string;
@@ -43,7 +43,7 @@ function TextInput({
       }}
       rightSection={
         inputState === "invalid" && (
-          <ExclamationCircleIcon className="w-6 h-6 text-red-400" />
+          <IconAlertCircle className="w-6 h-6 text-red-400" />
         )
       }
     />

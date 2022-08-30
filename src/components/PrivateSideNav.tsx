@@ -5,20 +5,14 @@ import Image from "next/future/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
-import {
-  IoClose,
-  IoFolder,
-  IoHome,
-  IoLockClosed,
-  IoMenu,
-} from "react-icons/io5";
+import { IconFolder, IconHome, IconLock, IconMenu2, IconX } from "tabler-icons";
 
 const navigation = [
-  { name: "Home", href: "/", icon: IoHome },
+  { name: "Home", href: "/", icon: IconHome },
   /* route marker - remove if you don't want feature routes added by default */
-  { name: "Ingredients", href: "/ingredients", icon: IoFolder },
-  { name: "Recipes", href: "/recipes", icon: IoFolder },
-  { name: "Protected", href: "/protected", icon: IoLockClosed },
+  { name: "Ingredients", href: "/ingredients", icon: IconFolder },
+  { name: "Recipes", href: "/recipes", icon: IconFolder },
+  { name: "Protected", href: "/protected", icon: IconLock },
 ];
 
 export default function PrivateSideNav() {
@@ -76,7 +70,7 @@ export default function PrivateSideNav() {
                       onClick={() => setSidebarOpen(false)}
                     >
                       <span className="sr-only">Close sidebar</span>
-                      <IoClose
+                      <IconX
                         className="w-6 h-6 text-white"
                         aria-hidden="true"
                       />
@@ -160,7 +154,7 @@ export default function PrivateSideNav() {
             onClick={() => setSidebarOpen(true)}
           >
             <span className="sr-only">Open sidebar</span>
-            <IoMenu className="w-6 h-6 text-slate-900" aria-hidden="true" />
+            <IconMenu2 className="w-6 h-6 text-slate-900" aria-hidden="true" />
           </button>
         </div>
       </div>

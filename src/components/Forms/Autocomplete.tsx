@@ -1,11 +1,11 @@
 import { FormControlState } from "@/components/types";
-import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
 import {
   Autocomplete as MantineAutocomplete,
   AutocompleteProps as MantineAutocompleteProps,
   createStyles,
 } from "@mantine/core";
 import clsx from "clsx";
+import { IconAlertCircle } from "tabler-icons";
 import { useTailwindColors } from "../../hooks/useTailwindConfig";
 import { useSetting } from "../ThemeToggle";
 
@@ -91,7 +91,7 @@ function Autocomplete({
       rightSection={
         <>
           {inputState === "invalid" && (
-            <ExclamationCircleIcon className="w-6 h-6 text-red-400" />
+            <IconAlertCircle className="w-6 h-6 text-red-400" />
           )}
         </>
       }

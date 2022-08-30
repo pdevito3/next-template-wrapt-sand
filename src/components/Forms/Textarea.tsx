@@ -1,11 +1,11 @@
 import { FormControlState } from "@/components/types";
-import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
 import {
   createStyles,
   Textarea as MantineTextarea,
   TextareaProps as MantineTextareaProps,
 } from "@mantine/core";
 import clsx from "clsx";
+import { IconAlertCircle } from "tabler-icons";
 
 interface TextareaProps extends MantineTextareaProps {
   testSelector?: string;
@@ -51,7 +51,7 @@ function Textarea({
       }}
       rightSection={
         inputState === "invalid" && (
-          <ExclamationCircleIcon className="w-6 h-6 text-red-400" />
+          <IconAlertCircle className="w-6 h-6 text-red-400" />
         )
       }
     />

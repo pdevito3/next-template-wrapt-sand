@@ -1,10 +1,5 @@
 import { FormControlState } from "@/components/types";
 import {
-  ExclamationCircleIcon,
-  MinusIcon,
-  PlusIcon,
-} from "@heroicons/react/24/solid";
-import {
   createStyles,
   NumberInput as MantineNumberInput,
   NumberInputHandlers,
@@ -12,6 +7,7 @@ import {
 } from "@mantine/core";
 import clsx from "clsx";
 import { useRef } from "react";
+import { IconAlertCircle, IconMinus, IconPlus } from "tabler-icons";
 
 interface NumberInputProps extends MantineNumberInputProps {
   testSelector?: string;
@@ -52,7 +48,7 @@ function NumberInput({
         <>
           <div className="pr-1">
             {inputState === "invalid" && (
-              <ExclamationCircleIcon className="w-6 h-6 text-red-400 pointer-events-none" />
+              <IconAlertCircle className="w-6 h-6 text-red-400 pointer-events-none" />
             )}
           </div>
           <button
@@ -68,7 +64,7 @@ function NumberInput({
             aria-disabled={rest.value == rest.min}
             onClick={() => handlers.current?.decrement()}
           >
-            <MinusIcon />
+            <IconMinus />
           </button>
           <button
             className={clsx(
@@ -83,7 +79,7 @@ function NumberInput({
             aria-disabled={rest.value == rest.max}
             onClick={() => handlers.current?.increment()}
           >
-            <PlusIcon />
+            <IconPlus />
           </button>
         </>
       }

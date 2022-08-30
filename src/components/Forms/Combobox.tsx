@@ -1,12 +1,8 @@
 import { FormControlState } from "@/components/types";
-import {
-  CheckIcon,
-  ChevronDownIcon,
-  ExclamationCircleIcon,
-} from "@heroicons/react/24/solid";
 import { createStyles, Select, SelectProps } from "@mantine/core";
 import clsx from "clsx";
 import { forwardRef } from "react";
+import { IconAlertCircle, IconCheck, IconChevronDown } from "tabler-icons";
 import { useTailwindColors } from "../../hooks/useTailwindConfig";
 import { useSetting } from "../ThemeToggle";
 
@@ -109,7 +105,7 @@ function ComboBox({
                   `absolute inset-y-0 left-0 flex items-center pl-3`
                 )}
               >
-                <CheckIcon
+                <IconCheck
                   className={clsx(
                     "w-5 h-5",
                     isHovered
@@ -156,9 +152,9 @@ function ComboBox({
         !showClearable && (
           <div className="flex items-center justify-center space-x-2">
             {inputState === "invalid" && (
-              <ExclamationCircleIcon className="w-6 h-6 text-red-400" />
+              <IconAlertCircle className="w-6 h-6 text-red-400" />
             )}
-            <ChevronDownIcon
+            <IconChevronDown
               className={clsx(
                 "w-4 h-4",
                 inputState === "invalid" && "text-red-400"

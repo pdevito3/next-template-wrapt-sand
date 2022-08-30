@@ -11,6 +11,14 @@ import {
 } from "@tanstack/react-table";
 import clsx from "clsx";
 import React from "react";
+import {
+  IconChevronDown,
+  IconChevronLeft,
+  IconChevronRight,
+  IconChevronsLeft,
+  IconChevronsRight,
+  IconChevronUp,
+} from "tabler-icons";
 
 interface PaginatedTableContextResponse {
   setPageNumber: React.Dispatch<React.SetStateAction<number>>;
@@ -188,16 +196,20 @@ function PaginatedTable({
                                 <span className="w-5 ml-2">
                                   <span className="flex-none rounded">
                                     {{
-                                      asc: "🔼",
-                                      desc: "🔽",
+                                      asc: (
+                                        <IconChevronDown className="w-5 h-5" />
+                                      ),
+                                      desc: (
+                                        <IconChevronUp className="w-5 h-5" />
+                                      ),
                                     }[header.column.getIsSorted() as string] ??
                                       null}
                                   </span>
                                   <span className="flex-none invisible rounded opacity-50 group-hover:visible">
                                     {header.column.getIsSorted() ||
-                                    !header.column.getCanSort()
-                                      ? null
-                                      : "🔼"}
+                                    !header.column.getCanSort() ? null : (
+                                      <IconChevronDown className="w-5 h-5" />
+                                    )}
                                   </span>
                                 </span>
                               </div>
@@ -327,7 +339,7 @@ function PaginationControls({
           onClick={() => setPageNumber(1)}
           disabled={!apiPagination?.hasPrevious}
         >
-          {"⏪"}
+          {<IconChevronsLeft className="w-5 h-5" />}
         </button>
         <button
           aria-label="Previous page"
@@ -344,7 +356,7 @@ function PaginationControls({
           }
           disabled={!apiPagination?.hasPrevious}
         >
-          {"◀️"}
+          {<IconChevronLeft className="w-5 h-5" />}
         </button>
         <button
           aria-label="Next page"
@@ -361,7 +373,7 @@ function PaginationControls({
           }
           disabled={!apiPagination?.hasNext}
         >
-          {"▶️"}
+          {<IconChevronRight className="w-5 h-5" />}
         </button>
         <button
           aria-label="Last page"
@@ -378,7 +390,7 @@ function PaginationControls({
           }
           disabled={!apiPagination?.hasNext}
         >
-          {"⏩"}
+          {<IconChevronsRight className="w-5 h-5" />}
         </button>
       </div>
     </div>
