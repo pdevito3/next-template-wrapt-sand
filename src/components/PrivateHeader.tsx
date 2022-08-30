@@ -1,6 +1,7 @@
 import { ThemeToggle } from "@/components/ThemeToggle";
 import useAuthUser from "@/domain/auth/hooks/useAuthUser";
 import { Menu, Transition } from "@headlessui/react";
+import { Avatar } from "@mantine/core";
 import clsx from "clsx";
 import { signOut } from "next-auth/react";
 import { Fragment } from "react";
@@ -21,10 +22,14 @@ function PrivateHeader() {
               <div>
                 <Menu.Button className="flex text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                   <span className="sr-only">Open user menu</span>
-                  {/* <Avatar name={username} round size="36" /> */}
-                  <div className="w-10 h-10 bg-white rounded-full">
+                  <Avatar
+                    src={user?.image}
+                    alt="avatar image"
+                    radius="xl"
+                    size="md"
+                  >
                     {user.name?.at(0)}
-                  </div>
+                  </Avatar>
                 </Menu.Button>
               </div>
               <Transition
