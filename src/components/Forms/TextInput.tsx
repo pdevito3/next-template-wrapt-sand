@@ -31,6 +31,7 @@ function TextInput({
         input: cx(
           clsx(
             "input",
+            rest.icon && "pl-10",
             inputState === "valid" && "input-valid",
             inputState === "invalid" && "input-invalid"
           )
