@@ -17,21 +17,21 @@ function TextInput({
 }: TextInputProps) {
   const useStyles = createStyles({});
   const { cx } = useStyles();
+  const { error, icon, disabled } = rest;
 
   let inputState = "valid" as typeof FormControlState[number];
-  if (rest.error) inputState = "invalid";
-  if (rest.disabled) inputState = "disabled";
+  if (error) inputState = "invalid";
+  if (disabled) inputState = "disabled";
 
   return (
     <MantineTextInput
-      {...rest}
       size="md"
-      error={rest.error}
+      error={error}
       classNames={{
         input: cx(
           clsx(
             "input",
-            rest.icon && "pl-10",
+            icon && "pl-10",
             inputState === "valid" && "input-valid",
             inputState === "invalid" && "input-invalid"
           )
@@ -47,6 +47,7 @@ function TextInput({
           <IconAlertCircle className="w-6 h-6 text-red-400" />
         )
       }
+      {...rest}
     />
   );
 }

@@ -56,13 +56,13 @@ function ComboBox({
     },
   });
   const { classes, cx } = useStyles();
+  const { error, disabled, value, clearable } = rest;
 
   let inputState = "valid" as typeof FormControlState[number];
-  if (rest.error) inputState = "invalid";
-  if (rest.disabled) inputState = "disabled";
+  if (error) inputState = "invalid";
+  if (disabled) inputState = "disabled";
 
-  const showClearable =
-    rest.clearable && rest.value !== null && rest.value !== undefined;
+  const showClearable = clearable && value !== null && value !== undefined;
 
   interface ItemProps extends React.ComponentPropsWithoutRef<"div"> {
     label: string;

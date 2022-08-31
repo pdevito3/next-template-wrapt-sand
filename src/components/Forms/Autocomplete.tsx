@@ -60,10 +60,11 @@ function Autocomplete({
     },
   });
   const { classes, cx } = useStyles();
+  const { error, disabled } = rest;
 
   let inputState = "valid" as typeof FormControlState[number];
-  if (rest.error) inputState = "invalid";
-  if (rest.disabled) inputState = "disabled";
+  if (error) inputState = "invalid";
+  if (disabled) inputState = "disabled";
   return (
     <MantineAutocomplete
       {...rest}

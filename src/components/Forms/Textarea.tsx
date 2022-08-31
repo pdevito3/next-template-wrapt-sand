@@ -19,10 +19,11 @@ function Textarea({
 }: TextareaProps) {
   const useStyles = createStyles({});
   const { cx } = useStyles();
+  const { error, icon, disabled } = rest;
 
   let inputState = "valid" as typeof FormControlState[number];
-  if (rest.error) inputState = "invalid";
-  if (rest.disabled) inputState = "disabled";
+  if (error) inputState = "invalid";
+  if (disabled) inputState = "disabled";
 
   var resizeClass = "resize-none";
   if (resize === "x") resizeClass = "resize-x";
@@ -33,7 +34,7 @@ function Textarea({
     <MantineTextarea
       {...rest}
       size="md"
-      error={rest.error}
+      error={error}
       classNames={{
         input: cx(
           clsx(
