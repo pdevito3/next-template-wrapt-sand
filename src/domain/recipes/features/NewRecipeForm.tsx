@@ -3,26 +3,29 @@ import NumberInput from "@/components/Forms/NumberInput";
 import Textarea from "@/components/Forms/Textarea";
 import TextInput from "@/components/Forms/TextInput";
 import { DevTool } from "@hookform/devtools";
+import { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useAddRecipe } from "../api";
 import { RecipeForCreationDto } from "../types/index";
 
-function NewRecipeForm() {
-  const { register, handleSubmit, reset, control, setFocus } =
+function NewRecipeForm(recipeId?: string) {
+  const focusField = "title";
+  const { handleSubmit, reset, control, setFocus } =
     useForm<RecipeForCreationDto>({
       defaultValues: {
         visibility: "public",
       },
     });
-  // useEffect(() => {
-  //   setFocus("title");
-  // }, [setFocus]);
+
+  useEffect(() => {
+    setFocus(focusField);
+  }, [setFocus]);
 
   const createRecipeApi = useAddRecipe();
   const onSubmit: SubmitHandler<RecipeForCreationDto> = (data) => {
     createRecipe(data);
-    // setFocus("title");
+    setFocus(focusField);
   };
 
   function createRecipe(data: RecipeForCreationDto) {

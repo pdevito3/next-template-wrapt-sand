@@ -5,6 +5,7 @@ import {
   TextareaProps as MantineTextareaProps,
 } from "@mantine/core";
 import clsx from "clsx";
+import { forwardRef } from "react";
 import { IconAlertCircle } from "tabler-icons";
 
 interface TextareaProps extends MantineTextareaProps {
@@ -12,51 +13,57 @@ interface TextareaProps extends MantineTextareaProps {
   resize?: "none" | "y" | "x" | "both";
 }
 
-function Textarea({
-  // testSelector = getTestSelector(labelProps.),
-  resize = "none",
-  ...rest
-}: TextareaProps) {
-  const useStyles = createStyles({});
-  const { cx } = useStyles();
-  const { error, icon, disabled } = rest;
+const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+  (
+    {
+      resize = "none",
+      // testSelector = getTestSelector(labelProps.),
+      ...rest
+    },
+    ref
+  ) => {
+    const useStyles = createStyles({});
+    const { cx } = useStyles();
+    const { error, disabled } = rest;
 
-  let inputState = "valid" as typeof FormControlState[number];
-  if (error) inputState = "invalid";
-  if (disabled) inputState = "disabled";
+    let inputState = "valid" as typeof FormControlState[number];
+    if (error) inputState = "invalid";
+    if (disabled) inputState = "disabled";
 
-  var resizeClass = "resize-none";
-  if (resize === "x") resizeClass = "resize-x";
-  if (resize === "y") resizeClass = "resize-y";
-  if (resize === "both") resizeClass = "resize";
+    var resizeClass = "resize-none";
+    if (resize === "x") resizeClass = "resize-x";
+    if (resize === "y") resizeClass = "resize-y";
+    if (resize === "both") resizeClass = "resize";
 
-  return (
-    <MantineTextarea
-      {...rest}
-      size="md"
-      error={error}
-      classNames={{
-        input: cx(
-          clsx(
-            "input",
-            resizeClass,
-            inputState === "valid" && "input-valid",
-            inputState === "invalid" && "input-invalid"
+    return (
+      <MantineTextarea
+        ref={ref}
+        size="md"
+        error={error}
+        classNames={{
+          input: cx(
+            clsx(
+              "input",
+              resizeClass,
+              inputState === "valid" && "input-valid",
+              inputState === "invalid" && "input-invalid"
+            )
+          ),
+          disabled: cx("input-disabled"),
+          error: cx("form-error"),
+          label: cx("form-label"),
+          required: cx("text-red-400"),
+          rightSection: cx(clsx("pointer-events-none")),
+        }}
+        rightSection={
+          inputState === "invalid" && (
+            <IconAlertCircle className="w-6 h-6 text-red-400" />
           )
-        ),
-        disabled: cx("input-disabled"),
-        error: cx("form-error"),
-        label: cx("form-label"),
-        required: cx("text-red-400"),
-        rightSection: cx(clsx("pointer-events-none")),
-      }}
-      rightSection={
-        inputState === "invalid" && (
-          <IconAlertCircle className="w-6 h-6 text-red-400" />
-        )
-      }
-    />
-  );
-}
+        }
+        {...rest}
+      />
+    );
+  }
+);
 
 export default Textarea;
