@@ -1,5 +1,5 @@
 import PrivateLayout from "@/components/PrivateLayout";
-import { NewRecipeForm } from "@/domain/recipes";
+import { RecipeForm } from "@/domain/recipes";
 import { useRouter } from "next/router";
 
 export default function NewRecipe() {
@@ -19,7 +19,7 @@ export default function NewRecipe() {
             Add a Recipe
           </h1>
           <div className="py-6">
-            <NewRecipeForm />
+            <RecipeForm />
           </div>
         </div>
       </div>

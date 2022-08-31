@@ -1,99 +1,176 @@
-import {
-  PaginatedTable,
-  PaginatedTableProvider,
-  useGlobalFilter,
-  usePaginatedTableContext,
-} from "@/components/Forms";
-import { createColumnHelper, SortingState } from "@tanstack/react-table";
-import { useRouter } from "next/router";
-import { useRecipes } from "../api";
-import { RecipeDto } from "../types";
+import ComboBox from "@/components/Forms/Combobox";
+import NumberInput from "@/components/Forms/NumberInput";
+import Textarea from "@/components/Forms/Textarea";
+import TextInput from "@/components/Forms/TextInput";
+import { DevTool } from "@hookform/devtools";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect } from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { FormMode } from "../../../components/types/index";
+import { useAddRecipe } from "../api";
+import { RecipeForCreationDto } from "../types/index";
+import { recipeValidationSchema } from "../validation";
 
-function RecipeForm() {
-  const router = useRouter();
-  const {
-    globalFilter: globalRecipeFilter,
-    queryFilter: queryFilterForRecipes,
-    calculateAndSetQueryFilter: calculateAndSetQueryFilterForRecipes,
-  } = useGlobalFilter((value) => `(title|visibility|directions)@=*${value}`);
+interface RecipeFormProps {
+  recipeId?: string | undefined;
+}
+
+function RecipeForm({ recipeId }: RecipeFormProps) {
+  const formMode = (recipeId ? "Edit" : "Add") as typeof FormMode[number];
+
+  const focusField = "title";
+  const { handleSubmit, reset, control, setFocus } =
+    useForm<RecipeForCreationDto>({
+      resolver: yupResolver(recipeValidationSchema),
+      defaultValues: {
+        visibility: "public",
+      },
+    });
+
+  useEffect(() => {
+    setFocus(focusField);
+  }, [setFocus]);
+
+  const createRecipeApi = useAddRecipe();
+  const onSubmit: SubmitHandler<RecipeForCreationDto> = (data) => {
+    if (formMode === "Add") {
+    }
+    createRecipe(data);
+    setFocus(focusField);
+  };
+
+  function createRecipe(data: RecipeForCreationDto) {
+    createRecipeApi
+      .mutateAsync(data)
+      .then(() => {
+        // Notifications.success("Recipe created successfully");
+        toast.success("Recipe created successfully");
+      })
+      .then(() => {
+        reset();
+      })
+      .catch((e) => {
+        toast.error("There was an error creating the recipe");
+        console.error(e);
+      });
+  }
+
+  function makeToast() {
+    toast.custom(
+      (t) => (
+        // TODO framer motion
+        <div className={`bg-white px-6 py-4 shadow-md rounded-full `}>
+          Hello TailwindCSS! 👋
+        </div>
+      ),
+      {
+        duration: 1500,
+      }
+    );
+  }
 
   return (
-    <div className="space-y-6">
-      <button
-        className="px-3 py-2 border border-white rounded-md"
-        onClick={() => router.back()}
-      >
-        Back
-      </button>
-      <div className="">
-        <div className="flex items-center justify-between">
-          <h1 className="max-w-4xl text-2xl font-medium tracking-tight font-display text-slate-900 dark:text-gray-50 sm:text-4xl">
-            Recipes Edit Form
-          </h1>
-        </div>
-        <div className="py-4">
-          {/* prefer this. more composed approach */}
-          <PaginatedTableProvider>
-            <div className="pt-2">
-              <RecipeListTable queryFilter={queryFilterForRecipes} />
-            </div>
-          </PaginatedTableProvider>
-        </div>
+    <>
+      <div className="py-5">
+        <button onClick={() => makeToast()}>toast 🥂</button>
       </div>
-    </div>
-  );
-}
+      {/* Need `noValidate` to allow RHF validation to trump browser validation when field is required */}
+      <form className="space-y-4" onSubmit={handleSubmit(onSubmit)} noValidate>
+        <div className="w-80">
+          <Controller
+            name="title"
+            control={control}
+            render={({ field, fieldState }) => (
+              <TextInput
+                label={"Title"}
+                placeholder="Title..."
+                required={
+                  recipeValidationSchema.fields?.title?.exclusiveTests?.required
+                }
+                error={fieldState.error?.message}
+                {...field}
+              />
+            )}
+          />
+        </div>
 
-interface RecipeListTableProps {
-  queryFilter?: string | undefined;
-}
+        <div className="w-80">
+          <Controller
+            name="visibility"
+            control={control}
+            render={({ field, fieldState }) => (
+              <ComboBox
+                {...field}
+                label={"Visibility"}
+                placeholder="Visibility..."
+                data={["public", "private"]}
+                clearable
+                required={
+                  recipeValidationSchema.fields?.visibility?.exclusiveTests
+                    ?.required
+                }
+                searchable
+                error={fieldState.error?.message}
+              />
+            )}
+          />
+        </div>
 
-function RecipeListTable({ queryFilter }: RecipeListTableProps) {
-  const { sorting, pageSize, pageNumber } = usePaginatedTableContext();
+        <div className="w-80">
+          <Controller
+            name="directions"
+            control={control}
+            render={({ field, fieldState }) => (
+              <Textarea
+                {...field}
+                label={"Directions"}
+                placeholder="Directions..."
+                minRows={2}
+                autosize
+                resize="y"
+                required={
+                  recipeValidationSchema.fields?.directions?.exclusiveTests
+                    ?.required
+                }
+                error={fieldState.error?.message}
+              />
+            )}
+          />
+        </div>
 
-  const { data: recipeResponse, isLoading } = useRecipes({
-    sortOrder: sorting as SortingState,
-    pageSize,
-    pageNumber,
-    filters: queryFilter,
-    hasArtificialDelay: true,
-  });
-  const recipeData = recipeResponse?.data;
-  const recipePagination = recipeResponse?.pagination;
+        <div className="w-80">
+          <Controller
+            name="rating"
+            control={control}
+            render={({ field, fieldState }) => (
+              <NumberInput
+                {...field}
+                label={"Rating"}
+                placeholder="Rating..."
+                min={0}
+                max={5}
+                required={
+                  recipeValidationSchema.fields?.rating?.exclusiveTests
+                    ?.required
+                }
+                error={fieldState.error?.message}
+              />
+            )}
+          />
+        </div>
 
-  const columnHelper = createColumnHelper<RecipeDto>();
-  const columns = [
-    columnHelper.accessor((row) => row.title, {
-      id: "title",
-      cell: (info) => <p className="">{info.getValue()}</p>,
-      header: () => <span className="">Title</span>,
-    }),
-    columnHelper.accessor((row) => row.visibility, {
-      id: "visibility",
-      cell: (info) => <p className="">{info.getValue()}</p>,
-      header: () => <span className="">Visibility</span>,
-    }),
-    columnHelper.accessor((row) => row.directions, {
-      id: "directions",
-      cell: (info) => <p className="">{info.getValue()}</p>,
-      header: () => <span className="">Directions</span>,
-    }),
-    columnHelper.accessor((row) => row.rating, {
-      id: "rating",
-      cell: (info) => <p className="">{info.getValue()}</p>,
-      header: () => <span className="">Rating</span>,
-    }),
-  ];
-
-  return (
-    <PaginatedTable
-      data={recipeData}
-      columns={columns}
-      apiPagination={recipePagination}
-      entityPlural="Recipes"
-      isLoading={isLoading}
-      onRowClick={(row) => alert(row.id)}
-    />
+        <div className="">
+          <button
+            type="submit"
+            className="px-3 py-2 text-white border rounded-md shadow cursor-pointer border-violet-800 bg-violet-500 dark:border-violet-500 dark:bg-transparent dark:shadow-violet-500"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+      <DevTool control={control} placement={"bottom-right"} />
+    </>
   );
 }
 
