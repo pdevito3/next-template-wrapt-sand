@@ -24,7 +24,9 @@ function RecipeForm({ recipeId }: RecipeFormProps) {
     useForm<RecipeForCreationDto>({
       resolver: yupResolver(recipeValidationSchema),
       defaultValues: {
+        title: "",
         visibility: "public",
+        directions: "",
       },
     });
 
