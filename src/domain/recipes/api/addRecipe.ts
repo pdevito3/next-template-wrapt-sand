@@ -6,7 +6,7 @@ import { RecipeKeys } from "./recipe.keys";
 
 const addRecipe = async (data: RecipeForCreationDto) => {
   const axios = await clients.recipeManagement();
-  console.log(data);
+
   return axios
     .post("/recipes", data)
     .then((response) => response.data as RecipeDto);

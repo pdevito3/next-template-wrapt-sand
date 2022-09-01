@@ -4,18 +4,24 @@ import { useMutation, UseMutationOptions, useQueryClient } from "react-query";
 import { RecipeForUpdateDto } from "../types";
 import { RecipeKeys } from "./recipe.keys";
 
-export const updateRecipe = (id: string, data: RecipeForUpdateDto) => {
-  return clients.recipeManagement.put(`/recipes/${id}`, data).then(() => {});
+export const updateRecipe = async (id: string, data: RecipeForUpdateDto) => {
+  const axios = await clients.recipeManagement();
+  return axios.put(`/recipes/${id}`, data).then((response) => response.data);
 };
 
+export interface UpdateProps {
+  id: string;
+  data: RecipeForUpdateDto;
+}
+
 export function useUpdateRecipe(
-  id: string,
-  options?: UseMutationOptions<void, AxiosError, RecipeForUpdateDto>
+  options?: UseMutationOptions<void, AxiosError, UpdateProps>
 ) {
   const queryClient = useQueryClient();
 
   return useMutation(
-    (updatedRecipe: RecipeForUpdateDto) => updateRecipe(id, updatedRecipe),
+    ({ id, data: updatedRecipe }: UpdateProps) =>
+      updateRecipe(id, updatedRecipe),
     {
       onSuccess: () => {
         queryClient.invalidateQueries(RecipeKeys.lists());
