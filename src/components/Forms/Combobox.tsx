@@ -136,6 +136,7 @@ const ComboBox = forwardRef<HTMLInputElement, ComboBoxProps>(
         transitionTimingFunction="ease"
         itemComponent={SelectItem}
         classNames={{
+          root: cx("input-root"),
           input: cx(
             clsx(
               "input",

@@ -7,6 +7,9 @@
 }
 
 @layer components {
+  .input-root {
+    @apply w-full
+  }
   .input {
     @apply block w-full p-2 text-sm rounded-md outline-none font-sans
   }

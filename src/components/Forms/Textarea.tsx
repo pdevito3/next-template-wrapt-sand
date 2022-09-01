@@ -41,6 +41,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         size="md"
         error={error}
         classNames={{
+          root: cx("input-root"),
           input: cx(
             clsx(
               "input",

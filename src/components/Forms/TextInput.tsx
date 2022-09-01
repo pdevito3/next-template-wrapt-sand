@@ -34,6 +34,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
         size="md"
         error={error}
         classNames={{
+          root: cx("input-root"),
           input: cx(
             clsx(
               "input",

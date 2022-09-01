@@ -73,6 +73,7 @@ function Autocomplete({
       transitionDuration={80}
       transitionTimingFunction="ease"
       classNames={{
+        root: cx("input-root"),
         input: cx(
           clsx(
             "input",

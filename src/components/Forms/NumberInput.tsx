@@ -37,6 +37,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
         size="md"
         formNoValidate={true}
         classNames={{
+          root: cx("input-root"),
           input: cx(
             clsx(
               "input",
