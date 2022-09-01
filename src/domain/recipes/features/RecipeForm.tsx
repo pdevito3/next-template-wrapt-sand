@@ -30,6 +30,11 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
     RecipeForCreationDto | RecipeForUpdateDto
   >({
     resolver: yupResolver(recipeValidationSchema),
+    defaultValues: {
+      title: "",
+      visibility: "public",
+      directions: "",
+    },
   });
 
   useEffect(() => {
