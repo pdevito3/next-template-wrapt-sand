@@ -24,16 +24,19 @@ function RecipeForm({ recipeId }: RecipeFormProps) {
   const { data: seedData } = useGetRecipe(recipeId);
 
   const focusField = "title";
-  const { handleSubmit, reset, control, setFocus, setValue } =
-    useForm<RecipeForCreationDto>({
-      resolver: yupResolver(recipeValidationSchema),
-    });
+  const { handleSubmit, reset, control, setFocus, setValue } = useForm<
+    RecipeForCreationDto | RecipeForUpdateDto
+  >({
+    resolver: yupResolver(recipeValidationSchema),
+  });
 
   useEffect(() => {
     setFocus(focusField);
   }, [setFocus]);
 
-  const onSubmit: SubmitHandler<RecipeForCreationDto> = (data) => {
+  const onSubmit: SubmitHandler<RecipeForCreationDto | RecipeForUpdateDto> = (
+    data
+  ) => {
     formMode === "Add" ? createRecipe(data) : updateRecipe(data);
 
     setFocus(focusField);
