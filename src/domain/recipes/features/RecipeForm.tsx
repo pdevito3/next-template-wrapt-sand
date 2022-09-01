@@ -86,6 +86,7 @@ function RecipeForm({ recipeId }: RecipeFormProps) {
                 label={"Title"}
                 placeholder="Title..."
                 required={
+                  // @ts-ignore
                   recipeValidationSchema.fields?.title?.exclusiveTests?.required
                 }
                 error={fieldState.error?.message}
@@ -107,6 +108,7 @@ function RecipeForm({ recipeId }: RecipeFormProps) {
                 data={["public", "private"]}
                 clearable
                 required={
+                  // @ts-ignore
                   recipeValidationSchema.fields?.visibility?.exclusiveTests
                     ?.required
                 }
@@ -130,6 +132,7 @@ function RecipeForm({ recipeId }: RecipeFormProps) {
                 autosize
                 resize="y"
                 required={
+                  // @ts-ignore
                   recipeValidationSchema.fields?.directions?.exclusiveTests
                     ?.required
                 }
@@ -151,6 +154,7 @@ function RecipeForm({ recipeId }: RecipeFormProps) {
                 min={0}
                 max={5}
                 required={
+                  // @ts-ignore
                   recipeValidationSchema.fields?.rating?.exclusiveTests
                     ?.required
                 }
