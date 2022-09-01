@@ -19,6 +19,7 @@ import {
   IconChevronsRight,
   IconChevronUp,
 } from "tabler-icons";
+import ComboBox from "./Combobox";
 
 interface PaginatedTableContextResponse {
   setPageNumber: React.Dispatch<React.SetStateAction<number>>;
@@ -290,11 +291,14 @@ function PaginationControls({
       className="flex items-center justify-between px-3 py-2 bg-white dark:bg-slate-700 sm:rounded-b-lg"
       aria-label={`Table navigation for ${entityPlural} table`}
     >
-      <div className="flex items-center space-x-3">
-        <span className="flex text-sm font-normal text-slate-500 dark:text-slate-400">
+      <div className="flex items-center flex-1 space-x-5">
+        <span className="flex text-sm font-normal text-slate-500 dark:text-slate-400 min-w-[4rem]">
           <div>Page</div>
           <span className="pl-1 font-semibold text-slate-900 dark:text-white">
-            {pageNumber} of {apiPagination?.totalPages}
+            {pageNumber}{" "}
+            {apiPagination?.totalPages
+              ? `of ${apiPagination?.totalPages}`
+              : null}
           </span>
         </span>
 
@@ -311,20 +315,21 @@ function PaginationControls({
                   className="w-16 p-1 border rounded"
               />
           </span> */}
-        <select
-          className="dark:text-blue-500"
-          value={pageSize}
-          onChange={(e) => {
-            setPageSize(Number(e.target.value));
-            setPageNumber(1);
-          }}
-        >
-          {PageSizeOptions.map((selectedPageSize) => (
-            <option key={selectedPageSize} value={selectedPageSize}>
-              Show {selectedPageSize}
-            </option>
-          ))}
-        </select>
+
+        <div className="w-32">
+          <ComboBox
+            data={PageSizeOptions.map((selectedPageSize) => ({
+              value: selectedPageSize.toString(),
+              label: `Show ${selectedPageSize}`,
+            }))}
+            value={pageSize.toString()}
+            onChange={(e) => {
+              console.log(e);
+              setPageSize(Number(e));
+              setPageNumber(1);
+            }}
+          />
+        </div>
       </div>
 
       <div className="inline-flex items-center -space-x-[2px]">
