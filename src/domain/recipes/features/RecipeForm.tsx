@@ -9,7 +9,9 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { FormMode } from "../../../components/types/index";
 import { useAddRecipe } from "../api";
-import { RecipeForCreationDto } from "../types/index";
+import { useGetRecipe } from "../api/getRecipe";
+import { useUpdateRecipe } from "../api/updateRecipe";
+import { RecipeForCreationDto, RecipeForUpdateDto } from "../types/index";
 import { recipeValidationSchema } from "../validation";
 
 interface RecipeFormProps {
@@ -19,29 +21,25 @@ interface RecipeFormProps {
 function RecipeForm({ recipeId }: RecipeFormProps) {
   const formMode = (recipeId ? "Edit" : "Add") as typeof FormMode[number];
 
+  const { data: seedData } = useGetRecipe(recipeId);
+
   const focusField = "title";
-  const { handleSubmit, reset, control, setFocus } =
+  const { handleSubmit, reset, control, setFocus, setValue } =
     useForm<RecipeForCreationDto>({
       resolver: yupResolver(recipeValidationSchema),
-      defaultValues: {
-        title: "",
-        visibility: "public",
-        directions: "",
-      },
     });
 
   useEffect(() => {
     setFocus(focusField);
   }, [setFocus]);
 
-  const createRecipeApi = useAddRecipe();
   const onSubmit: SubmitHandler<RecipeForCreationDto> = (data) => {
-    if (formMode === "Add") {
-    }
-    createRecipe(data);
+    formMode === "Add" ? createRecipe(data) : updateRecipe(data);
+
     setFocus(focusField);
   };
 
+  const createRecipeApi = useAddRecipe();
   function createRecipe(data: RecipeForCreationDto) {
     createRecipeApi
       .mutateAsync(data)
@@ -54,6 +52,25 @@ function RecipeForm({ recipeId }: RecipeFormProps) {
       })
       .catch((e) => {
         toast.error("There was an error creating the recipe");
+        console.error(e);
+      });
+  }
+
+  const updateRecipeApi = useUpdateRecipe();
+  function updateRecipe(data: RecipeForUpdateDto) {
+    const id = recipeId;
+    if (id === null || id === undefined) return;
+
+    updateRecipeApi
+      .mutateAsync({ id, data })
+      .then(() => {
+        toast.success("Recipe updated successfully");
+      })
+      .then(() => {
+        reset();
+      })
+      .catch((e) => {
+        toast.error("There was an error updating the recipe");
         console.error(e);
       });
   }
@@ -71,6 +88,15 @@ function RecipeForm({ recipeId }: RecipeFormProps) {
       }
     );
   }
+
+  // TODO update to machine
+  // TODO optimistic update to prevent data flash on save?
+  useEffect(() => {
+    setValue("title", seedData?.title ?? "");
+    setValue("visibility", seedData?.visibility ?? "");
+    setValue("directions", seedData?.directions ?? "");
+    setValue("rating", seedData?.rating);
+  }, [seedData]);
 
   return (
     <>
@@ -107,7 +133,7 @@ function RecipeForm({ recipeId }: RecipeFormProps) {
                 {...field}
                 label={"Visibility"}
                 placeholder="Visibility..."
-                data={["public", "private"]}
+                data={["Public", "Private"]}
                 clearable
                 required={
                   // @ts-ignore

@@ -15,7 +15,7 @@ export type RecipeDto = {
   recipeSourceLink: string;
   description: string;
   rating?: number;
-}
+};
 
 export interface RecipeForManipulationDto {
   id: string;
@@ -27,8 +27,8 @@ export interface RecipeForManipulationDto {
   rating?: number;
 }
 
-export interface RecipeForCreationDto extends RecipeForManipulationDto { }
-export interface RecipeForUpdateDto extends RecipeForManipulationDto { }
+export interface RecipeForCreationDto extends RecipeForManipulationDto {}
+export interface RecipeForUpdateDto extends RecipeForManipulationDto {}
 
 // need a string enum list?
 // const StatusList = ['Status1', 'Status2', null] as const;
