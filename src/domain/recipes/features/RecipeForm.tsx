@@ -9,19 +9,21 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { FormMode } from "../../../components/types/index";
 import { useAddRecipe } from "../api";
-import { useGetRecipe } from "../api/getRecipe";
 import { useUpdateRecipe } from "../api/updateRecipe";
-import { RecipeForCreationDto, RecipeForUpdateDto } from "../types/index";
+import {
+  RecipeDto,
+  RecipeForCreationDto,
+  RecipeForUpdateDto,
+} from "../types/index";
 import { recipeValidationSchema } from "../validation";
 
 interface RecipeFormProps {
   recipeId?: string | undefined;
+  recipeData?: RecipeDto;
 }
 
-function RecipeForm({ recipeId }: RecipeFormProps) {
+function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
   const formMode = (recipeId ? "Edit" : "Add") as typeof FormMode[number];
-
-  const { data: seedData } = useGetRecipe(recipeId);
 
   const focusField = "title";
   const { handleSubmit, reset, control, setFocus, setValue } = useForm<
@@ -38,7 +40,6 @@ function RecipeForm({ recipeId }: RecipeFormProps) {
     data
   ) => {
     formMode === "Add" ? createRecipe(data) : updateRecipe(data);
-
     setFocus(focusField);
   };
 
@@ -95,11 +96,11 @@ function RecipeForm({ recipeId }: RecipeFormProps) {
   // TODO update to machine
   // TODO optimistic update to prevent data flash on save?
   useEffect(() => {
-    setValue("title", seedData?.title ?? "");
-    setValue("visibility", seedData?.visibility ?? "");
-    setValue("directions", seedData?.directions ?? "");
-    setValue("rating", seedData?.rating);
-  }, [seedData]);
+    setValue("title", recipeData?.title ?? "");
+    setValue("visibility", recipeData?.visibility ?? "");
+    setValue("directions", recipeData?.directions ?? "");
+    setValue("rating", recipeData?.rating);
+  }, [recipeData]);
 
   return (
     <>

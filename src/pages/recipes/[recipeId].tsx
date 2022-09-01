@@ -1,10 +1,12 @@
 import PrivateLayout from "@/components/PrivateLayout";
+import { useGetRecipe } from "@/domain/recipes/api";
 import { RecipeForm } from "@/domain/recipes/features/RecipeForm";
 import { useRouter } from "next/router";
 
 export default function EditRecipe() {
   const router = useRouter();
   const { recipeId } = router.query;
+  const { data } = useGetRecipe(recipeId?.toString());
 
   return (
     <PrivateLayout>
@@ -20,7 +22,7 @@ export default function EditRecipe() {
             Edit Recipe
           </h1>
           <div className="py-6">
-            <RecipeForm recipeId={recipeId?.toString()} />
+            <RecipeForm recipeId={recipeId?.toString()} recipeData={data} />
           </div>
         </div>
       </div>
