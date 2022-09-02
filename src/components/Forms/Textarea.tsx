@@ -11,6 +11,7 @@ import { IconAlertCircle } from "tabler-icons";
 interface TextareaProps extends MantineTextareaProps {
   testSelector?: string;
   resize?: "none" | "y" | "x" | "both";
+  asInputHeight?: boolean;
 }
 
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
@@ -18,13 +19,14 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     {
       resize = "none",
       // testSelector = getTestSelector(labelProps.),
+      asInputHeight = false,
       ...rest
     },
     ref
   ) => {
     const useStyles = createStyles({});
     const { cx } = useStyles();
-    const { error, disabled } = rest;
+    const { error, disabled, maxRows, minRows } = rest;
 
     let inputState = "valid" as typeof FormControlState[number];
     if (error) inputState = "invalid";
@@ -45,9 +47,10 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           input: cx(
             clsx(
               "input",
-              resizeClass,
+              asInputHeight ? "none" : resizeClass,
               inputState === "valid" && "input-valid",
-              inputState === "invalid" && "input-invalid"
+              inputState === "invalid" && "input-invalid",
+              asInputHeight && "h-6"
             )
           ),
           disabled: cx("input-disabled"),
@@ -62,6 +65,8 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           )
         }
         {...rest}
+        maxRows={asInputHeight ? 1 : maxRows}
+        minRows={asInputHeight ? 1 : minRows}
       />
     );
   }
