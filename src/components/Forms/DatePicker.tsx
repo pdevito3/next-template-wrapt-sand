@@ -62,16 +62,38 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
         //       : twColors?.slate["200"],
         // },
       },
-      // outside: {
-      //   opacity: 0,
-      // },
+
+      // is date outside given month
+      outside: {
+        color:
+          themeSetting === "dark"
+            ? `${twColors?.slate["400"]}60 !important`
+            : `${twColors?.slate["500"]}60 !important`,
+      },
 
       weekend: {
-        color: `${twColors?.green["400"]} !important`,
+        color:
+          themeSetting === "dark"
+            ? `${twColors?.slate["400"]} !important`
+            : `${twColors?.slate["500"]} !important`,
       },
 
       selected: {
-        color: `${twColors?.pink["400"]} !important`,
+        color: `${twColors?.white} !important`,
+        backgroundColor: `${twColors?.violet["500"]} !important`,
+      },
+
+      disabled: {
+        backgroundColor:
+          themeSetting === "dark"
+            ? `${twColors?.slate["800"]}20 !important`
+            : `${twColors?.slate["300"]}20 !important`,
+
+        // TODO not working
+        // cursor: "not-allowed",
+        // "&:hover": {
+        //   cursor: "not-allowed",
+        // },
       },
     });
     const { classes, cx } = useStyles();
@@ -95,14 +117,14 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
         transitionTimingFunction="ease"
         firstDayOfWeek="sunday"
         icon={icon ?? <IconCalendar size={16} />}
+        excludeDate={(date) => date.getDay() === 0 || date.getDay() === 6}
         dayClassName={(date, modifiers) =>
           cx({
-            // [classes.outside]: modifiers.outside,
-
-            // TODO full selected style, make weekends the same as weekday, disabled state, level change styles?
-
+            [classes.outside]: modifiers.outside,
             [classes.selected]: modifiers.selected,
-            [classes.weekend]: modifiers.weekend,
+            [classes.weekend]:
+              modifiers.weekend && !modifiers.outside && !modifiers.selected,
+            [classes.disabled]: modifiers.disabled,
           })
         }
         classNames={{
@@ -116,15 +138,40 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
             )
           ),
           disabled: cx("input-disabled"),
-          error: cx("form-error"),
+          error: cx("form-error text-error"),
           label: cx("form-label"),
-          required: cx("text-red-400"),
-          icon: cx(inputState === "invalid" && "text-red-400"),
+          required: cx("text-error"),
+          icon: cx(inputState === "invalid" && "text-error"),
           dropdown: cx(
-            "bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-r-lg border-l-slate-100 dark:border-l-slate-700 border-l-2",
+            "bg-slate-50 border border-slate-300 text-slate-500 text-sm rounded-r-lg border-l-slate-100 dark:border-l-slate-700 border-l-2",
             "focus:ring-violet-500 focus:border-violet-500 block py-1 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400",
             "dark:text-white dark:focus:ring-violet-500 dark:focus:border-violet-500"
           ),
+          day: cx(
+            "text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-700",
+            "hover:bg-slate-200 hover:text-slate-600 dark:hover:bg-slate-600 dark:hover:text-white"
+          ),
+          weekday: cx("text-slate-300 dark:text-slate-900"),
+          calendarHeaderLevel: cx(
+            "text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-700",
+            "hover:bg-slate-200 hover:text-slate-600 dark:hover:bg-slate-600 dark:hover:text-white"
+          ),
+          calendarHeaderControl: cx(
+            "text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-700",
+            "hover:bg-slate-200 hover:text-slate-600 dark:hover:bg-slate-600 dark:hover:text-white"
+          ),
+          monthPickerControl: cx(
+            "text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-700",
+            "hover:bg-slate-200 hover:text-slate-600 dark:hover:bg-slate-600 dark:hover:text-white"
+          ),
+          yearPickerControl: cx(
+            "text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-700",
+            "hover:bg-slate-200 hover:text-slate-600 dark:hover:bg-slate-600 dark:hover:text-white"
+          ),
+          // broken...
+          monthPickerControlActive: cx("text-white bg-violet-500"),
+          yearPickerControlActive: cx("bg-violet-500 text-white"),
+          // ...broken
           rightSection: cx(clsx(!showClearable && "pointer-events-none")),
         }}
         rightSection={
