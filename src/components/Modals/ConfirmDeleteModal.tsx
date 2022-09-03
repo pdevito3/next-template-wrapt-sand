@@ -30,7 +30,7 @@ function useDeleteModal() {
       labels: { confirm: "Delete", cancel: "Cancel" },
       confirmProps: {
         classNames: {
-          root: cx("bg-red-400"),
+          root: cx("bg-red-400 hover:bg-red-500"),
         },
       },
       //TODO make secondary button style??
