@@ -1,4 +1,5 @@
 import { PaginatedTable, usePaginatedTableContext } from "@/components/Forms";
+import openDeleteModal from "@/components/Modals/ConfirmDeleteModal";
 import { RecipeDto } from "@/domain/recipes/types";
 import "@tanstack/react-table";
 import { createColumnHelper, SortingState } from "@tanstack/react-table";
@@ -73,7 +74,9 @@ export function RecipeListTable({ queryFilter }: RecipeListTableProps) {
         <div className="flex items-center justify-center w-full">
           <button
             onClick={(e) => {
-              deleteRecipe(row.getValue());
+              openDeleteModal({
+                onConfirm: () => deleteRecipe(row.getValue()),
+              });
               e.stopPropagation();
             }}
             className="inline-flex items-center px-1 py-2 text-sm font-medium leading-5 transition duration-100 ease-in bg-white border border-gray-300 rounded-full shadow-sm hover:bg-red-200 hover:text-red-800 hover:outline-none dark:border-slate-900 dark:bg-slate-800 dark:text-white dark:hover:bg-red-800 dark:hover:text-red-300 dark:hover:outline-none sm:px-3 sm:py-1 sm:opacity-0 sm:group-hover:opacity-100 dark:hover:shadow dark:shadow-red-400 dark:hover:shadow-red-300"

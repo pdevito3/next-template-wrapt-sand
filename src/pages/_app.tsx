@@ -3,6 +3,7 @@ import Login from "@/domain/auth/components/login";
 import useAuthUser from "@/domain/auth/hooks/useAuthUser";
 import "@/styles/globals.css";
 import { MantineProvider } from "@mantine/core";
+import { ModalsProvider } from "@mantine/modals";
 import { SessionProvider } from "next-auth/react";
 import type { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -23,7 +24,9 @@ function MyApp({ Component, pageProps }: AppProps) {
             // withGlobalStyles
             // withNormalizeCSS
             >
-              <Component {...pageProps} />
+              <ModalsProvider>
+                <Component {...pageProps} />
+              </ModalsProvider>
               <ReactQueryDevtools initialIsOpen={false} />
               <Notifications />
             </MantineProvider>
