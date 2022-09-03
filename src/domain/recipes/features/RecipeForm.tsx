@@ -5,7 +5,6 @@ import TextInput from "@/components/Forms/TextInput";
 import { DevTool } from "@hookform/devtools";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { DatePicker } from "@mantine/dates";
-import dayjs from "dayjs";
 import { useEffect } from "react";
 import { Controller, SubmitHandler, useForm, useWatch } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -34,7 +33,7 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
     resolver: yupResolver(recipeValidationSchema),
     defaultValues: {
       title: "",
-      visibility: "public",
+      visibility: "Public",
       directions: "",
     },
   });
@@ -103,10 +102,13 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
   // TODO update to machine
   // TODO optimistic update to prevent data flash on save?
   useEffect(() => {
-    setValue("title", recipeData?.title ?? "");
-    setValue("visibility", recipeData?.visibility ?? "");
-    setValue("directions", recipeData?.directions ?? "");
-    setValue("rating", recipeData?.rating);
+    if (formMode === "Edit") {
+      setValue("title", recipeData?.title ?? "");
+      setValue("visibility", recipeData?.visibility ?? "Public");
+      setValue("directions", recipeData?.directions ?? "");
+      setValue("rating", recipeData?.rating);
+      setValue("dateOfOrigin", recipeData?.dateOfOrigin);
+    }
   }, [recipeData]);
 
   const doo = useWatch({
@@ -218,10 +220,8 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
                 label={"Date Of Origin"}
                 placeholder="Pick a date"
                 withAsterisk
-                // defaultValue={new Date()}
                 error={fieldState.error?.message}
                 {...field}
-                value={dayjs(field.value).format("yyyy/MM/dd")}
               />
             )}
           />
