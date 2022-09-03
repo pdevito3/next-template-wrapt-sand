@@ -5,6 +5,7 @@ export const recipeValidationSchema = yup.object({
   visibility: yup.string(),
   directions: yup.string(),
   rating: yup.number().min(0).max(5),
+  dateOfOrigin: yup.date().required("Date of origin is required"),
   // firstName: yup.string()
   //     .required('First Name is required'),
   // lastName: yup.string()

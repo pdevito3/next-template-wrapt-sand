@@ -1,10 +1,10 @@
 import ComboBox from "@/components/Forms/Combobox";
+import DatePicker from "@/components/Forms/DatePicker";
 import NumberInput from "@/components/Forms/NumberInput";
 import Textarea from "@/components/Forms/Textarea";
 import TextInput from "@/components/Forms/TextInput";
 import { DevTool } from "@hookform/devtools";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { DatePicker } from "@mantine/dates";
 import { useEffect } from "react";
 import { Controller, SubmitHandler, useForm, useWatch } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -217,9 +217,18 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
             rules={{ required: "Date Of Origin is required" }}
             render={({ field, fieldState }) => (
               <DatePicker
-                label={"Date Of Origin"}
+                label={"Date of Origin"}
                 placeholder="Pick a date"
-                withAsterisk
+                withAsterisk={
+                  // @ts-ignore
+                  recipeValidationSchema.fields?.dateOfOrigin?.exclusiveTests
+                    ?.required
+                }
+                required={
+                  // @ts-ignore
+                  recipeValidationSchema.fields?.dateOfOrigin?.exclusiveTests
+                    ?.required
+                }
                 error={fieldState.error?.message}
                 {...field}
               />
