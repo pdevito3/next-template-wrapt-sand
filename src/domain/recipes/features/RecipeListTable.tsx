@@ -1,5 +1,5 @@
 import { PaginatedTable, usePaginatedTableContext } from "@/components/Forms";
-import openDeleteModal from "@/components/Modals/ConfirmDeleteModal";
+import useDeleteModal from "@/components/Modals/ConfirmDeleteModal";
 import { RecipeDto } from "@/domain/recipes/types";
 import "@tanstack/react-table";
 import { createColumnHelper, SortingState } from "@tanstack/react-table";
@@ -16,6 +16,7 @@ export function RecipeListTable({ queryFilter }: RecipeListTableProps) {
   const router = useRouter();
   const { sorting, pageSize, pageNumber } = usePaginatedTableContext();
 
+  const openDeleteModal = useDeleteModal();
   const deleteRecipeApi = useDeleteRecipe();
   function deleteRecipe(id: string) {
     deleteRecipeApi
