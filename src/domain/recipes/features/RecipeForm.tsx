@@ -35,6 +35,9 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
       title: "",
       visibility: "Public",
       directions: "",
+
+      // @ts-ignore -- need default value to reset form
+      dateOfOrigin: null,
     },
   });
 
