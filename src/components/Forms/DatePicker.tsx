@@ -142,11 +142,7 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
           label: cx("form-label"),
           required: cx("text-error"),
           icon: cx(inputState === "invalid" && "text-error"),
-          dropdown: cx(
-            "bg-slate-50 border border-slate-300 text-slate-500 text-sm rounded-r-lg border-l-slate-100 dark:border-l-slate-700 border-l-2",
-            "focus:ring-violet-500 focus:border-violet-500 block py-1 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-slate-400",
-            "dark:text-white dark:focus:ring-violet-500 dark:focus:border-violet-500"
-          ),
+          dropdown: cx("input-dropdown"),
           day: cx(
             "text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-700",
             "hover:bg-slate-200 hover:text-slate-600 dark:hover:bg-slate-600 dark:hover:text-white"
