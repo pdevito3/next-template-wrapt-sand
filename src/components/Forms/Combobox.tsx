@@ -145,9 +145,9 @@ const ComboBox = forwardRef<HTMLInputElement, ComboBoxProps>(
             )
           ),
           disabled: cx("input-disabled"),
-          error: cx("form-error"),
+          error: cx("form-error text-error"),
           label: cx("form-label"),
-          required: cx("text-red-400"),
+          required: cx("text-error"),
           dropdown: cx("input-dropdown"),
           itemsWrapper: cx("input-items-wrapper"),
           item: cx(clsx(classes.item, "input-item")),
@@ -157,12 +157,12 @@ const ComboBox = forwardRef<HTMLInputElement, ComboBoxProps>(
           !showClearable && (
             <div className="flex items-center justify-center space-x-2">
               {inputState === "invalid" && (
-                <IconAlertCircle className="w-6 h-6 text-red-400" />
+                <IconAlertCircle className="w-6 h-6 text-error" />
               )}
               <IconChevronDown
                 className={clsx(
                   "w-4 h-4",
-                  inputState === "invalid" && "text-red-400"
+                  inputState === "invalid" && "text-error"
                 )}
               />
             </div>

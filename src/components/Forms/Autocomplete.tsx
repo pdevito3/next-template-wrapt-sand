@@ -82,9 +82,9 @@ function Autocomplete({
           )
         ),
         disabled: cx("input-disabled"),
-        error: cx("form-error"),
+        error: cx("form-error text-error"),
         label: cx("form-label"),
-        required: cx("text-red-400"),
+        required: cx("text-error"),
         dropdown: cx("input-dropdown"),
         itemsWrapper: cx("input-items-wrapper"),
         item: cx(clsx(classes.item, "input-item")),

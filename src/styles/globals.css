@@ -35,6 +35,9 @@
     @apply text-slate-900 dark:text-white pb-1 font-sans
   }
   .form-error {
-    @apply text-sm text-red-400 -mt-1
+    @apply text-sm -mt-1
+  }
+  .text-error {
+    @apply text-red-400
   }
 }
