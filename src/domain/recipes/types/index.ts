@@ -15,6 +15,7 @@ export type RecipeDto = {
   recipeSourceLink: string;
   description: string;
   rating?: number;
+  dateOfOrigin?: Date;
 };
 
 export interface RecipeForManipulationDto {
@@ -25,6 +26,7 @@ export interface RecipeForManipulationDto {
   recipeSourceLink: string;
   description: string;
   rating?: number;
+  dateOfOrigin?: Date;
 }
 
 export interface RecipeForCreationDto extends RecipeForManipulationDto {}

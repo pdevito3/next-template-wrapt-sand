@@ -4,8 +4,10 @@ import Textarea from "@/components/Forms/Textarea";
 import TextInput from "@/components/Forms/TextInput";
 import { DevTool } from "@hookform/devtools";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { DatePicker } from "@mantine/dates";
+import dayjs from "dayjs";
 import { useEffect } from "react";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm, useWatch } from "react-hook-form";
 import toast from "react-hot-toast";
 import { FormMode } from "../../../components/types/index";
 import { useAddRecipe } from "../api";
@@ -107,6 +109,11 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
     setValue("rating", recipeData?.rating);
   }, [recipeData]);
 
+  const doo = useWatch({
+    control,
+    name: "dateOfOrigin",
+  });
+
   return (
     <>
       <div className="py-5">
@@ -199,6 +206,26 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
               />
             )}
           />
+        </div>
+
+        <div className="w-80">
+          <Controller
+            name="dateOfOrigin"
+            control={control}
+            rules={{ required: "Date Of Origin is required" }}
+            render={({ field, fieldState }) => (
+              <DatePicker
+                label={"Date Of Origin"}
+                placeholder="Pick a date"
+                withAsterisk
+                // defaultValue={new Date()}
+                error={fieldState.error?.message}
+                {...field}
+                value={dayjs(field.value).format("yyyy/MM/dd")}
+              />
+            )}
+          />
+          <p>date of origin: {doo?.toISOString()}</p>
         </div>
 
         <div className="">

@@ -61,6 +61,11 @@ export function RecipeListTable({ queryFilter }: RecipeListTableProps) {
       cell: (info) => <p className="">{info.getValue()}</p>,
       header: () => <span className="">Rating</span>,
     }),
+    columnHelper.accessor((row) => row.dateOfOrigin, {
+      id: "dateOfOrigin",
+      cell: (info) => <p className="">{info.getValue()?.toLocaleString()}</p>,
+      header: () => <span className="">Date Of Origin</span>,
+    }),
     columnHelper.accessor("id", {
       enableSorting: false,
       meta: { thClassName: "w-10" },
