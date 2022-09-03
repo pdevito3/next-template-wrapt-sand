@@ -47,6 +47,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           error: cx("form-error"),
           label: cx("form-label"),
           required: cx("text-red-400"),
+          icon: cx(inputState === "invalid" && "text-red-400"),
           rightSection: cx(clsx("pointer-events-none")),
         }}
         rightSection={
