@@ -1,3 +1,4 @@
+import { Checkbox } from "@/components/Forms/Checkbox";
 import ComboBox from "@/components/Forms/Combobox";
 import DatePicker from "@/components/Forms/DatePicker";
 import NumberInput from "@/components/Forms/NumberInput";
@@ -35,6 +36,7 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
       title: "",
       visibility: "Public",
       directions: "",
+      haveMadeItMyself: false,
 
       // @ts-ignore -- need default value to reset form
       dateOfOrigin: null,
@@ -111,6 +113,7 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
       setValue("directions", recipeData?.directions ?? "");
       setValue("rating", recipeData?.rating);
       setValue("dateOfOrigin", recipeData?.dateOfOrigin);
+      setValue("haveMadeItMyself", recipeData?.haveMadeItMyself ?? false);
     }
   }, [recipeData]);
 
@@ -217,7 +220,6 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
           <Controller
             name="dateOfOrigin"
             control={control}
-            rules={{ required: "Date Of Origin is required" }}
             render={({ field, fieldState }) => (
               <DatePicker
                 label={"Date of Origin"}
@@ -237,7 +239,26 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
               />
             )}
           />
-          <p>date of origin: {doo?.toISOString()}</p>
+        </div>
+
+        <div className="w-80">
+          <Controller
+            name="haveMadeItMyself"
+            control={control}
+            render={({ field, fieldState }) => (
+              <Checkbox
+                label={"Have Made It Myself"}
+                required={
+                  // @ts-ignore
+                  recipeValidationSchema.fields?.haveMadeItMyself
+                    ?.exclusiveTests?.required
+                }
+                isSelected={field.value}
+                error={fieldState?.error?.message}
+                {...field}
+              />
+            )}
+          />
         </div>
 
         <div className="">

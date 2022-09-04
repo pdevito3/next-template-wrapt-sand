@@ -1132,6 +1132,14 @@
     "@react-types/combobox" "^3.5.3"
     "@react-types/shared" "^3.14.1"
 
+"@react-stately/data@^3.6.1":
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/@react-stately/data/-/data-3.6.1.tgz#79268d2aba5a99e150547026c8c8c8ce9056ad6a"
+  integrity sha512-+e+f8WNu7NpHVmSOBnwHNAG67aCWWRWf96zSJ2O1QBK04v/a9aMbP8m7c1Y15CWy5PLvUEJoaXaanwthTGev+w==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@react-types/shared" "^3.14.1"
+
 "@react-stately/datepicker@^3.0.2":
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@react-stately/datepicker/-/datepicker-3.0.2.tgz#c1118841dcecfed5e3f6950ff773c21ab8fbd56d"
@@ -2726,6 +2734,33 @@ react-simple-animate@^3.3.12:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/react-simple-animate/-/react-simple-animate-3.5.1.tgz#6cdc1407864989b604d52200ffaaec8aa75c0505"
   integrity sha512-VpQS4nYU3G8+xU9hMinbeFZqHRVe+rNicec+y+Jaz3kHCV5TlBSkTzoaz/Nycsh2ShoWWfqfhV3Rn8E85QNqZg==
+
+react-stately@^3.17.0:
+  version "3.17.0"
+  resolved "https://registry.yarnpkg.com/react-stately/-/react-stately-3.17.0.tgz#4abfdee3469c7157bdf07c5b0508a65286a08c7b"
+  integrity sha512-wAclTwKXt2BoK1OLajxkW+Zl0gQer3qL/eDaNd98xvK4IYlEBxcCVXzvvzkMcOzPai2iqPFAk0w6PzMjlhUy1g==
+  dependencies:
+    "@react-stately/calendar" "^3.0.2"
+    "@react-stately/checkbox" "^3.2.1"
+    "@react-stately/collections" "^3.4.3"
+    "@react-stately/combobox" "^3.2.1"
+    "@react-stately/data" "^3.6.1"
+    "@react-stately/datepicker" "^3.0.2"
+    "@react-stately/list" "^3.5.3"
+    "@react-stately/menu" "^3.4.1"
+    "@react-stately/numberfield" "^3.2.1"
+    "@react-stately/overlays" "^3.4.1"
+    "@react-stately/radio" "^3.5.1"
+    "@react-stately/searchfield" "^3.3.1"
+    "@react-stately/select" "^3.3.1"
+    "@react-stately/selection" "^3.10.3"
+    "@react-stately/slider" "^3.2.1"
+    "@react-stately/table" "^3.4.0"
+    "@react-stately/tabs" "^3.2.1"
+    "@react-stately/toggle" "^3.4.1"
+    "@react-stately/tooltip" "^3.2.1"
+    "@react-stately/tree" "^3.3.3"
+    "@react-types/shared" "^3.14.1"
 
 react-textarea-autosize@8.3.4:
   version "8.3.4"

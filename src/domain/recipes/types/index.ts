@@ -16,6 +16,7 @@ export type RecipeDto = {
   description: string;
   rating?: number;
   dateOfOrigin?: Date;
+  haveMadeItMyself?: boolean;
 };
 
 export interface RecipeForManipulationDto {
@@ -27,6 +28,7 @@ export interface RecipeForManipulationDto {
   description: string;
   rating?: number;
   dateOfOrigin?: Date;
+  haveMadeItMyself?: boolean;
 }
 
 export interface RecipeForCreationDto extends RecipeForManipulationDto {}
