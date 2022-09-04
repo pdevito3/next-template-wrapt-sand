@@ -25,7 +25,9 @@ export function Checkbox({
   let { focusProps, isFocusVisible } = useFocusRing();
 
   let checkboxClassName = clsx(
-    state.isSelected ? "bg-violet-500 group-active:bg-violet-600" : "bg-white",
+    state.isSelected
+      ? "bg-violet-500 group-active:bg-violet-600"
+      : "input input-valid",
     "text-white",
     "border-2",
     "rounded",
