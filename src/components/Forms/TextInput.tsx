@@ -52,7 +52,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
         }}
         rightSection={
           inputState === "invalid" && (
-            <IconAlertCircle className="w-6 h-6 text-red-400" />
+            <IconAlertCircle className="w-6 h-6 text-error" />
           )
         }
         {...rest}
