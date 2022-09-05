@@ -1,4 +1,5 @@
 import { FormControlState } from "@/components/types";
+import { getTestSelector } from "@/utils/testing";
 import {
   createStyles,
   TextInput as MantineTextInput,
@@ -9,17 +10,11 @@ import { forwardRef } from "react";
 import { IconAlertCircle } from "tabler-icons";
 
 interface TextInputProps extends MantineTextInputProps {
-  testSelector?: string;
+  testSelector: string;
 }
 
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
-  (
-    {
-      // testSelector = getTestSelector(labelProps.),
-      ...rest
-    },
-    ref
-  ) => {
+  ({ testSelector, ...rest }, ref) => {
     const useStyles = createStyles({});
     const { cx } = useStyles();
     const { error, icon, disabled } = rest;
@@ -30,8 +25,10 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
 
     return (
       <MantineTextInput
+        {...rest}
         ref={ref}
         size="md"
+        cy-data={getTestSelector(testSelector)}
         error={error}
         classNames={{
           root: cx("input-root"),
@@ -55,7 +52,6 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             <IconAlertCircle className="w-6 h-6 text-error" />
           )
         }
-        {...rest}
       />
     );
   }

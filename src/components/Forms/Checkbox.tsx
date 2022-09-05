@@ -1,3 +1,4 @@
+import { getTestSelector } from "@/utils/testing";
 import { useCheckbox } from "@react-aria/checkbox";
 import { useFocusRing } from "@react-aria/focus";
 import { mergeProps } from "@react-aria/utils";
@@ -11,12 +12,14 @@ interface CheckboxProps extends AriaCheckboxProps {
   label: string;
   required?: boolean;
   error?: string | undefined;
+  testSelector: string;
 }
 
 export function Checkbox({
   label,
   required = false,
   error,
+  testSelector,
   ...props
 }: CheckboxProps) {
   let state = useToggleState(props);
@@ -67,6 +70,7 @@ export function Checkbox({
             {...mergeProps(inputProps, focusProps)}
             required={required}
             ref={ref}
+            cy-data={getTestSelector(testSelector)}
           />
         </VisuallyHidden>
         <div className={clsx(checkboxClassName)} aria-hidden="true">

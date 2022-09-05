@@ -1,4 +1,5 @@
 import { FormControlState } from "@/components/types";
+import { getTestSelector } from "@/utils/testing";
 import { createStyles } from "@mantine/core";
 import {
   DatePicker as MantineDatePicker,
@@ -11,17 +12,11 @@ import { useTailwindColors } from "../../hooks/useTailwindConfig";
 import { useSetting } from "../ThemeToggle";
 
 interface DatePickerProps extends MantineDatePickerProps {
-  testSelector?: string;
+  testSelector: string;
 }
 
 const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
-  (
-    {
-      // testSelector = getTestSelector(labelProps.),
-      ...rest
-    },
-    ref
-  ) => {
+  ({ testSelector, ...rest }, ref) => {
     const themeSetting = useSetting((state) => state.setting);
     const twColors = useTailwindColors();
     const useStyles = createStyles({
@@ -109,6 +104,7 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       <MantineDatePicker
         ref={ref}
         size="md"
+        cy-data={getTestSelector(testSelector)}
         allowFreeInput
         dateParser={(dateString) => new Date(Date.parse(dateString))}
         // new Date(dayjs(dateString).format("yyyy/MM/dd"))

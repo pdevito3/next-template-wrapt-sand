@@ -137,6 +137,7 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
               <TextInput
                 label={"Title"}
                 placeholder="Title..."
+                testSelector="title"
                 required={
                   // @ts-ignore
                   recipeValidationSchema.fields?.title?.exclusiveTests?.required
@@ -157,6 +158,7 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
                 {...field}
                 label={"Visibility"}
                 placeholder="Visibility..."
+                testSelector="visibility"
                 data={["Public", "Private"]}
                 clearable
                 required={
@@ -180,6 +182,7 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
                 {...field}
                 label={"Directions"}
                 placeholder="Directions..."
+                testSelector="directions"
                 minRows={2}
                 autosize
                 resize="y"
@@ -222,8 +225,10 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
             control={control}
             render={({ field, fieldState }) => (
               <DatePicker
+                {...field}
                 label={"Date of Origin"}
                 placeholder="Pick a date"
+                testSelector="dateOfOrigin"
                 withAsterisk={
                   // @ts-ignore
                   recipeValidationSchema.fields?.dateOfOrigin?.exclusiveTests
@@ -235,7 +240,6 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
                     ?.required
                 }
                 error={fieldState.error?.message}
-                {...field}
               />
             )}
           />
@@ -248,6 +252,7 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
             render={({ field, fieldState }) => (
               <Checkbox
                 label={"Have Made It Myself"}
+                testSelector="haveMadeItMyself"
                 required={
                   // @ts-ignore
                   recipeValidationSchema.fields?.haveMadeItMyself

@@ -1,4 +1,5 @@
 import { FormControlState } from "@/components/types";
+import { getTestSelector } from "@/utils/testing";
 import {
   Autocomplete as MantineAutocomplete,
   AutocompleteProps as MantineAutocompleteProps,
@@ -10,13 +11,10 @@ import { useTailwindColors } from "../../hooks/useTailwindConfig";
 import { useSetting } from "../ThemeToggle";
 
 interface AutocompleteProps extends MantineAutocompleteProps {
-  testSelector?: string;
+  testSelector: string;
 }
 
-function Autocomplete({
-  // testSelector = getTestSelector(labelProps.),
-  ...rest
-}: AutocompleteProps) {
+function Autocomplete({ testSelector, ...rest }: AutocompleteProps) {
   const themeSetting = useSetting((state) => state.setting);
   const twColors = useTailwindColors();
   const useStyles = createStyles({
@@ -65,6 +63,7 @@ function Autocomplete({
   let inputState = "valid" as typeof FormControlState[number];
   if (error) inputState = "invalid";
   if (disabled) inputState = "disabled";
+
   return (
     <MantineAutocomplete
       {...rest}
@@ -72,6 +71,7 @@ function Autocomplete({
       transition="pop"
       transitionDuration={80}
       transitionTimingFunction="ease"
+      cy-data={getTestSelector(testSelector)}
       classNames={{
         root: cx("input-root"),
         input: cx(

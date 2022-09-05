@@ -1,4 +1,5 @@
 import { FormControlState } from "@/components/types";
+import { getTestSelector } from "@/utils/testing";
 import { createStyles, Select, SelectProps } from "@mantine/core";
 import clsx from "clsx";
 import { forwardRef } from "react";
@@ -7,17 +8,11 @@ import { useTailwindColors } from "../../hooks/useTailwindConfig";
 import { useSetting } from "../ThemeToggle";
 
 interface ComboBoxProps extends SelectProps {
-  testSelector?: string;
+  testSelector: string;
 }
 
 const ComboBox = forwardRef<HTMLInputElement, ComboBoxProps>(
-  (
-    {
-      // testSelector = getTestSelector(labelProps.),
-      ...rest
-    },
-    ref
-  ) => {
+  ({ testSelector, ...rest }, ref) => {
     const themeSetting = useSetting((state) => state.setting);
     const twColors = useTailwindColors();
     const useStyles = createStyles({
@@ -90,6 +85,7 @@ const ComboBox = forwardRef<HTMLInputElement, ComboBoxProps>(
           <div
             ref={ref}
             {...others}
+            cy-data={getTestSelector(`${testSelector}-${value}`)}
             className={clsx(
               "relative cursor-default select-none py-2 pl-10 pr-4",
               isHovered
@@ -131,6 +127,7 @@ const ComboBox = forwardRef<HTMLInputElement, ComboBoxProps>(
       <Select
         ref={ref}
         size="md"
+        cy-data={getTestSelector(testSelector)}
         transition="pop"
         transitionDuration={80}
         transitionTimingFunction="ease"

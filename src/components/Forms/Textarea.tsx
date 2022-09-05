@@ -1,4 +1,5 @@
 import { FormControlState } from "@/components/types";
+import { getTestSelector } from "@/utils/testing";
 import {
   createStyles,
   Textarea as MantineTextarea,
@@ -9,21 +10,13 @@ import { forwardRef } from "react";
 import { IconAlertCircle } from "tabler-icons";
 
 interface TextareaProps extends MantineTextareaProps {
-  testSelector?: string;
+  testSelector: string;
   resize?: "none" | "y" | "x" | "both";
   asInputHeight?: boolean;
 }
 
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
-  (
-    {
-      resize = "none",
-      // testSelector = getTestSelector(labelProps.),
-      asInputHeight = false,
-      ...rest
-    },
-    ref
-  ) => {
+  ({ resize = "none", testSelector, asInputHeight = false, ...rest }, ref) => {
     const useStyles = createStyles({});
     const { cx } = useStyles();
     const { error, disabled, maxRows, minRows } = rest;
@@ -39,8 +32,10 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
 
     return (
       <MantineTextarea
+        {...rest}
         ref={ref}
         size="md"
+        cy-data={getTestSelector(testSelector)}
         error={error}
         classNames={{
           root: cx("input-root"),
@@ -64,7 +59,6 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             <IconAlertCircle className="w-6 h-6 text-red-400" />
           )
         }
-        {...rest}
         maxRows={asInputHeight ? 1 : maxRows}
         minRows={asInputHeight ? 1 : minRows}
       />

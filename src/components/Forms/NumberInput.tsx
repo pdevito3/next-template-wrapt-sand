@@ -1,4 +1,5 @@
 import { FormControlState } from "@/components/types";
+import { getTestSelector } from "@/utils/testing";
 import {
   createStyles,
   NumberInput as MantineNumberInput,
@@ -10,17 +11,11 @@ import { forwardRef, useRef } from "react";
 import { IconAlertCircle, IconMinus, IconPlus } from "tabler-icons";
 
 interface NumberInputProps extends MantineNumberInputProps {
-  testSelector?: string;
+  testSelector: string;
 }
 
 const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
-  (
-    {
-      // testSelector = getTestSelector(labelProps.),
-      ...rest
-    },
-    ref
-  ) => {
+  ({ testSelector, ...rest }, ref) => {
     const useStyles = createStyles({});
     const { cx } = useStyles();
     const handlers = useRef<NumberInputHandlers>();
@@ -35,6 +30,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
         ref={ref}
         handlersRef={handlers}
         size="md"
+        cy-data={getTestSelector(testSelector)}
         formNoValidate={true}
         classNames={{
           root: cx("input-root"),
