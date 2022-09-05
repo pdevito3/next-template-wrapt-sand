@@ -92,21 +92,28 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       },
     });
     const { classes, cx } = useStyles();
-    const { error, disabled, value, clearable, icon } = rest;
+    const { error, disabled, value, clearable, icon, onChange } = rest;
 
     let inputState = "valid" as typeof FormControlState[number];
     if (error) inputState = "invalid";
     if (disabled) inputState = "disabled";
 
     const showClearable = clearable && value !== null && value !== undefined;
-
     return (
       <MantineDatePicker
+        {...rest}
         ref={ref}
         size="md"
         cy-data={getTestSelector(testSelector)}
         allowFreeInput
-        dateParser={(dateString) => new Date(Date.parse(dateString))}
+        inputFormat="YYYY-MM-DD"
+        onChange={(date) => {
+          if (date !== undefined) {
+            date?.setHours(0, 0, 0);
+            onChange(date);
+          }
+        }}
+        // dateParser={(dateString) => new Date(Date.parse(dateString))}
         // new Date(dayjs(dateString).format("yyyy/MM/dd"))
         transition="pop"
         transitionDuration={80}
@@ -176,7 +183,6 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
           )
         }
         rightSectionWidth={40}
-        {...rest}
       />
     );
   }
