@@ -4,7 +4,7 @@ export const env = {
   isDevelopment: _env === "development",
   auth: {
     nextAuthId: "oidc",
-    secret: "974d6f71-d41b-4601-9a7a-a33081f82188", // TODO change to env var ref
+    secret: process.env.NEXTAUTH_SECRET,
   },
   clientUrls: {
     recipeManagement: () => {
