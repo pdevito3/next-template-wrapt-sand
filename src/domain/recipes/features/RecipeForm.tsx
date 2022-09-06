@@ -81,9 +81,6 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
       .then(() => {
         toast.success("Recipe updated successfully");
       })
-      .then(() => {
-        reset();
-      })
       .catch((e) => {
         toast.error("There was an error updating the recipe");
         console.error(e);
