@@ -1,4 +1,4 @@
-import { Checkbox } from "@/components/Forms/Checkbox";
+import Checkbox from "@/components/Forms/Checkbox";
 import ComboBox from "@/components/Forms/Combobox";
 import DatePicker from "@/components/Forms/DatePicker";
 import NumberInput from "@/components/Forms/NumberInput";
