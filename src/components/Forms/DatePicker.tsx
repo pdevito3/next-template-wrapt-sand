@@ -6,6 +6,7 @@ import {
   DatePickerProps as MantineDatePickerProps,
 } from "@mantine/dates";
 import clsx from "clsx";
+import dayjs from "dayjs";
 import { forwardRef } from "react";
 import { IconAlertCircle, IconCalendar } from "tabler-icons";
 import { useTailwindColors } from "../../hooks/useTailwindConfig";
@@ -107,11 +108,13 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
         cy-data={getTestSelector(testSelector)}
         allowFreeInput
         inputFormat="YYYY-MM-DD"
+        value={
+          value === null || value === undefined ? null : dayjs(value).toDate()
+        }
         onChange={(date) => {
-          if (date !== undefined) {
-            date?.setHours(0, 0, 0);
-            onChange(date);
-          }
+          if (date !== undefined && date !== null) {
+            onChange(dayjs(date).toDate());
+          } else onChange(null);
         }}
         // dateParser={(dateString) => new Date(Date.parse(dateString))}
         // new Date(dayjs(dateString).format("yyyy/MM/dd"))
