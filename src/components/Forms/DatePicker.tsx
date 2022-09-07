@@ -107,7 +107,7 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
         size="md"
         cy-data={getTestSelector(testSelector)}
         allowFreeInput
-        inputFormat="YYYY-MM-DD"
+        inputFormat="MM/DD/YYYY"
         value={
           value === null || value === undefined ? null : dayjs(value).toDate()
         }
@@ -116,8 +116,6 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
             onChange(dayjs(date).toDate());
           } else onChange(null);
         }}
-        // dateParser={(dateString) => new Date(Date.parse(dateString))}
-        // new Date(dayjs(dateString).format("yyyy/MM/dd"))
         transition="pop"
         transitionDuration={80}
         transitionTimingFunction="ease"
