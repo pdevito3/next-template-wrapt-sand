@@ -7,7 +7,7 @@ import TextInput from "@/components/Forms/TextInput";
 import { DevTool } from "@hookform/devtools";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
-import { Controller, SubmitHandler, useForm, useWatch } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { FormMode } from "../../../components/types/index";
 import { useAddRecipe } from "../api";
@@ -114,11 +114,6 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
     }
   }, [recipeData]);
 
-  const doo = useWatch({
-    control,
-    name: "dateOfOrigin",
-  });
-
   return (
     <>
       <div className="py-5">
@@ -203,6 +198,7 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
                 {...field}
                 label={"Rating"}
                 placeholder="Rating..."
+                testSelector="rating"
                 min={0}
                 max={5}
                 required={
@@ -251,8 +247,7 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
                 label={"Have Made It Myself"}
                 testSelector="haveMadeItMyself"
                 required={
-                  // @ts-ignore
-                  recipeValidationSchema.fields?.haveMadeItMyself
+                  recipeValidationSchema.fields?.haveMadeItMyself // @ts-ignore
                     ?.exclusiveTests?.required
                 }
                 isSelected={field.value}

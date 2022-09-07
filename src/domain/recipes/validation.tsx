@@ -3,8 +3,8 @@ import * as yup from "yup";
 export const recipeValidationSchema = yup.object({
   title: yup.string().required("Title is required"),
   visibility: yup.string(),
-  directions: yup.string(),
-  rating: yup.number().min(0).max(5),
+  directions: yup.string().nullable(),
+  rating: yup.number().min(0).max(5).nullable(),
   dateOfOrigin: yup.date().required("Date of origin is required"),
   haveMadeItMyself: yup.boolean().required(),
   // firstName: yup.string()
