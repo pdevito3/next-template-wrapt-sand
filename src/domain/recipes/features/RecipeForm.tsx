@@ -28,9 +28,14 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
   const formMode = (recipeId ? "Edit" : "Add") as typeof FormMode[number];
 
   const focusField = "title";
-  const { handleSubmit, reset, control, setFocus, setValue } = useForm<
-    RecipeForCreationDto | RecipeForUpdateDto
-  >({
+  const {
+    handleSubmit,
+    reset,
+    control,
+    setFocus,
+    setValue,
+    formState: { isDirty, isValid },
+  } = useForm<RecipeForCreationDto | RecipeForUpdateDto>({
     resolver: yupResolver(recipeValidationSchema),
     defaultValues: {
       title: "",
@@ -81,6 +86,14 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
       .then(() => {
         toast.success("Recipe updated successfully");
       })
+      .then(() => {
+        reset(
+          {},
+          {
+            keepValues: true,
+          }
+        );
+      })
       .catch((e) => {
         toast.error("There was an error updating the recipe");
         console.error(e);
@@ -111,6 +124,12 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
       setValue("rating", recipeData?.rating);
       setValue("dateOfOrigin", recipeData?.dateOfOrigin);
       setValue("haveMadeItMyself", recipeData?.haveMadeItMyself ?? false);
+      reset(
+        {},
+        {
+          keepValues: true,
+        }
+      );
     }
   }, [recipeData]);
 
