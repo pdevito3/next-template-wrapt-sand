@@ -47,7 +47,7 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
       haveMadeItMyself: false,
 
       // @ts-ignore -- need default value to reset form
-      // dateOfOrigin: null,
+      dateOfOrigin: null,
     },
   });
   const simpleIsDirty = !!Object.keys(dirtyFields).length;
