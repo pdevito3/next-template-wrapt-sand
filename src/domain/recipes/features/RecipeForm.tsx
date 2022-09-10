@@ -36,6 +36,7 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
     control,
     setFocus,
     setValue,
+    watch,
     formState: { dirtyFields, isValid },
   } = useForm<RecipeForCreationDto | RecipeForUpdateDto>({
     mode: "onBlur",
@@ -147,7 +148,10 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
     .onTransition((state) => console.log(state.value))
     .start();
 
+  const watchAllFields = watch();
   useEffect(() => {
+    let timeout = setTimeout(() => {});
+
     if (simpleIsDirty)
       autosaveService.send({
         type: "CHECK_FOR_CHANGES",
@@ -155,12 +159,15 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
       });
 
     if (isValid)
-      autosaveService.send({
-        type: "CHECK_IF_FORM_IS_VALID",
-        query: isValid ? "Valid" : "Invalid",
-      });
-  }, [simpleIsDirty]);
-  }, [simpleIsDirty, isValid]);
+      timeout = setTimeout(() => {
+        autosaveService.send({
+          type: "CHECK_IF_FORM_IS_VALID",
+          query: isValid ? "Valid" : "Invalid",
+        });
+      }, 1500);
+
+    return () => clearTimeout(timeout);
+  }, [simpleIsDirty, isValid, watchAllFields]);
 
   return (
     <>
@@ -170,6 +177,8 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
         <p>
           Form is {simpleIsDirty ? "💩" : "🧼"} and {isValid ? "✅" : "❌"}
         </p>
+
+        <p>{JSON.stringify(watchAllFields)}</p>
 
         <button
           onClick={() => {
