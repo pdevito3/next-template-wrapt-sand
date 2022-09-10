@@ -160,6 +160,7 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
         query: isValid ? "Valid" : "Invalid",
       });
   }, [simpleIsDirty]);
+  }, [simpleIsDirty, isValid]);
 
   return (
     <>
