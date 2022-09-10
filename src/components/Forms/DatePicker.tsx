@@ -91,6 +91,12 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
         //   cursor: "not-allowed",
         // },
       },
+      today: {
+        backgroundColor:
+          themeSetting === "dark"
+            ? `${twColors?.violet["700"]}40 !important`
+            : `${twColors?.violet["400"]}40 !important`,
+      },
     });
     const { classes, cx } = useStyles();
     const { error, disabled, value, clearable, icon, onChange } = rest;
@@ -108,13 +114,9 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
         cy-data={getTestSelector(testSelector)}
         allowFreeInput
         inputFormat="MM/DD/YYYY"
-        value={
-          value === null || value === undefined ? null : dayjs(value).toDate()
-        }
+        value={value ? dayjs(value).toDate() : null}
         onChange={(date) => {
-          if (date !== undefined && date !== null) {
-            onChange(dayjs(date).toDate());
-          } else onChange(null);
+          onChange(date ? dayjs(date).toDate() : null);
         }}
         transition="pop"
         transitionDuration={80}
@@ -129,6 +131,9 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
             [classes.weekend]:
               modifiers.weekend && !modifiers.outside && !modifiers.selected,
             [classes.disabled]: modifiers.disabled,
+            [classes.today]:
+              date.getDate() === dayjs().toDate().getDate() &&
+              !modifiers.selected,
           })
         }
         classNames={{
@@ -148,7 +153,7 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
           icon: cx(inputState === "invalid" && "text-error"),
           dropdown: cx("input-dropdown"),
           day: cx(
-            "text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-700",
+            "text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-700 rounded-full transition-colors duration-100",
             "hover:bg-slate-200 hover:text-slate-600 dark:hover:bg-slate-600 dark:hover:text-white"
           ),
           weekday: cx("text-slate-300 dark:text-slate-900"),
