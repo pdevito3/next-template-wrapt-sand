@@ -9,6 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { interpret } from "xstate";
 import { FormMode } from "../../../components/types/index";
 import { useAddRecipe } from "../api";
 import { useUpdateRecipe } from "../api/updateRecipe";
@@ -18,6 +19,7 @@ import {
   RecipeForUpdateDto,
 } from "../types/index";
 import { recipeValidationSchema } from "../validation";
+import { autosaveMachine } from "./autosaveMachine";
 
 interface RecipeFormProps {
   recipeId?: string | undefined;
@@ -34,8 +36,9 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
     control,
     setFocus,
     setValue,
-    formState: { isDirty, isValid },
+    formState: { dirtyFields, isValid },
   } = useForm<RecipeForCreationDto | RecipeForUpdateDto>({
+    mode: "onBlur",
     resolver: yupResolver(recipeValidationSchema),
     defaultValues: {
       title: "",
@@ -44,9 +47,10 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
       haveMadeItMyself: false,
 
       // @ts-ignore -- need default value to reset form
-      dateOfOrigin: null,
+      // dateOfOrigin: null,
     },
   });
+  const simpleIsDirty = !!Object.keys(dirtyFields).length;
 
   useEffect(() => {
     setFocus(focusField);
@@ -56,7 +60,7 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
     data
   ) => {
     formMode === "Add" ? createRecipe(data) : updateRecipe(data);
-    setFocus(focusField);
+    if (formMode === "Add") setFocus(focusField);
   };
 
   const createRecipeApi = useAddRecipe();
@@ -88,7 +92,7 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
       })
       .then(() => {
         reset(
-          {},
+          { ...data },
           {
             keepValues: true,
           }
@@ -133,10 +137,57 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
     }
   }, [recipeData]);
 
+  const configedMachine = autosaveMachine.withConfig({
+    services: {
+      autosave: () => handleSubmit(onSubmit),
+    },
+  });
+  const autosaveService = interpret(configedMachine)
+    // .onTransition((state) => console.log(state.value))
+    .onTransition((state) => console.log(state.value))
+    .start();
+
+  useEffect(() => {
+    if (simpleIsDirty)
+      autosaveService.send({
+        type: "CHECK_FOR_CHANGES",
+        query: simpleIsDirty ? "isDirty" : null,
+      });
+
+    if (isValid)
+      autosaveService.send({
+        type: "CHECK_IF_FORM_IS_VALID",
+        query: isValid ? "Valid" : "Invalid",
+      });
+  }, [simpleIsDirty]);
+
   return (
     <>
-      <div className="py-5">
+      <div className="py-5 space-y-3">
         <button onClick={() => makeToast()}>toast 🥂</button>
+
+        <p>
+          Form is {simpleIsDirty ? "💩" : "🧼"} and {isValid ? "✅" : "❌"}
+        </p>
+
+        <button
+          onClick={() => {
+            const autosaveService = interpret(configedMachine)
+              // .onTransition((state) => console.log(state.value))
+              .onTransition((state) => console.log(state.value))
+              .start();
+            autosaveService.send({
+              type: "CHECK_FOR_CHANGES",
+              query: simpleIsDirty ? "isDirty" : null,
+            });
+            autosaveService.send({
+              type: "CHECK_IF_FORM_IS_VALID",
+              query: isValid ? "Valid" : "Invalid",
+            });
+          }}
+        >
+          Check If Dirty
+        </button>
       </div>
       {/* Need `noValidate` to allow RHF validation to trump browser validation when field is required */}
       <form className="space-y-4" onSubmit={handleSubmit(onSubmit)} noValidate>
