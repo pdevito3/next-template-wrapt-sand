@@ -37,7 +37,7 @@ export default function useAutosave({
         type: "CHECK_FOR_CHANGES",
         query: isDirty,
       });
-  }, [isDirty]);
+  }, [isDirty, send]);
 
   useEffect(() => {
     let timeout = setTimeout(() => {});
@@ -51,5 +51,5 @@ export default function useAutosave({
       }, debounceDelayMs);
 
     return () => clearTimeout(timeout);
-  }, [isValid, formFields]);
+  }, [isValid, formFields, debounceDelayMs, send]);
 }
