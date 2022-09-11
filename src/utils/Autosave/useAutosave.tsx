@@ -1,5 +1,5 @@
+import { useMachine } from "@xstate/react";
 import { useEffect } from "react";
-import { interpret } from "xstate";
 import { autosaveMachine } from "./AutosaveMachine";
 
 interface AutosaveProps {
@@ -25,22 +25,24 @@ export default function useAutosave({
     },
   });
 
-  const autosaveService = interpret(configuredAutosaveMachine)
-    // .onTransition((state) => console.log(state.value))
-    .start();
+  const [state, send] = useMachine(configuredAutosaveMachine);
+
+  // const autosaveService = interpret(configuredAutosaveMachine)
+  //   // .onTransition((state) => console.log(state.value))
+  //   .start();
 
   useEffect(() => {
     let timeout = setTimeout(() => {});
 
     if (isDirty)
-      autosaveService.send({
+      send({
         type: "CHECK_FOR_CHANGES",
         query: isDirty,
       });
 
     if (isValid)
       timeout = setTimeout(() => {
-        autosaveService.send({
+        send({
           type: "CHECK_IF_FORM_IS_VALID",
           query: isValid,
         });

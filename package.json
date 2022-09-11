@@ -16,6 +16,7 @@
     "@mantine/modals": "^5.2.5",
     "@mantine/next": "^5.2.4",
     "@tanstack/react-table": "^8.5.11",
+    "@xstate/react": "^3.0.1",
     "axios": "^0.27.2",
     "clsx": "^1.2.1",
     "dayjs": "^1.11.5",
