@@ -10,6 +10,7 @@ interface AutosaveProps {
   debounceDelayMs?: number;
 }
 
+// TODO add proper typescript
 // TODO build debounce into the machine
 export default function useAutosave({
   handleSubmission,
@@ -34,14 +35,14 @@ export default function useAutosave({
     if (isDirty)
       autosaveService.send({
         type: "CHECK_FOR_CHANGES",
-        query: isDirty ? "dirty" : null,
+        query: isDirty,
       });
 
     if (isValid)
       timeout = setTimeout(() => {
         autosaveService.send({
           type: "CHECK_IF_FORM_IS_VALID",
-          query: isValid ? "valid" : "invalid",
+          query: isValid,
         });
       }, debounceDelayMs);
 
