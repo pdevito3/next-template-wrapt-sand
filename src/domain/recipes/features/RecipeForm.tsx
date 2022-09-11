@@ -4,12 +4,12 @@ import DatePicker from "@/components/Forms/DatePicker";
 import NumberInput from "@/components/Forms/NumberInput";
 import Textarea from "@/components/Forms/Textarea";
 import TextInput from "@/components/Forms/TextInput";
+import useAutosave from "@/utils/Autosave/useAutosave";
 import { DevTool } from "@hookform/devtools";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { interpret } from "xstate";
 import { FormMode } from "../../../components/types/index";
 import { useAddRecipe } from "../api";
 import { useUpdateRecipe } from "../api/updateRecipe";
@@ -19,7 +19,6 @@ import {
   RecipeForUpdateDto,
 } from "../types/index";
 import { recipeValidationSchema } from "../validation";
-import { autosaveMachine } from "./autosaveMachine";
 
 interface RecipeFormProps {
   recipeId?: string | undefined;
@@ -119,8 +118,6 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
     );
   }
 
-  // TODO update to machine
-  // TODO optimistic update to prevent data flash on save?
   useEffect(() => {
     if (formMode === "Edit") {
       setValue("title", recipeData?.title ?? "");
@@ -138,36 +135,13 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
     }
   }, [recipeData]);
 
-  const configedMachine = autosaveMachine.withConfig({
-    services: {
-      autosave: () => handleSubmit(onSubmit),
-    },
-  });
-  const autosaveService = interpret(configedMachine)
-    // .onTransition((state) => console.log(state.value))
-    .onTransition((state) => console.log(state.value))
-    .start();
-
   const watchAllFields = watch();
-  useEffect(() => {
-    let timeout = setTimeout(() => {});
-
-    if (simpleIsDirty)
-      autosaveService.send({
-        type: "CHECK_FOR_CHANGES",
-        query: simpleIsDirty ? "isDirty" : null,
-      });
-
-    if (isValid)
-      timeout = setTimeout(() => {
-        autosaveService.send({
-          type: "CHECK_IF_FORM_IS_VALID",
-          query: isValid ? "Valid" : "Invalid",
-        });
-      }, 1500);
-
-    return () => clearTimeout(timeout);
-  }, [simpleIsDirty, isValid, watchAllFields]);
+  useAutosave({
+    handleSubmission: handleSubmit(onSubmit),
+    isDirty: simpleIsDirty,
+    isValid,
+    formFields: watchAllFields,
+  });
 
   return (
     <>
@@ -177,27 +151,6 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
         <p>
           Form is {simpleIsDirty ? "💩" : "🧼"} and {isValid ? "✅" : "❌"}
         </p>
-
-        <p>{JSON.stringify(watchAllFields)}</p>
-
-        <button
-          onClick={() => {
-            const autosaveService = interpret(configedMachine)
-              // .onTransition((state) => console.log(state.value))
-              .onTransition((state) => console.log(state.value))
-              .start();
-            autosaveService.send({
-              type: "CHECK_FOR_CHANGES",
-              query: simpleIsDirty ? "isDirty" : null,
-            });
-            autosaveService.send({
-              type: "CHECK_IF_FORM_IS_VALID",
-              query: isValid ? "Valid" : "Invalid",
-            });
-          }}
-        >
-          Check If Dirty
-        </button>
       </div>
       {/* Need `noValidate` to allow RHF validation to trump browser validation when field is required */}
       <form className="space-y-4" onSubmit={handleSubmit(onSubmit)} noValidate>

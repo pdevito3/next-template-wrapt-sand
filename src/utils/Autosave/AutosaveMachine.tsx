@@ -5,28 +5,28 @@ export const autosaveMachine =
   createMachine(
     {
       predictableActionArguments: true,
-      id: "Autosave",
+      id: "Autosave Machine",
       initial: "unknown",
       states: {
         unknown: {
           on: {
             CHECK_FOR_CHANGES: [
               {
-                cond: (context, event) => event.query === "isDirty",
-                target: "Dirty Form",
+                cond: (context, event) => event.query === "dirty",
+                target: "dirtyForm",
               },
               {
-                target: "Clean Form",
+                target: "cleanForm",
               },
             ],
           },
         },
-        "Valid Form": {
+        validForm: {
           entry: "saveAfterDelay",
           exit: "cancelDelay",
           on: {
             SAVE: {
-              target: "Autosaving",
+              target: "autosaving",
             },
             DEBOUNCE_SAVE: {
               actions: "cancelSave",
@@ -34,53 +34,53 @@ export const autosaveMachine =
             },
           },
         },
-        "Invalid Form": {
+        invalidForm: {
           always: {
             target: "unknown",
           },
         },
-        Autosaving: {
+        autosaving: {
           invoke: {
-            src: "autosave",
             id: "Autosave",
+            src: "autosave",
             onDone: [
               {
-                target: "Autosave successful",
+                target: "autosaveSuccessful",
               },
             ],
             onError: [
               {
-                target: "Autosave Failed",
+                target: "autosaveFailed",
               },
             ],
           },
         },
-        "Autosave Failed": {
+        autosaveFailed: {
           on: {
             RETRY: {
-              target: "Autosaving",
+              target: "autosaving",
             },
           },
         },
-        "Autosave successful": {
+        autosaveSuccessful: {
           always: {
             target: "unknown",
           },
         },
-        "Dirty Form": {
+        dirtyForm: {
           on: {
             CHECK_IF_FORM_IS_VALID: [
               {
-                cond: (context, event) => event.query === "Valid",
-                target: "Valid Form",
+                cond: (context, event) => event.query === "valid",
+                target: "validForm",
               },
               {
-                target: "Invalid Form",
+                target: "invalidForm",
               },
             ],
           },
         },
-        "Clean Form": {
+        cleanForm: {
           always: {
             target: "unknown",
           },
