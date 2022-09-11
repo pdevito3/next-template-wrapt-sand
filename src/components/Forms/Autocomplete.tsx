@@ -101,4 +101,5 @@ function Autocomplete({ testSelector, ...rest }: AutocompleteProps) {
   );
 }
 
+Autocomplete.displayName = "Autocomplete";
 export default Autocomplete;

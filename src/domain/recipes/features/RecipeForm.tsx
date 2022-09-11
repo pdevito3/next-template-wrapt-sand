@@ -133,7 +133,7 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
         }
       );
     }
-  }, [recipeData]);
+  }, [formMode, recipeData, reset, setValue]);
 
   const watchAllFields = watch();
   useAutosave({

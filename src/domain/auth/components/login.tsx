@@ -38,7 +38,7 @@ function Login() {
             <a
               href="https://wrapt.dev"
               target="_blank"
-              rel="noopener"
+              rel="noreferrer"
               className="wrapt-logo"
             >
               <svg
@@ -57,7 +57,7 @@ function Login() {
             <a
               href="https://github.com/pdevito3/craftsman"
               target="_blank"
-              rel="noopener"
+              rel="noreferrer"
               className="flex justify-end pb-1 sm:pb-2"
             />
           </div>
@@ -82,7 +82,7 @@ function Login() {
           <a
             href="https://wrapt.dev"
             target="_blank"
-            rel="noopener"
+            rel="noreferrer"
             className="flex flex-col col-span-3 p-4 transition-colors ease-in border border-transparent rounded-md cursor-pointer sm:col-span-1 hover:border-gray-600 hover:bg-gray-800"
           >
             <svg
@@ -156,7 +156,7 @@ function Login() {
           <a
             href="https://github.com/pdevito3/craftsman"
             target="_blank"
-            rel="noopener"
+            rel="noreferrer"
             className="flex flex-col col-span-3 p-4 transition-colors ease-in border border-transparent rounded-md cursor-pointer sm:col-span-1 hover:border-gray-600 hover:bg-gray-800"
           >
             <svg
@@ -182,7 +182,7 @@ function Login() {
           <a
             href="https://discord.gg/TBq2rVkSEj"
             target="_blank"
-            rel="noopener"
+            rel="noreferrer"
             className="flex flex-col col-span-3 p-4 transition-colors ease-in border border-transparent rounded-md cursor-pointer sm:col-span-1 gap-y-4 hover:border-gray-600 hover:bg-gray-800"
           >
             <svg

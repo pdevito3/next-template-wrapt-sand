@@ -187,7 +187,7 @@ export function useTheme() {
 
       window.removeEventListener("storage", onStorage);
     };
-  }, []);
+  }, [setSetting]);
 
   return [setting, setSetting];
 }

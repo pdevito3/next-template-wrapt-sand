@@ -122,6 +122,7 @@ const ComboBox = forwardRef<HTMLInputElement, ComboBoxProps>(
         );
       }
     );
+    SelectItem.displayName = "SelectItem";
 
     return (
       <Select
@@ -172,4 +173,5 @@ const ComboBox = forwardRef<HTMLInputElement, ComboBoxProps>(
   }
 );
 
+ComboBox.displayName = "ComboBox";
 export default ComboBox;
