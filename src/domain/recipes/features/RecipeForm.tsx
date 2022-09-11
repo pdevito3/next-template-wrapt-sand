@@ -4,6 +4,7 @@ import DatePicker from "@/components/Forms/DatePicker";
 import NumberInput from "@/components/Forms/NumberInput";
 import Textarea from "@/components/Forms/Textarea";
 import TextInput from "@/components/Forms/TextInput";
+import useAutosave from "@/utils/Autosave/useAutosave";
 import { DevTool } from "@hookform/devtools";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
@@ -34,8 +35,10 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
     control,
     setFocus,
     setValue,
-    formState: { isDirty, isValid },
+    watch,
+    formState: { dirtyFields, isValid },
   } = useForm<RecipeForCreationDto | RecipeForUpdateDto>({
+    mode: "onBlur",
     resolver: yupResolver(recipeValidationSchema),
     defaultValues: {
       title: "",
@@ -47,6 +50,7 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
       dateOfOrigin: null,
     },
   });
+  const simpleIsDirty = !!Object.keys(dirtyFields).length;
 
   useEffect(() => {
     setFocus(focusField);
@@ -56,7 +60,7 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
     data
   ) => {
     formMode === "Add" ? createRecipe(data) : updateRecipe(data);
-    setFocus(focusField);
+    if (formMode === "Add") setFocus(focusField);
   };
 
   const createRecipeApi = useAddRecipe();
@@ -88,7 +92,7 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
       })
       .then(() => {
         reset(
-          {},
+          { ...data },
           {
             keepValues: true,
           }
@@ -114,8 +118,6 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
     );
   }
 
-  // TODO update to machine
-  // TODO optimistic update to prevent data flash on save?
   useEffect(() => {
     if (formMode === "Edit") {
       setValue("title", recipeData?.title ?? "");
@@ -133,10 +135,22 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
     }
   }, [recipeData]);
 
+  const watchAllFields = watch();
+  useAutosave({
+    handleSubmission: handleSubmit(onSubmit),
+    isDirty: simpleIsDirty,
+    isValid,
+    formFields: watchAllFields,
+  });
+
   return (
     <>
-      <div className="py-5">
+      <div className="py-5 space-y-3">
         <button onClick={() => makeToast()}>toast 🥂</button>
+
+        <p>
+          Form is {simpleIsDirty ? "💩" : "🧼"} and {isValid ? "✅" : "❌"}
+        </p>
       </div>
       {/* Need `noValidate` to allow RHF validation to trump browser validation when field is required */}
       <form className="space-y-4" onSubmit={handleSubmit(onSubmit)} noValidate>
