@@ -32,13 +32,15 @@ export default function useAutosave({
   //   .start();
 
   useEffect(() => {
-    let timeout = setTimeout(() => {});
-
     if (isDirty)
       send({
         type: "CHECK_FOR_CHANGES",
         query: isDirty,
       });
+  }, [isDirty]);
+
+  useEffect(() => {
+    let timeout = setTimeout(() => {});
 
     if (isValid)
       timeout = setTimeout(() => {
@@ -49,5 +51,5 @@ export default function useAutosave({
       }, debounceDelayMs);
 
     return () => clearTimeout(timeout);
-  }, [isDirty, isValid, formFields]);
+  }, [isValid, formFields]);
 }
