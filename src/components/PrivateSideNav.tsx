@@ -25,7 +25,7 @@ export default function PrivateSideNav() {
   }, [pathname]);
 
   return (
-    <div className="min-h-screen">
+    <div className="h-full">
       <Transition.Root show={sidebarOpen} as={Fragment}>
         <Dialog
           as="div"
