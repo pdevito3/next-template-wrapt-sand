@@ -5,7 +5,14 @@ import Image from "next/future/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
-import { IconFolder, IconHome, IconLock, IconMenu2, IconX } from "tabler-icons";
+import {
+  IconFolder,
+  IconHome,
+  IconLock,
+  IconMenu2,
+  IconSettings,
+  IconX,
+} from "tabler-icons";
 
 const navigation = [
   { name: "Home", href: "/", icon: IconHome },
@@ -13,6 +20,7 @@ const navigation = [
   { name: "Ingredients", href: "/ingredients", icon: IconFolder },
   { name: "Recipes", href: "/recipes", icon: IconFolder },
   { name: "Protected", href: "/protected", icon: IconLock },
+  { name: "Settings", href: "/settings", icon: IconSettings },
 ];
 
 export default function PrivateSideNav() {
