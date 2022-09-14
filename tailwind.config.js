@@ -1,4 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
+const plugin = require('tailwindcss/plugin')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -41,5 +42,11 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/forms'),
+    plugin(function({ addVariant }) {
+      addVariant('data-active', '&[data-active]')
+      addVariant('data-selected', '&[data-selected]')
+      addVariant('data-hovered', '&[data-active]')
+      addVariant('disabled', '&:disabled')
+    })
   ],
 }

@@ -109,7 +109,7 @@ const ComboBox = forwardRef<HTMLInputElement, ComboBoxProps>(
                     className={clsx(
                       "w-5 h-5",
                       isHovered
-                        ? "text-slate-00 dark:text-white"
+                        ? "text-slate-600 dark:text-white"
                         : "text-violet-500 dark:text-violet-500"
                     )}
                     aria-hidden="true"
