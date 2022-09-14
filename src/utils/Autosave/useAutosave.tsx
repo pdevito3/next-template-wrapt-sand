@@ -8,6 +8,7 @@ interface AutosaveProps {
   isValid?: boolean;
   formFields: any;
   debounceDelayMs?: number;
+  isActive?: boolean;
 }
 
 // TODO add proper typescript
@@ -18,6 +19,7 @@ export default function useAutosave({
   isValid = true,
   formFields,
   debounceDelayMs = 1500,
+  isActive = true,
 }: AutosaveProps) {
   const configuredAutosaveMachine = autosaveMachine.withConfig({
     services: {
@@ -32,17 +34,17 @@ export default function useAutosave({
   //   .start();
 
   useEffect(() => {
-    if (isDirty)
+    if (isDirty && isActive)
       send({
         type: "CHECK_FOR_CHANGES",
         query: isDirty,
       });
-  }, [isDirty, send]);
+  }, [isActive, isDirty, send]);
 
   useEffect(() => {
     let timeout = setTimeout(() => {});
 
-    if (isValid)
+    if (isValid && isActive)
       timeout = setTimeout(() => {
         send({
           type: "CHECK_IF_FORM_IS_VALID",
@@ -51,5 +53,5 @@ export default function useAutosave({
       }, debounceDelayMs);
 
     return () => clearTimeout(timeout);
-  }, [isValid, formFields, debounceDelayMs, send]);
+  }, [isValid, formFields, debounceDelayMs, send, isActive]);
 }
