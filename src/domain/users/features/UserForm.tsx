@@ -97,20 +97,6 @@ function UserForm({ userId, userData }: UserFormProps) {
       });
   }
 
-  function makeToast() {
-    toast.custom(
-      (t) => (
-        // TODO framer motion
-        <div className={`bg-white px-6 py-4 shadow-md rounded-full `}>
-          Hello TailwindCSS! 👋
-        </div>
-      ),
-      {
-        duration: 1500,
-      }
-    );
-  }
-
   useEffect(() => {
     if (formMode === "Edit") {
       setValue("identifier", userData?.identifier ?? "");
@@ -137,17 +123,10 @@ function UserForm({ userId, userData }: UserFormProps) {
   });
 
   return (
-    <>
-      <div className="py-5 space-y-3">
-        <button onClick={() => makeToast()}>toast 🥂</button>
-
-        <p>
-          Form is {simpleIsDirty ? "💩" : "🧼"} and {isValid ? "✅" : "❌"}
-        </p>
-      </div>
+    <div>
       {/* Need `noValidate` to allow RHF validation to trump browser validation when field is required */}
       <form className="space-y-4" onSubmit={handleSubmit(onSubmit)} noValidate>
-        <div className="w-80">
+        <div className="w-64 xl:w-80">
           <Controller
             name="identifier"
             control={control}
@@ -167,7 +146,7 @@ function UserForm({ userId, userData }: UserFormProps) {
             )}
           />
         </div>
-        <div className="w-80">
+        <div className="w-64 xl:w-80">
           <Controller
             name="firstName"
             control={control}
@@ -187,7 +166,7 @@ function UserForm({ userId, userData }: UserFormProps) {
             )}
           />
         </div>
-        <div className="w-80">
+        <div className="w-64 xl:w-80">
           <Controller
             name="lastName"
             control={control}
@@ -207,7 +186,7 @@ function UserForm({ userId, userData }: UserFormProps) {
             )}
           />
         </div>
-        <div className="w-80">
+        <div className="w-64 xl:w-80">
           <Controller
             name="email"
             control={control}
@@ -226,7 +205,7 @@ function UserForm({ userId, userData }: UserFormProps) {
             )}
           />
         </div>
-        <div className="w-80">
+        <div className="w-64 xl:w-80">
           <Controller
             name="username"
             control={control}
@@ -259,7 +238,7 @@ function UserForm({ userId, userData }: UserFormProps) {
         )}
       </form>
       <DevTool control={control} placement={"bottom-right"} />
-    </>
+    </div>
   );
 }
 

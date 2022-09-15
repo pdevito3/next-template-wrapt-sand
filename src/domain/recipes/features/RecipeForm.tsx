@@ -50,6 +50,8 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
       dateOfOrigin: null,
     },
   });
+
+  // TODO abstract to helper util
   const simpleIsDirty = !!Object.keys(dirtyFields).length;
 
   useEffect(() => {
