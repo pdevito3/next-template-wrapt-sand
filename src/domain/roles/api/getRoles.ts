@@ -12,5 +12,8 @@ export const getRoles = async () => {
 };
 
 export const useGetRoles = () => {
-  return useQuery(RoleKeys.all, () => getRoles(), {});
+  return useQuery(RoleKeys.all, () => getRoles(), {
+    staleTime: Infinity,
+    cacheTime: Infinity,
+  });
 };

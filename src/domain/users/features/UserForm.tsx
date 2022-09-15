@@ -125,8 +125,12 @@ function UserForm({ userId, userData }: UserFormProps) {
   return (
     <div>
       {/* Need `noValidate` to allow RHF validation to trump browser validation when field is required */}
-      <form className="space-y-4" onSubmit={handleSubmit(onSubmit)} noValidate>
-        <div className="w-64 xl:w-80">
+      <form
+        className="grid grid-cols-1 gap-4 sm:grid-cols-4"
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+      >
+        <div className="col-span-1 sm:col-span-3">
           <Controller
             name="identifier"
             control={control}
@@ -146,7 +150,7 @@ function UserForm({ userId, userData }: UserFormProps) {
             )}
           />
         </div>
-        <div className="w-64 xl:w-80">
+        <div className="col-span-1 sm:col-span-2">
           <Controller
             name="firstName"
             control={control}
@@ -166,7 +170,7 @@ function UserForm({ userId, userData }: UserFormProps) {
             )}
           />
         </div>
-        <div className="w-64 xl:w-80">
+        <div className="col-span-1 sm:col-span-2">
           <Controller
             name="lastName"
             control={control}
@@ -186,7 +190,7 @@ function UserForm({ userId, userData }: UserFormProps) {
             )}
           />
         </div>
-        <div className="w-64 xl:w-80">
+        <div className="col-span-1 sm:col-span-2">
           <Controller
             name="email"
             control={control}
@@ -205,7 +209,7 @@ function UserForm({ userId, userData }: UserFormProps) {
             )}
           />
         </div>
-        <div className="w-64 xl:w-80">
+        <div className="col-span-1 sm:col-span-2">
           <Controller
             name="username"
             control={control}

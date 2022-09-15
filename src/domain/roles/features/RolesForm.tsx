@@ -1,4 +1,5 @@
 import ComboBox from "@/components/Forms/Combobox";
+import TrashButton from "@/components/Forms/TrashButton";
 import { useAddUserRole } from "@/domain/users/api/addUserRole";
 import { useRemoveUserRole } from "@/domain/users/api/removeUserRole";
 import { DevTool } from "@hookform/devtools";
@@ -6,7 +7,6 @@ import clsx from "clsx";
 import { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { IconTrash } from "tabler-icons";
 import { useGetRoles } from "../api/getRoles";
 
 interface RolesFormProps {
@@ -137,21 +137,14 @@ function RolesForm({
                   className="flex items-center justify-between w-full px-4 py-2 rounded-md group hover:bg-slate-50 dark:hover:bg-slate-600"
                   key={role}
                 >
-                  <p className="flex-1 w-full">{role}</p>
+                  <p className="flex-1 w-full select-none">{role}</p>
 
                   <div className="flex items-center justify-center">
-                    <button
-                      onClick={(e) => {
+                    <TrashButton
+                      onClick={() => {
                         removeRole(role);
-                        // openDeleteModal({
-                        //   onConfirm: () => deleteRecipe(row.getValue()),
-                        // });
-                        e.stopPropagation();
                       }}
-                      className="inline-flex items-center px-2 py-2 text-sm font-medium leading-5 transition duration-100 ease-in bg-white border border-gray-300 rounded-full shadow-sm hover:bg-red-200 hover:text-red-800 hover:outline-none dark:border-slate-900 dark:bg-slate-800 dark:text-white dark:hover:bg-red-800 dark:hover:text-red-300 dark:hover:outline-none sm:px-3 sm:py-1 sm:opacity-0 sm:group-hover:opacity-100 dark:hover:shadow dark:shadow-red-400 dark:hover:shadow-red-300"
-                    >
-                      <IconTrash className="w-4 h-4" />
-                    </button>
+                    />
                   </div>
                 </div>
               ))
