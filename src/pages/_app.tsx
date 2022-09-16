@@ -1,4 +1,4 @@
-import { Notifications } from "@/components/Notifications";
+import { Notifications } from "@/components/notifications";
 import Login from "@/domain/auth/components/login";
 import useAuthUser from "@/domain/auth/hooks/useAuthUser";
 import "@/styles/globals.css";

@@ -1,9 +1,9 @@
 import {
   PaginatedTable,
   TrashButton,
-  usePaginatedTableContext,
+  usePaginatedTableContext
 } from "@/components/forms";
-import useDeleteModal from "@/components/Modals/ConfirmDeleteModal";
+import useDeleteModal from "@/components/modal/ConfirmDeleteModal";
 import { RecipeDto } from "@/domain/recipes/types";
 import "@tanstack/react-table";
 import { createColumnHelper, SortingState } from "@tanstack/react-table";
