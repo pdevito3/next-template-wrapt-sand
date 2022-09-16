@@ -54,7 +54,7 @@ async function buildApiClient({ baseURL, customHeaders }: ApiClientProps) {
       }
 
       if (error && error.response && error.response.status === 401) {
-        signIn(env.auth.nextAuthId);
+        signIn(env.auth.nextAuthId, { callbackUrl: "/" });
       }
       console.log((error && error.toJSON && error.toJSON()) || undefined);
 
