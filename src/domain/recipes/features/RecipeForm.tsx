@@ -1,16 +1,18 @@
-import Checkbox from "@/components/Forms/Checkbox";
-import ComboBox from "@/components/Forms/Combobox";
-import DatePicker from "@/components/Forms/DatePicker";
-import NumberInput from "@/components/Forms/NumberInput";
-import Textarea from "@/components/Forms/Textarea";
-import TextInput from "@/components/Forms/TextInput";
+import {
+  Checkbox,
+  ComboBox,
+  DatePicker,
+  NumberInput,
+  Textarea,
+  TextInput,
+} from "@/components/forms";
+import { FormMode } from "@/types";
 import useAutosave from "@/utils/Autosave/useAutosave";
 import { DevTool } from "@hookform/devtools";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { FormMode } from "../../../components/types/index";
 import { useAddRecipe } from "../api";
 import { useUpdateRecipe } from "../api/updateRecipe";
 import {

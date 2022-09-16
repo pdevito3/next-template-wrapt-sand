@@ -1,7 +1,10 @@
-import { PaginatedTable, usePaginatedTableContext } from "@/components/Forms";
-import TrashButton from "@/components/Forms/TrashButton";
+import {
+  PaginatedTable,
+  TrashButton,
+  usePaginatedTableContext,
+} from "@/components/forms";
 import useDeleteModal from "@/components/Modals/ConfirmDeleteModal";
-import { UserDto } from "@/domain/Users/types";
+import { UserDto } from "@/domain/users/types";
 import "@tanstack/react-table";
 import { createColumnHelper, SortingState } from "@tanstack/react-table";
 import { useRouter } from "next/router";

@@ -1,5 +1,8 @@
-import { PaginatedTableProvider, useGlobalFilter } from "@/components/Forms";
-import DebouncedInput from "@/components/Forms/DebouncedInput";
+import {
+  DebouncedInput,
+  PaginatedTableProvider,
+  useGlobalFilter,
+} from "@/components/forms";
 import { UserListTable } from "@/domain/users";
 import "@tanstack/react-table";
 import Link from "next/link";
@@ -10,13 +13,14 @@ function UsersTab() {
     globalFilter: globalUserFilter,
     queryFilter: queryFilterForUsers,
     calculateAndSetQueryFilter,
-  } = useGlobalFilter((value) => `(firstName|lastName)@=*${value}`);
+  } = useGlobalFilter(
+    (value) => `(firstName|lastName|identifier|username)@=*${value}`
+  );
+  // TODO add email filter separately due to Value Object
 
   return (
     <>
-      <h2 className="text-xl font-medium tracking-tight font-display text-slate-900 dark:text-gray-50 sm:text-3xl">
-        Users
-      </h2>
+      <h2 className="h2">Users</h2>
       <div className="py-4">
         {/* prefer this. more composed approach */}
         <PaginatedTableProvider>

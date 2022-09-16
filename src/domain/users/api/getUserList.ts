@@ -1,5 +1,5 @@
 import { clients } from "@/lib/axios";
-import { PagedResponse, Pagination } from "@/types/api";
+import { PagedResponse, Pagination } from "@/types/apis";
 import { generateSieveSortOrder } from "@/utils/sorting";
 import { AxiosResponse } from "axios";
 import queryString from "query-string";

@@ -1,4 +1,4 @@
-import DebouncedInput from "@/components/Forms/DebouncedInput";
+import { DebouncedInput } from "@/components/forms";
 import "@tanstack/react-table";
 import { IconSearch } from "tabler-icons";
 

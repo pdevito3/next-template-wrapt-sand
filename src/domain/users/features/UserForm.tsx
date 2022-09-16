@@ -1,4 +1,5 @@
-import TextInput from "@/components/Forms/TextInput";
+import { TextInput } from "@/components/forms";
+import { FormMode } from "@/types";
 import useAutosave from "@/utils/Autosave/useAutosave";
 import { DevTool } from "@hookform/devtools";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -6,7 +7,6 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { FormMode } from "../../../components/types/index";
 import { useAddUser } from "../api";
 import { useUpdateUser } from "../api/updateUser";
 import { UserDto, UserForCreationDto, UserForUpdateDto } from "../types/index";

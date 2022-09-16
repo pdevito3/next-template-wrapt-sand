@@ -1,4 +1,4 @@
-import { PaginatedTableProvider, useGlobalFilter } from "@/components/Forms";
+import { PaginatedTableProvider, useGlobalFilter } from "@/components/forms";
 import SearchInput from "@/components/SearchInput";
 import { RecipeListTable } from "@/domain/recipes";
 import "@tanstack/react-table";
@@ -22,7 +22,6 @@ export default function RecipeList() {
             Recipes
           </h1>
           <div className="py-4">
-            {/* prefer this. more composed approach */}
             <PaginatedTableProvider>
               <div className="flex items-center justify-between">
                 <div className="mt-1">

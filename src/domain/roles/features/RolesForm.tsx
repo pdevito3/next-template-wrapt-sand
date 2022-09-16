@@ -1,5 +1,4 @@
-import ComboBox from "@/components/Forms/Combobox";
-import TrashButton from "@/components/Forms/TrashButton";
+import { ComboBox, TrashButton } from "@/components/forms";
 import { useAddUserRole } from "@/domain/users/api/addUserRole";
 import { useRemoveUserRole } from "@/domain/users/api/removeUserRole";
 import { DevTool } from "@hookform/devtools";

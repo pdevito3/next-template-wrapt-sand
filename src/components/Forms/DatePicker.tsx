@@ -1,4 +1,4 @@
-import { FormControlState } from "@/components/types";
+import { FormControlState } from "@/types";
 import { getTestSelector } from "@/utils/testing";
 import { createStyles } from "@mantine/core";
 import {
@@ -195,4 +195,4 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
 );
 
 DatePicker.displayName = "DatePicker";
-export default DatePicker;
+export { DatePicker };

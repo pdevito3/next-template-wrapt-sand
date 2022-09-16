@@ -1,4 +1,5 @@
-import { Pagination } from "@/types/api";
+import { ComboBox } from "@/components/forms";
+import { Pagination } from "@/types";
 import {
   ColumnDef,
   flexRender,
@@ -19,7 +20,6 @@ import {
   IconChevronsRight,
   IconChevronUp,
 } from "tabler-icons";
-import ComboBox from "./Combobox";
 
 interface PaginatedTableContextResponse {
   setPageNumber: React.Dispatch<React.SetStateAction<number>>;
@@ -318,13 +318,14 @@ function PaginationControls({
 
         <div className="w-32">
           <ComboBox
+            aria-label={"page-size-selector"}
+            testSelector={"page-size-selector"}
             data={PageSizeOptions.map((selectedPageSize) => ({
               value: selectedPageSize.toString(),
               label: `Show ${selectedPageSize}`,
             }))}
             value={pageSize.toString()}
             onChange={(e) => {
-              console.log(e);
               setPageSize(Number(e));
               setPageNumber(1);
             }}

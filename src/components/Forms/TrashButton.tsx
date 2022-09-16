@@ -24,4 +24,4 @@ function TrashButton({ onClick, hideInGroup = true }: TrashButtonProps) {
   );
 }
 
-export default TrashButton;
+export { TrashButton };

@@ -1,4 +1,4 @@
-import { Tabs } from "@/components/Forms/Tabs";
+import { Tabs } from "@/components/forms/Tabs";
 import UsersTab from "@/components/settings/UsersTab";
 import "@tanstack/react-table";
 import { IconShieldLock, IconUser } from "tabler-icons";

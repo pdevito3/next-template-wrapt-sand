@@ -33,4 +33,4 @@ function DebouncedInput({
   );
 }
 
-export default DebouncedInput;
+export { DebouncedInput };

@@ -174,4 +174,4 @@ const ComboBox = forwardRef<HTMLInputElement, ComboBoxProps>(
 );
 
 ComboBox.displayName = "ComboBox";
-export default ComboBox;
+export { ComboBox };
