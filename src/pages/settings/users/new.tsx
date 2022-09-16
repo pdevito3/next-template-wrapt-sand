@@ -12,7 +12,7 @@ export default function NewUser() {
         <Link
           className="px-3 py-2 border rounded-md border-slate-700 dark:border-white"
           // onClick={() => router.back()}
-          href={"/settings/users"}
+          href={"/settings"}
         >
           Back
         </Link>
