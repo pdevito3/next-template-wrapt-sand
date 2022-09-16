@@ -49,6 +49,9 @@ function RouteGuard({ children, isPublic }: RouteGuardProps) {
   if (typeof window !== undefined && isLoading) return null;
   if (!isLoggedIn) return <Login />;
 
+  // TODO try when loading from server
+  // if (!isLoggedIn) signIn(env.auth.nextAuthId, { callbackUrl: "/" });
+
   return <>{children}</>;
 }
 

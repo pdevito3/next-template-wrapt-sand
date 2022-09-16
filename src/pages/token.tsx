@@ -8,7 +8,7 @@ export default function Protected() {
   return (
     <PrivateLayout>
       <div className="max-w-lg whitespace-pre-wrap">
-        ProtectedPage
+        <h1 className="h1">Token Info</h1>
         <p className="whitespace-wrap">{JSON.stringify(session, null, 2)}</p>
       </div>
     </PrivateLayout>
