@@ -77,13 +77,15 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
       selected: {
         color: `${twColors?.white} !important`,
         backgroundColor: `${twColors?.violet["500"]} !important`,
+        borderRadius: "9999px !important",
       },
 
       disabled: {
-        backgroundColor:
+        cursor: "not-allowed",
+        color:
           themeSetting === "dark"
-            ? `${twColors?.slate["800"]}20 !important`
-            : `${twColors?.slate["300"]}20 !important`,
+            ? `${twColors?.slate["800"]} !important`
+            : `${twColors?.slate["300"]} !important`,
 
         // TODO not working
         // cursor: "not-allowed",
@@ -92,10 +94,11 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
         // },
       },
       today: {
-        backgroundColor:
+        color:
           themeSetting === "dark"
-            ? `${twColors?.violet["700"]}40 !important`
-            : `${twColors?.violet["400"]}40 !important`,
+            ? `${twColors?.violet["500"]} !important`
+            : `${twColors?.violet["500"]} !important`,
+        fontWeight: 500,
       },
     });
     const { classes, cx } = useStyles();
@@ -153,8 +156,8 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
           icon: cx(inputState === "invalid" && "text-error"),
           dropdown: cx("input-dropdown"),
           day: cx(
-            "text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-700 rounded-full transition-colors duration-100",
-            "hover:bg-slate-200 hover:text-slate-600 dark:hover:bg-slate-600 dark:hover:text-white"
+            "text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-700",
+            "hover:bg-slate-200 hover:text-slate-600 dark:hover:bg-slate-600 dark:hover:text-white hover:rounded-full"
           ),
           weekday: cx("text-slate-300 dark:text-slate-900"),
           calendarHeaderLevel: cx(
