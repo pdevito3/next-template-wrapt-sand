@@ -8,7 +8,7 @@ import {
 import clsx from "clsx";
 import dayjs from "dayjs";
 import { forwardRef } from "react";
-import { IconAlertCircle, IconCalendar } from "tabler-icons";
+import { IconCalendar } from "tabler-icons";
 import { useTailwindColors } from "../../hooks/useTailwindConfig";
 import { useSetting } from "../ThemeToggle";
 
@@ -135,8 +135,8 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
               modifiers.weekend && !modifiers.outside && !modifiers.selected,
             [classes.disabled]: modifiers.disabled,
             [classes.today]:
-              date.getDate() === dayjs().toDate().getDate() &&
-              !modifiers.selected,
+              date.toLocaleDateString() ===
+                dayjs().toDate().toLocaleDateString() && !modifiers.selected,
           })
         }
         classNames={{
