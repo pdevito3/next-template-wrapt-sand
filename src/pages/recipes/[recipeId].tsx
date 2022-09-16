@@ -20,9 +20,7 @@ export default function EditRecipe() {
           Back
         </Link>
         <div className="">
-          <h1 className="max-w-4xl text-2xl font-medium tracking-tight font-display text-slate-900 dark:text-gray-50 sm:text-4xl">
-            Edit Recipe
-          </h1>
+          <h1 className="h1">Edit Recipe</h1>
           <div className="py-6">
             <RecipeForm recipeId={recipeId?.toString()} recipeData={data} />
           </div>

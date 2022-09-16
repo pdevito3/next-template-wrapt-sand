@@ -17,9 +17,7 @@ export default function NewUser() {
           Back
         </Link>
         <div className="max-w-3xl py-6 space-y-5">
-          <h1 className="max-w-4xl text-2xl font-medium tracking-tight font-display text-slate-900 dark:text-gray-50 sm:text-4xl">
-            Add a User
-          </h1>
+          <h1 className="h1">Add a User</h1>
           <div className="py-6">
             <UserForm />
           </div>

@@ -3,7 +3,7 @@ import {
   ComboBox,
   DatePicker,
   NumberInput,
-  Textarea,
+  TextArea,
   TextInput,
 } from "@/components/forms";
 import { FormMode } from "@/types";
@@ -207,7 +207,7 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
             name="directions"
             control={control}
             render={({ field, fieldState }) => (
-              <Textarea
+              <TextArea
                 {...field}
                 label={"Directions"}
                 placeholder="Directions..."

@@ -1,4 +1,4 @@
-import { FormControlState } from "@/components/types";
+import { FormControlState } from "@/types";
 import { getTestSelector } from "@/utils/testing";
 import {
   createStyles,
@@ -15,7 +15,7 @@ interface TextareaProps extends MantineTextareaProps {
   asInputHeight?: boolean;
 }
 
-const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ resize = "none", testSelector, asInputHeight = false, ...rest }, ref) => {
     const useStyles = createStyles({});
     const { cx } = useStyles();
@@ -66,5 +66,5 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   }
 );
 
-Textarea.displayName = "Textarea";
-export { Textarea };
+TextArea.displayName = "TextArea";
+export { TextArea };

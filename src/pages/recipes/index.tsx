@@ -18,9 +18,7 @@ export default function RecipeList() {
     <PrivateLayout>
       <div className="space-y-6 max-w-9xl">
         <div className="">
-          <h1 className="max-w-4xl text-2xl font-medium tracking-tight font-display text-slate-900 dark:text-gray-50 sm:text-4xl">
-            Recipes
-          </h1>
+          <h1 className="h1">Recipes</h1>
           <div className="py-4">
             <PaginatedTableProvider>
               <div className="flex items-center justify-between">

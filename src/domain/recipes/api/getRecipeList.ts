@@ -58,8 +58,6 @@ export const useRecipes = ({
     filters,
     sortOrder: sortOrderString,
   });
-  // var temp = useSession();
-  // console.log(temp.data.accessToken);
 
   return useQuery(RecipeKeys.list(queryParams ?? ""), () =>
     getRecipes({ queryString: queryParams, hasArtificialDelay, delayInMs })

@@ -6,6 +6,6 @@ export * from "./DebouncedInput";
 export * from "./NumberInput";
 export * from "./PaginatedTable";
 export * from "./Tabs";
-export * from "./Textarea";
+export * from "./TextArea";
 export * from "./TextInput";
 export * from "./TrashButton";

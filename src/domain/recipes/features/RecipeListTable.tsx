@@ -1,7 +1,7 @@
 import {
   PaginatedTable,
   TrashButton,
-  usePaginatedTableContext
+  usePaginatedTableContext,
 } from "@/components/forms";
 import useDeleteModal from "@/components/modal/ConfirmDeleteModal";
 import { RecipeDto } from "@/domain/recipes/types";
@@ -25,7 +25,6 @@ export function RecipeListTable({ queryFilter }: RecipeListTableProps) {
     deleteRecipeApi
       .mutateAsync(id)
       .then(() => {
-        // TODO are you sure modal *****************************************
         toast.success("Recipe deleted successfully");
       })
       .catch((e) => {

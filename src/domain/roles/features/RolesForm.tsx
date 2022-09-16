@@ -124,9 +124,7 @@ function RolesForm({
           </button>
         </div>
       </form>
-      <h2 className="text-lg font-medium tracking-tight font-display text-slate-900 dark:text-gray-50 sm:text-xl">
-        Assigned Roles
-      </h2>
+      <h2 className="h2">Assigned Roles</h2>
       <div className="p-2 mt-3 space-y-2 border rounded-md shadow dark:border-slate-800">
         {
           <>

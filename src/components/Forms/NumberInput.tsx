@@ -1,4 +1,4 @@
-import { FormControlState } from "@/components/types";
+import { FormControlState } from "@/types";
 import { getTestSelector } from "@/utils/testing";
 import {
   createStyles,
