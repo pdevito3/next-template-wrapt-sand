@@ -8,7 +8,7 @@ import {
 import clsx from "clsx";
 import dayjs from "dayjs";
 import { forwardRef } from "react";
-import { IconCalendar } from "tabler-icons";
+import { IconAlertCircle, IconCalendar } from "tabler-icons";
 import { useTailwindColors } from "../../hooks/useTailwindConfig";
 import { useSetting } from "../ThemeToggle";
 
