@@ -4,12 +4,11 @@ import {
   usePaginatedTableContext,
 } from "@/components/forms";
 import useDeleteModal from "@/components/modal/ConfirmDeleteModal";
-import { RecipeDto } from "@/domain/recipes/types";
+import { Notifications } from "@/components/notifications";
+import { RecipeDto, useDeleteRecipe, useRecipes } from "@/domain/recipes";
 import "@tanstack/react-table";
 import { createColumnHelper, SortingState } from "@tanstack/react-table";
 import { useRouter } from "next/router";
-import toast from "react-hot-toast";
-import { useDeleteRecipe, useRecipes } from "../api";
 
 interface RecipeListTableProps {
   queryFilter?: string | undefined;
@@ -25,10 +24,10 @@ export function RecipeListTable({ queryFilter }: RecipeListTableProps) {
     deleteRecipeApi
       .mutateAsync(id)
       .then(() => {
-        toast.success("Recipe deleted successfully");
+        Notifications.success("Recipe deleted successfully");
       })
       .catch((e) => {
-        toast.error("There was an error deleting the recipe");
+        Notifications.error("There was an error deleting the recipe");
         console.error(e);
       });
   }

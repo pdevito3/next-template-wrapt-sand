@@ -4,12 +4,11 @@ import {
   usePaginatedTableContext,
 } from "@/components/forms";
 import useDeleteModal from "@/components/modal/ConfirmDeleteModal";
-import { UserDto } from "@/domain/users/types";
+import { Notifications } from "@/components/notifications";
+import { useDeleteUser, UserDto, useUsers } from "@/domain/users";
 import "@tanstack/react-table";
 import { createColumnHelper, SortingState } from "@tanstack/react-table";
 import { useRouter } from "next/router";
-import toast from "react-hot-toast";
-import { useDeleteUser, useUsers } from "../api";
 
 interface UserListTableProps {
   queryFilter?: string | undefined;
@@ -26,10 +25,10 @@ export function UserListTable({ queryFilter }: UserListTableProps) {
       .mutateAsync(id)
       .then(() => {
         // TODO are you sure modal *****************************************
-        toast.success("User deleted successfully");
+        Notifications.success("User deleted successfully");
       })
       .catch((e) => {
-        toast.error("There was an error deleting the User");
+        Notifications.error("There was an error deleting the User");
         console.error(e);
       });
   }

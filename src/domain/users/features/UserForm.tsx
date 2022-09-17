@@ -1,16 +1,20 @@
 import { TextInput } from "@/components/forms";
+import { Notifications } from "@/components/notifications";
+import {
+  useAddUser,
+  UserDto,
+  UserForCreationDto,
+  UserForUpdateDto,
+  userValidationSchema,
+  useUpdateUser,
+} from "@/domain/users";
 import { FormMode } from "@/types";
-import useAutosave from "@/utils/Autosave/useAutosave";
+import { useAutosave } from "@/utils";
 import { DevTool } from "@hookform/devtools";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import toast from "react-hot-toast";
-import { useAddUser } from "../api";
-import { useUpdateUser } from "../api/updateUser";
-import { UserDto, UserForCreationDto, UserForUpdateDto } from "../types/index";
-import { userValidationSchema } from "../validation";
 
 interface UserFormProps {
   userId?: string | undefined;
@@ -65,10 +69,10 @@ function UserForm({ userId, userData }: UserFormProps) {
         router.push(`/settings/users/${data.id}`);
       })
       .then(() => {
-        toast.success("User created successfully");
+        Notifications.success("User created successfully");
       })
       .catch((e) => {
-        toast.error("There was an error creating the user");
+        Notifications.error("There was an error creating the user");
         console.error(e);
       });
   }
@@ -81,7 +85,7 @@ function UserForm({ userId, userData }: UserFormProps) {
     updateUserApi
       .mutateAsync({ id, data })
       .then(() => {
-        toast.success("User updated successfully");
+        Notifications.success("User updated successfully");
       })
       .then(() => {
         reset(
@@ -92,7 +96,7 @@ function UserForm({ userId, userData }: UserFormProps) {
         );
       })
       .catch((e) => {
-        toast.error("There was an error updating the user");
+        Notifications.error("There was an error updating the user");
         console.error(e);
       });
   }

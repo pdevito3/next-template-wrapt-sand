@@ -1,4 +1,4 @@
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster, ToastOptions } from "react-hot-toast";
 
 const Notifications = () => {
   return (
@@ -27,6 +27,13 @@ const Notifications = () => {
       }}
     />
   );
+};
+
+Notifications.success = (message: string, options?: ToastOptions) => {
+  toast.success(message);
+};
+Notifications.error = (message: string, options?: ToastOptions) => {
+  toast.error(message);
 };
 
 // Notifications.success = (message: string, options?: ToastOptions<{}>) => {

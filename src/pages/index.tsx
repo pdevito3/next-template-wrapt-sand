@@ -148,7 +148,7 @@ export default function Home() {
               </svg>
               <h5 className="mt-4 text-xl font-semibold">GitHub</h5>
               <p className="mt-2">
-                Powered by an OS project called Craftsman, all the code
+                Powered by an OS project called Craftsman, all the code is
                 available on GitHub. Stars ⭐️ are greatly appreciated!
               </p>
             </a>

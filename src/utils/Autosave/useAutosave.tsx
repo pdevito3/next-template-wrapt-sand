@@ -13,7 +13,7 @@ interface AutosaveProps {
 
 // TODO add proper typescript
 // TODO build debounce into the machine
-export default function useAutosave({
+export function useAutosave({
   handleSubmission,
   isDirty,
   isValid = true,
