@@ -1,24 +1,17 @@
-import { PrivateLayout } from "@/components/PrivateLayout";
+import { PrivateLayout } from "@/components";
+import { Button } from "@/components/forms";
 import { UserForm } from "@/domain/users";
-import Link from "next/link";
-import { useRouter } from "next/router";
 
 export default function NewUser() {
-  const router = useRouter();
-
   return (
     <PrivateLayout>
       <div className="space-y-6">
-        <Link
-          className="px-3 py-2 border rounded-md border-slate-700 dark:border-white"
-          // onClick={() => router.back()}
-          href={"/settings"}
-        >
+        <Button buttonStyle="secondary" href={"/settings"}>
           Back
-        </Link>
-        <div className="max-w-3xl py-6 space-y-5">
+        </Button>
+        <div className="">
           <h1 className="h1">Add a User</h1>
-          <div className="py-6">
+          <div className="max-w-3xl py-6 space-y-5">
             <UserForm />
           </div>
         </div>

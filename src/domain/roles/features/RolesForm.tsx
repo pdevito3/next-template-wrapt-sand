@@ -1,8 +1,7 @@
-import { ComboBox, TrashButton } from "@/components/forms";
+import { Button, ComboBox, TrashButton } from "@/components/forms";
 import { useAddUserRole } from "@/domain/users/api/addUserRole";
 import { useRemoveUserRole } from "@/domain/users/api/removeUserRole";
 import { DevTool } from "@hookform/devtools";
-import clsx from "clsx";
 import { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -111,17 +110,9 @@ function RolesForm({
         </div>
 
         <div className="">
-          <button
-            type="submit"
-            disabled={getRolesList()?.length <= 0}
-            className={clsx(
-              "px-3 py-2 text-white border rounded-md shadow cursor-pointer border-violet-800 bg-violet-500",
-              "dark:border-violet-500 dark:bg-transparent dark:shadow-violet-500",
-              "dark:disabled:bg-slate-900 disabled:cursor-not-allowed dark:disabled:border-slate-800 dark:disabled:shadow-slate-600"
-            )}
-          >
-            Assign
-          </button>
+          <Button type="submit" disabled={getRolesList()?.length <= 0}>
+            Assign Role
+          </Button>
         </div>
       </form>
       <h2 className="h2">Assigned Roles</h2>

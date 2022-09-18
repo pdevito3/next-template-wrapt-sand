@@ -53,12 +53,12 @@ export function UserListTable({ queryFilter }: UserListTableProps) {
     columnHelper.accessor((row) => row.firstName, {
       id: "firstName",
       cell: (info) => <p className="">{info.getValue()}</p>,
-      header: () => <span className="">FirstName</span>,
+      header: () => <span className="">First Name</span>,
     }),
     columnHelper.accessor((row) => row.lastName, {
       id: "lastName",
       cell: (info) => <p className="">{info.getValue()}</p>,
-      header: () => <span className="">LastName</span>,
+      header: () => <span className="">Last Name</span>,
     }),
     columnHelper.accessor((row) => row.email, {
       id: "email",

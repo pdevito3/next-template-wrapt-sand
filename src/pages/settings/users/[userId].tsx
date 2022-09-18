@@ -1,7 +1,7 @@
-import PrivateLayout from "@/components/PrivateLayout";
+import { PrivateLayout } from "@/components";
+import { Button } from "@/components/forms";
 import { RolesForm } from "@/domain/roles";
 import { useGetUser, UserForm } from "@/domain/users";
-import Link from "next/link";
 import { useRouter } from "next/router";
 
 export default function EditUser() {
@@ -12,20 +12,13 @@ export default function EditUser() {
   return (
     <PrivateLayout>
       <div className="space-y-6">
-        <Link
-          className="px-3 py-2 border rounded-md border-slate-700 dark:border-white"
-          // onClick={() => router.back()}
-          href={"/settings"}
-        >
+        <Button buttonStyle="secondary" href={"/settings"}>
           Back
-        </Link>
+        </Button>
         <div className="">
           <h1 className="h1">Edit User</h1>
           <div className="max-w-3xl py-6 space-y-5">
-            <div className="space-y-3">
-              <h2 className="h2">Users</h2>
-              <UserForm userId={userId?.toString()} userData={userData} />
-            </div>
+            <UserForm userId={userId?.toString()} userData={userData} />
 
             <div className="pt-5 space-y-3 lg:pt-0">
               <h2 className="h2">Manage Roles</h2>
