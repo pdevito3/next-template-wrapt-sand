@@ -17,6 +17,7 @@ import {
 const navigation = [
   { name: "Home", href: "/", icon: IconHome },
   /* route marker - remove if you don't want feature routes added by default */
+	{ name: 'RolePermissions', href: '/rolepermissions', icon: IconFolder },
   { name: "Recipes", href: "/recipes", icon: IconFolder },
   { name: "Token Info", href: "/token", icon: IconLock },
   { name: "Settings", href: "/settings", icon: IconSettings },
