@@ -22,10 +22,8 @@ function UsersTab() {
     <>
       <h2 className="h2">Users</h2>
       <div className="py-4">
-        {/* prefer this. more composed approach */}
         <PaginatedTableProvider>
           <div className="flex items-center justify-between">
-            {/* TODO: abstract to an input that can use the debounce input under the hood */}
             <div className="relative mt-1">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <IconSearch className="w-5 h-5 text-gray-500 dark:text-gray-400" />
@@ -56,4 +54,4 @@ function UsersTab() {
   );
 }
 
-export default UsersTab;
+export { UsersTab };

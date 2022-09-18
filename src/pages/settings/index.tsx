@@ -1,5 +1,5 @@
 import { Tabs } from "@/components/forms";
-import UsersTab from "@/components/settings/UsersTab";
+import { RolePermissionsTab, UsersTab } from "@/components/settings";
 import "@tanstack/react-table";
 import { IconShieldLock, IconUser } from "tabler-icons";
 import { PrivateLayout } from "../../components/PrivateLayout";
@@ -32,7 +32,7 @@ export default function Settings() {
             </Tabs.Panel>
 
             <Tabs.Panel value="rolepermissions" className="pt-5">
-              TBD
+              <RolePermissionsTab />
             </Tabs.Panel>
           </Tabs>
         </div>
