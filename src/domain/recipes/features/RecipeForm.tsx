@@ -1,4 +1,5 @@
 import {
+  Button,
   Checkbox,
   ComboBox,
   DatePicker,
@@ -286,12 +287,9 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
         </div>
 
         <div className="">
-          <button
-            type="submit"
-            className="px-3 py-2 text-white border rounded-md shadow cursor-pointer border-violet-800 bg-violet-500 dark:border-violet-500 dark:bg-transparent dark:shadow-violet-500"
-          >
+          <Button buttonStyle="primary" type="submit">
             Submit
-          </button>
+          </Button>
         </div>
       </form>
       <DevTool control={control} placement={"bottom-right"} />

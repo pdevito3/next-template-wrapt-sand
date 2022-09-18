@@ -1,7 +1,6 @@
 import PrivateLayout from "@/components/PrivateLayout";
-import { RolesForm } from "@/domain/roles/features/RolesForm";
-import { useGetUser } from "@/domain/users/api";
-import { UserForm } from "@/domain/users/features/UserForm";
+import { RolesForm } from "@/domain/roles";
+import { useGetUser, UserForm } from "@/domain/users";
 import Link from "next/link";
 import { useRouter } from "next/router";
 

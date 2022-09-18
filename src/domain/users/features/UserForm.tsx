@@ -1,4 +1,4 @@
-import { TextInput } from "@/components/forms";
+import { Button, TextInput } from "@/components/forms";
 import { Notifications } from "@/components/notifications";
 import {
   useAddUser,
@@ -235,14 +235,9 @@ function UserForm({ userId, userData }: UserFormProps) {
         </div>
 
         {formMode === "Add" && (
-          <div className="">
-            <button
-              type="submit"
-              className="px-3 py-2 text-white border rounded-md shadow cursor-pointer border-violet-800 bg-violet-500 dark:border-violet-500 dark:bg-transparent dark:shadow-violet-500"
-            >
-              Submit
-            </button>
-          </div>
+          <Button buttonStyle="primary" type="submit">
+            Submit
+          </Button>
         )}
       </form>
       <DevTool control={control} placement={"bottom-right"} />
