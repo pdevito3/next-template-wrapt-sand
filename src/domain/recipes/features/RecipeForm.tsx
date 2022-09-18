@@ -6,21 +6,22 @@ import {
   TextArea,
   TextInput,
 } from "@/components/forms";
+import { Notifications } from "@/components/notifications";
+import {
+  RecipeDto,
+  RecipeForCreationDto,
+  RecipeForUpdateDto,
+  recipeValidationSchema,
+  useAddRecipe,
+  useUpdateRecipe,
+} from "@/domain/recipes";
 import { FormMode } from "@/types";
-import useAutosave from "@/utils/Autosave/useAutosave";
+import { getSimpleDirtyFields, useAutosave } from "@/utils";
 import { DevTool } from "@hookform/devtools";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { useAddRecipe } from "../api";
-import { useUpdateRecipe } from "../api/updateRecipe";
-import {
-  RecipeDto,
-  RecipeForCreationDto,
-  RecipeForUpdateDto,
-} from "../types/index";
-import { recipeValidationSchema } from "../validation";
 
 interface RecipeFormProps {
   recipeId?: string | undefined;
@@ -53,9 +54,6 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
     },
   });
 
-  // TODO abstract to helper util
-  const simpleIsDirty = !!Object.keys(dirtyFields).length;
-
   useEffect(() => {
     setFocus(focusField);
   }, [setFocus]);
@@ -72,14 +70,13 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
     createRecipeApi
       .mutateAsync(data)
       .then(() => {
-        // Notifications.success("Recipe created successfully");
-        toast.success("Recipe created successfully");
+        Notifications.success("Recipe created successfully");
       })
       .then(() => {
         reset();
       })
       .catch((e) => {
-        toast.error("There was an error creating the recipe");
+        Notifications.error("There was an error creating the recipe");
         console.error(e);
       });
   }
@@ -92,7 +89,7 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
     updateRecipeApi
       .mutateAsync({ id, data })
       .then(() => {
-        toast.success("Recipe updated successfully");
+        Notifications.success("Recipe updated successfully");
       })
       .then(() => {
         reset(
@@ -103,7 +100,7 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
         );
       })
       .catch((e) => {
-        toast.error("There was an error updating the recipe");
+        Notifications.error("There was an error updating the recipe");
         console.error(e);
       });
   }
@@ -142,23 +139,16 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
   const watchAllFields = watch();
   useAutosave({
     handleSubmission: handleSubmit(onSubmit),
-    isDirty: simpleIsDirty,
+    isDirty: getSimpleDirtyFields(dirtyFields),
     isValid,
     formFields: watchAllFields,
   });
 
   return (
     <>
-      <div className="py-5 space-y-3">
-        <button onClick={() => makeToast()}>toast 🥂</button>
-
-        <p>
-          Form is {simpleIsDirty ? "💩" : "🧼"} and {isValid ? "✅" : "❌"}
-        </p>
-      </div>
       {/* Need `noValidate` to allow RHF validation to trump browser validation when field is required */}
       <form className="space-y-4" onSubmit={handleSubmit(onSubmit)} noValidate>
-        <div className="w-80">
+        <div className="w-full sm:w-80 lg:w-96">
           <Controller
             name="title"
             control={control}
@@ -178,7 +168,7 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
           />
         </div>
 
-        <div className="w-80">
+        <div className="w-full sm:w-80 lg:w-96">
           <Controller
             name="visibility"
             control={control}
@@ -202,7 +192,7 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
           />
         </div>
 
-        <div className="w-80">
+        <div className="w-full sm:w-80 lg:w-96">
           <Controller
             name="directions"
             control={control}
@@ -226,7 +216,7 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
           />
         </div>
 
-        <div className="w-80">
+        <div className="w-full sm:w-80 lg:w-96">
           <Controller
             name="rating"
             control={control}
@@ -249,7 +239,7 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
           />
         </div>
 
-        <div className="w-80">
+        <div className="w-full sm:w-80 lg:w-96">
           <Controller
             name="dateOfOrigin"
             control={control}
@@ -275,7 +265,7 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
           />
         </div>
 
-        <div className="w-80">
+        <div className="w-full sm:w-80 lg:w-96">
           <Controller
             name="haveMadeItMyself"
             control={control}
