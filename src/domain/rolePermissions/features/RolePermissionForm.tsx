@@ -1,12 +1,4 @@
-import {
-  Button,
-  Checkbox,
-  ComboBox,
-  DatePicker,
-  NumberInput,
-  TextArea,
-  TextInput,
-} from "@/components/forms";
+import { Button, TextInput } from "@/components/forms";
 import { Notifications } from "@/components/notifications";
 import {
   RolePermissionDto,
@@ -28,8 +20,13 @@ interface RolePermissionFormProps {
   rolePermissionData?: RolePermissionDto;
 }
 
-function RolePermissionForm({ rolePermissionId, rolePermissionData }: RolePermissionFormProps) {
-  const formMode = (rolePermissionId ? "Edit" : "Add") as typeof FormMode[number];
+function RolePermissionForm({
+  rolePermissionId,
+  rolePermissionData,
+}: RolePermissionFormProps) {
+  const formMode = (
+    rolePermissionId ? "Edit" : "Add"
+  ) as typeof FormMode[number];
 
   const focusField = "role";
   const {
@@ -53,10 +50,12 @@ function RolePermissionForm({ rolePermissionId, rolePermissionData }: RolePermis
     setFocus(focusField);
   }, [setFocus]);
 
-  const onSubmit: SubmitHandler<RolePermissionForCreationDto | RolePermissionForUpdateDto> = (
-    data
-  ) => {
-    formMode === "Add" ? createRolePermission(data) : updateRolePermission(data);
+  const onSubmit: SubmitHandler<
+    RolePermissionForCreationDto | RolePermissionForUpdateDto
+  > = (data) => {
+    formMode === "Add"
+      ? createRolePermission(data)
+      : updateRolePermission(data);
     if (formMode === "Add") setFocus(focusField);
   };
 
@@ -102,7 +101,6 @@ function RolePermissionForm({ rolePermissionId, rolePermissionData }: RolePermis
 
   useEffect(() => {
     if (formMode === "Edit") {
-      
       setValue("role", rolePermissionData?.role ?? "");
       setValue("permission", rolePermissionData?.permission ?? "");
       reset(
@@ -126,8 +124,6 @@ function RolePermissionForm({ rolePermissionId, rolePermissionData }: RolePermis
     <>
       {/* Need `noValidate` to allow RHF validation to trump browser validation when field is required */}
       <form className="space-y-4" onSubmit={handleSubmit(onSubmit)} noValidate>
-        
-
         <div className="w-full sm:w-80 lg:w-96">
           <Controller
             name="role"
@@ -139,37 +135,11 @@ function RolePermissionForm({ rolePermissionId, rolePermissionData }: RolePermis
                 testSelector="role"
                 required={
                   // @ts-ignore
-                  rolePermissionValidationSchema.fields?.role
-                    ?.exclusiveTests?.required
-                }
-                error={fieldState.error?.message}
-                {...field}
-              />
-            )}
-          />
-        </div>
-
-        {/* OR use a TextArea... */}
-
-        <div className="w-full sm:w-80 lg:w-96">
-          <Controller
-            name="role"
-            control={control}
-            render={({ field, fieldState }) => (
-              <TextArea
-                {...field}
-                label={"Role"}
-                placeholder="Role..."
-                testSelector="role"
-                minRows={2}
-                autosize
-                resize="y"
-                required={
-                  // @ts-ignore
                   rolePermissionValidationSchema.fields?.role?.exclusiveTests
                     ?.required
                 }
                 error={fieldState.error?.message}
+                {...field}
               />
             )}
           />
@@ -191,32 +161,6 @@ function RolePermissionForm({ rolePermissionId, rolePermissionData }: RolePermis
                 }
                 error={fieldState.error?.message}
                 {...field}
-              />
-            )}
-          />
-        </div>
-
-        {/* OR use a TextArea... */}
-
-        <div className="w-full sm:w-80 lg:w-96">
-          <Controller
-            name="permission"
-            control={control}
-            render={({ field, fieldState }) => (
-              <TextArea
-                {...field}
-                label={"Permission"}
-                placeholder="Permission..."
-                testSelector="permission"
-                minRows={2}
-                autosize
-                resize="y"
-                required={
-                  // @ts-ignore
-                  rolePermissionValidationSchema.fields?.permission?.exclusiveTests
-                    ?.required
-                }
-                error={fieldState.error?.message}
               />
             )}
           />

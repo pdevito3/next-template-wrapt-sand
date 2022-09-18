@@ -5,7 +5,11 @@ import {
 } from "@/components/forms";
 import useDeleteModal from "@/components/modal/ConfirmDeleteModal";
 import { Notifications } from "@/components/notifications";
-import { RolePermissionDto, useDeleteRolePermission, useRolePermissions } from "@/domain/rolePermissions";
+import {
+  RolePermissionDto,
+  useDeleteRolePermission,
+  useRolePermissions,
+} from "@/domain/rolePermissions";
 import "@tanstack/react-table";
 import { createColumnHelper, SortingState } from "@tanstack/react-table";
 import { useRouter } from "next/router";
@@ -14,7 +18,9 @@ interface RolePermissionListTableProps {
   queryFilter?: string | undefined;
 }
 
-export function RolePermissionListTable({ queryFilter }: RolePermissionListTableProps) {
+export function RolePermissionListTable({
+  queryFilter,
+}: RolePermissionListTableProps) {
   const router = useRouter();
   const { sorting, pageSize, pageNumber } = usePaginatedTableContext();
 
@@ -80,7 +86,7 @@ export function RolePermissionListTable({ queryFilter }: RolePermissionListTable
       apiPagination={rolePermissionPagination}
       entityPlural="RolePermissions"
       isLoading={isLoading}
-      onRowClick={(row) => router.push(`/rolepermissions/${row.id}`)}
+      onRowClick={(row) => router.push(`settings/rolepermissions/${row.id}`)}
     />
   );
 }
