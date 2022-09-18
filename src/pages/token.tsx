@@ -1,4 +1,4 @@
-import PrivateLayout from "@/components/PrivateLayout";
+import { PrivateLayout } from "@/components";
 import useAuthUser from "@/domain/auth/hooks/useAuthUser";
 
 // Protected.isPublic = false;

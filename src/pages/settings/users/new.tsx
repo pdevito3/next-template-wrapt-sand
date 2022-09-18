@@ -1,4 +1,4 @@
-import PrivateLayout from "@/components/PrivateLayout";
+import { PrivateLayout } from "@/components/PrivateLayout";
 import { UserForm } from "@/domain/users";
 import Link from "next/link";
 import { useRouter } from "next/router";

@@ -16,7 +16,6 @@ interface ButtonProps {
   onClick?: (event?: any) => void;
   testSelector?: string;
   icon?: ReactNode;
-  renderAs?: "button" | "link";
   href?: string;
 }
 
@@ -33,7 +32,6 @@ function Button({
     "button"
   ),
   icon,
-  renderAs = "button",
   href,
   ...rest
 }: ButtonProps) {
@@ -55,6 +53,9 @@ function Button({
       "hover:bg-red-500 hover:border-red-500",
     icon && "flex items-center"
   );
+
+  let renderAs = "button" as "button" | "link";
+  if (href) renderAs = "link";
 
   return (
     <>

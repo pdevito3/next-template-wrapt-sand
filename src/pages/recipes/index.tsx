@@ -1,20 +1,19 @@
+import { PrivateLayout, SearchInput } from "@/components";
 import {
   Button,
   PaginatedTableProvider,
   useGlobalFilter,
 } from "@/components/forms";
-import SearchInput from "@/components/SearchInput";
 import { RecipeListTable } from "@/domain/recipes";
 import "@tanstack/react-table";
 import { IconCirclePlus } from "tabler-icons";
-import PrivateLayout from "../../components/PrivateLayout";
 
 RecipeList.isPublic = false;
 export default function RecipeList() {
   const {
     globalFilter: globalRecipeFilter,
     queryFilter: queryFilterForRecipes,
-    calculateAndSetQueryFilter: calculateAndSetQueryFilterForRecipes,
+    calculateAndSetQueryFilter,
   } = useGlobalFilter((value) => `(title|visibility|directions)@=*${value}`);
 
   return (
@@ -29,7 +28,7 @@ export default function RecipeList() {
                   <SearchInput
                     value={globalRecipeFilter ?? ""}
                     onChange={(value) =>
-                      calculateAndSetQueryFilterForRecipes(String(value))
+                      calculateAndSetQueryFilter(String(value))
                     }
                     placeholder="Search all columns..."
                   />
@@ -38,7 +37,6 @@ export default function RecipeList() {
                 <Button
                   buttonStyle="primary"
                   icon={<IconCirclePlus className="w-5 h-5" />}
-                  renderAs="link"
                   href="/recipes/new"
                 >
                   Add Recipe

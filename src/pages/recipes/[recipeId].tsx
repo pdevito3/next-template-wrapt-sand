@@ -1,7 +1,6 @@
-import PrivateLayout from "@/components/PrivateLayout";
-import { useGetRecipe } from "@/domain/recipes/api";
-import { RecipeForm } from "@/domain/recipes/features/RecipeForm";
-import Link from "next/link";
+import { PrivateLayout } from "@/components";
+import { Button } from "@/components/forms";
+import { RecipeForm, useGetRecipe } from "@/domain/recipes";
 import { useRouter } from "next/router";
 
 export default function EditRecipe() {
@@ -12,13 +11,7 @@ export default function EditRecipe() {
   return (
     <PrivateLayout>
       <div className="space-y-6">
-        <Link
-          className="px-3 py-2 border rounded-md border-slate-700 dark:border-white"
-          // onClick={() => router.back()}
-          href={"/recipes"}
-        >
-          Back
-        </Link>
+        <Button href={"/recipes"}>Back</Button>
         <div className="">
           <h1 className="h1">Edit Recipe</h1>
           <div className="py-6">

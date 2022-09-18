@@ -32,4 +32,4 @@ function SearchInput({
   );
 }
 
-export default SearchInput;
+export { SearchInput };

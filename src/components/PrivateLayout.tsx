@@ -1,11 +1,10 @@
-import { PrivateHeader } from "./PrivateHeader";
-import PrivateSideNav from "./PrivateSideNav";
+import { PrivateHeader, PrivateSideNav } from "@/components";
 
 interface Props {
   children: React.ReactNode;
 }
 
-export default function PrivateLayout({ children }: Props) {
+export function PrivateLayout({ children }: Props) {
   return (
     <div className="flex flex-col w-full h-full">
       <PrivateHeader />

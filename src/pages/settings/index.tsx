@@ -2,7 +2,7 @@ import { Tabs } from "@/components/forms";
 import UsersTab from "@/components/settings/UsersTab";
 import "@tanstack/react-table";
 import { IconShieldLock, IconUser } from "tabler-icons";
-import PrivateLayout from "../../components/PrivateLayout";
+import { PrivateLayout } from "../../components/PrivateLayout";
 
 Settings.isPublic = false;
 export default function Settings() {

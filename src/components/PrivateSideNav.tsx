@@ -22,7 +22,7 @@ const navigation = [
   { name: "Settings", href: "/settings", icon: IconSettings },
 ];
 
-export default function PrivateSideNav() {
+function PrivateSideNav() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const router = useRouter();
   const { pathname } = router;
