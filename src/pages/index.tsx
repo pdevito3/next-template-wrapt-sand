@@ -1,10 +1,8 @@
-import PrivateLayout from "@/components/PrivateLayout";
+import { PrivateLayout } from "@/components";
 import Head from "next/head";
 
 Home.isPublic = false;
 export default function Home() {
-  // const { isLoading } = useAuthUser();
-  const isLoading = false;
   return (
     <>
       {/* TODO head update */}
