@@ -6,9 +6,11 @@ export default function NewRolePermission() {
   return (
     <PrivateLayout>
       <div className="space-y-6">
-        <Button buttonStyle="secondary" href={"/settings"}>
-          Back
-        </Button>
+        <div className="pt-4">
+          <Button buttonStyle="secondary" href={"/settings"}>
+            Back
+          </Button>
+        </div>
         <div className="">
           <h1 className="h1">Add a Role Permission</h1>
           <div className="max-w-3xl py-6 space-y-5">
