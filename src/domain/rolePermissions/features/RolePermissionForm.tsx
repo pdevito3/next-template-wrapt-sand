@@ -1,4 +1,4 @@
-import { Button, TextInput } from "@/components/forms";
+import { Button, ComboBox, TextInput } from "@/components/forms";
 import { Notifications } from "@/components/notifications";
 import {
   RolePermissionDto,
@@ -8,6 +8,7 @@ import {
   useAddRolePermission,
   useUpdateRolePermission,
 } from "@/domain/rolePermissions";
+import { useGetRoles } from "@/domain/roles";
 import { FormMode } from "@/types";
 import { getSimpleDirtyFields, useAutosave } from "@/utils";
 import { DevTool } from "@hookform/devtools";
@@ -120,6 +121,11 @@ function RolePermissionForm({
     formFields: watchAllFields,
   });
 
+  const { data: rolesList } = useGetRoles();
+  function getRolesList() {
+    return rolesList?.map((role) => ({ value: role, label: role })) ?? [];
+  }
+
   return (
     <>
       {/* Need `noValidate` to allow RHF validation to trump browser validation when field is required */}
@@ -128,18 +134,19 @@ function RolePermissionForm({
           <Controller
             name="role"
             control={control}
+            rules={{ required: true }}
             render={({ field, fieldState }) => (
-              <TextInput
+              <ComboBox
+                {...field}
                 label={"Role"}
                 placeholder="Role..."
                 testSelector="role"
-                required={
-                  // @ts-ignore
-                  rolePermissionValidationSchema.fields?.role?.exclusiveTests
-                    ?.required
-                }
+                data={getRolesList() ?? []}
+                clearable
+                required={true}
+                searchable
+                disabled={getRolesList()?.length <= 0}
                 error={fieldState.error?.message}
-                {...field}
               />
             )}
           />
