@@ -76,7 +76,6 @@ function RolesForm({
         ?.filter((item) => !assignedRoles?.includes(item))
         ?.map((role) => ({ value: role, label: role })) ?? []
     );
-    // return rolesList?.map((role) => ({ value: role, label: role }));
   }
 
   return (
@@ -87,7 +86,7 @@ function RolesForm({
         onSubmit={handleSubmit(onSubmit)}
         noValidate
       >
-        <div className="w-80">
+        <div className="w-full sm:w-80 lg:w-96">
           <Controller
             name="role"
             control={control}
