@@ -1,4 +1,4 @@
-import { env } from "@/utils/environmentService";
+import { env } from "@/config";
 import { signIn, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 

@@ -1,5 +1,5 @@
+import { env } from "@/config";
 import useAuthUser from "@/domain/auth/hooks/useAuthUser";
-import { env } from "@/utils/environmentService";
 import { signIn } from "next-auth/react";
 
 Login.isPublic = true;

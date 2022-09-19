@@ -1,4 +1,4 @@
-import { env } from "@/utils/environmentService";
+import { env } from "@/config";
 import Axios from "axios";
 import { getSession, signIn } from "next-auth/react";
 

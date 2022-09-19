@@ -1,5 +1,5 @@
+import { env } from "@/config";
 import { clients } from "@/lib/axios";
-import { env } from "@/utils/environmentService";
 import NextAuth, { NextAuthOptions, User } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import querystring from "query-string";
