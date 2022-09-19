@@ -4,6 +4,7 @@ import {
   RolePermissionForm,
   useGetRolePermission,
 } from "@/domain/rolePermissions";
+import Head from "next/head";
 import { useRouter } from "next/router";
 
 export default function EditRolePermission() {
@@ -14,23 +15,29 @@ export default function EditRolePermission() {
   );
 
   return (
-    <PrivateLayout>
-      <div className="space-y-6">
-        <div className="pt-4">
-          <Button buttonStyle="secondary" href={"/settings"}>
-            Back
-          </Button>
-        </div>
-        <div className="">
-          <h1 className="h1">Edit Role Permission</h1>
-          <div className="max-w-3xl py-6 space-y-5">
-            <RolePermissionForm
-              rolePermissionId={rolePermissionId?.toString()}
-              rolePermissionData={rolePermissionData}
-            />
+    <>
+      <Head>
+        <title>Edit Role Permission</title>
+      </Head>
+
+      <PrivateLayout>
+        <div className="space-y-6">
+          <div className="pt-4">
+            <Button buttonStyle="secondary" href={"/settings"}>
+              Back
+            </Button>
+          </div>
+          <div className="">
+            <h1 className="h1">Edit Role Permission</h1>
+            <div className="max-w-3xl py-6 space-y-5">
+              <RolePermissionForm
+                rolePermissionId={rolePermissionId?.toString()}
+                rolePermissionData={rolePermissionData}
+              />
+            </div>
           </div>
         </div>
-      </div>
-    </PrivateLayout>
+      </PrivateLayout>
+    </>
   );
 }

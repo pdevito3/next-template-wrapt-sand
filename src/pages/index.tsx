@@ -5,9 +5,8 @@ Home.isPublic = false;
 export default function Home() {
   return (
     <>
-      {/* TODO head update */}
       <Head>
-        <title>Create Next App</title>
+        <title>Home</title>
         <link rel="icon" href="/favicon.svg" />
       </Head>
 
