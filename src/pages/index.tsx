@@ -47,7 +47,7 @@ export default function Home() {
               </div>
               <p>
                 To get started, you can add scaffolding with Craftsman, or start
-                building whatever pages and components suite your needs!
+                building whatever pages and components suit your needs!
               </p>
             </div>
             <a
