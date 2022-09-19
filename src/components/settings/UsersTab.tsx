@@ -1,21 +1,18 @@
+import { SearchInput } from "@/components";
 import {
   Button,
-  DebouncedInput,
   PaginatedTableProvider,
   useGlobalFilter,
 } from "@/components/forms";
 import { UserListTable } from "@/domain/users";
 import "@tanstack/react-table";
-import { IconCirclePlus, IconSearch } from "tabler-icons";
+import { IconCirclePlus } from "tabler-icons";
 
 function UsersTab() {
-  const {
-    globalFilter: globalUserFilter,
-    queryFilter: queryFilterForUsers,
-    calculateAndSetQueryFilter,
-  } = useGlobalFilter(
-    (value) => `(firstName|lastName|identifier|username)@=*${value}`
-  );
+  const { globalFilter, queryFilter, calculateAndSetQueryFilter } =
+    useGlobalFilter(
+      (value) => `(firstName|lastName|identifier|username)@=*${value}`
+    );
   // TODO add email filter separately due to Value Object
 
   return (
@@ -24,15 +21,10 @@ function UsersTab() {
       <div className="py-4">
         <PaginatedTableProvider>
           <div className="flex items-center justify-between">
-            <div className="relative mt-1">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <IconSearch className="w-5 h-5 text-gray-500 dark:text-gray-400" />
-              </div>
-
-              <DebouncedInput
-                value={globalUserFilter ?? ""}
+            <div className="mt-1">
+              <SearchInput
+                value={globalFilter ?? ""}
                 onChange={(value) => calculateAndSetQueryFilter(String(value))}
-                className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg outline-none w-80 bg-gray-50 focus:border-violet-500 focus:ring-violet-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-violet-500 dark:focus:ring-violet-500"
                 placeholder="Search all columns..."
               />
             </div>
@@ -46,7 +38,7 @@ function UsersTab() {
           </div>
 
           <div className="pt-2">
-            <UserListTable queryFilter={queryFilterForUsers} />
+            <UserListTable queryFilter={queryFilter} />
           </div>
         </PaginatedTableProvider>
       </div>
