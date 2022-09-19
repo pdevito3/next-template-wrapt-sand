@@ -9,21 +9,15 @@ import type { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
-// const appendCache = createEmotionCache({ key: "mantine", prepend: false });
-
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <>
       <title>New Wrapt App in Next</title>
 
-      <SessionProvider session={pageProps.session} refetchInterval={0}>
+      <SessionProvider session={session} refetchInterval={0}>
         <QueryClientProvider client={new QueryClient()}>
           <RouteGuard isPublic={Component.isPublic}>
-            <MantineProvider
-            // emotionCache={appendCache}
-            // withGlobalStyles
-            // withNormalizeCSS
-            >
+            <MantineProvider>
               <ModalsProvider>
                 <Component {...pageProps} />
               </ModalsProvider>
