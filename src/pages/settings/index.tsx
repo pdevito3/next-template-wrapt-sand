@@ -29,7 +29,7 @@ export default function Settings() {
                   value="rolepermissions"
                   icon={<IconShieldLock className="w-5 h-5" />}
                 >
-                  Role Permisisons
+                  Role Permissions
                 </Tabs.Tab>
               </Tabs.List>
 
