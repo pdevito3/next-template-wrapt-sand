@@ -12,9 +12,14 @@ import { useSetting } from "../ThemeToggle";
 
 interface AutocompleteProps extends MantineAutocompleteProps {
   testSelector: string;
+  errorSrOnly?: boolean;
 }
 
-function Autocomplete({ testSelector, ...rest }: AutocompleteProps) {
+function Autocomplete({
+  testSelector,
+  errorSrOnly,
+  ...rest
+}: AutocompleteProps) {
   const themeSetting = useSetting((state) => state.setting);
   const twColors = useTailwindColors();
   const useStyles = createStyles({
@@ -82,11 +87,12 @@ function Autocomplete({ testSelector, ...rest }: AutocompleteProps) {
           )
         ),
         disabled: cx("input-disabled"),
-        error: cx("form-error text-error"),
+        error: cx(clsx("form-error text-error", errorSrOnly && "sr-only")),
         label: cx("form-label"),
         required: cx("text-error"),
         dropdown: cx("input-dropdown"),
         itemsWrapper: cx("input-items-wrapper"),
+        wrapper: cx(clsx(errorSrOnly && "mb-0")),
         item: cx(clsx(classes.item, "input-item")),
         rightSection: cx(clsx("pointer-events-none")),
       }}

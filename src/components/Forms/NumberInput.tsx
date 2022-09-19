@@ -12,10 +12,11 @@ import { IconAlertCircle, IconMinus, IconPlus } from "tabler-icons";
 
 interface NumberInputProps extends MantineNumberInputProps {
   testSelector: string;
+  errorSrOnly?: boolean;
 }
 
 const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
-  ({ testSelector, ...rest }, ref) => {
+  ({ testSelector, errorSrOnly, ...rest }, ref) => {
     const useStyles = createStyles({});
     const { cx } = useStyles();
     const handlers = useRef<NumberInputHandlers>();
@@ -42,7 +43,8 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
             )
           ),
           disabled: cx("input-disabled"),
-          error: cx("form-error text-error"),
+          error: cx(clsx("form-error text-error", errorSrOnly && "sr-only")),
+          wrapper: cx(clsx(errorSrOnly && "mb-0")),
           label: cx("form-label"),
           required: cx("text-error"),
         }}

@@ -13,10 +13,20 @@ interface TextareaProps extends MantineTextareaProps {
   testSelector: string;
   resize?: "none" | "y" | "x" | "both";
   asInputHeight?: boolean;
+  errorSrOnly?: boolean;
 }
 
 const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ resize = "none", testSelector, asInputHeight = false, ...rest }, ref) => {
+  (
+    {
+      resize = "none",
+      testSelector,
+      asInputHeight = false,
+      errorSrOnly,
+      ...rest
+    },
+    ref
+  ) => {
     const useStyles = createStyles({});
     const { cx } = useStyles();
     const { error, disabled, maxRows, minRows } = rest;
@@ -49,7 +59,8 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             )
           ),
           disabled: cx("input-disabled"),
-          error: cx("form-error text-error"),
+          error: cx(clsx("form-error text-error", errorSrOnly && "sr-only")),
+          wrapper: cx(clsx(errorSrOnly && "mb-0")),
           label: cx("form-label"),
           required: cx("text-error"),
           rightSection: cx(clsx("pointer-events-none")),

@@ -11,10 +11,11 @@ import { IconAlertCircle } from "tabler-icons";
 
 interface TextInputProps extends MantineTextInputProps {
   testSelector: string;
+  errorSrOnly?: boolean;
 }
 
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
-  ({ testSelector, ...rest }, ref) => {
+  ({ testSelector, errorSrOnly, ...rest }, ref) => {
     const useStyles = createStyles({});
     const { cx } = useStyles();
     const { error, icon, disabled } = rest;
@@ -41,7 +42,8 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             )
           ),
           disabled: cx("input-disabled"),
-          error: cx("form-error text-error"),
+          error: cx(clsx("form-error text-error", errorSrOnly && "sr-only")),
+          wrapper: cx(clsx(errorSrOnly && "mb-0")),
           label: cx("form-label"),
           required: cx("text-error"),
           icon: cx(inputState === "invalid" && "text-error"),

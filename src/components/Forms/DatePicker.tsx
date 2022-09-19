@@ -14,10 +14,11 @@ import { useSetting } from "../ThemeToggle";
 
 interface DatePickerProps extends MantineDatePickerProps {
   testSelector: string;
+  errorSrOnly?: boolean;
 }
 
 const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
-  ({ testSelector, ...rest }, ref) => {
+  ({ testSelector, errorSrOnly, ...rest }, ref) => {
     const themeSetting = useSetting((state) => state.setting);
     const twColors = useTailwindColors();
     const useStyles = createStyles({
@@ -150,7 +151,8 @@ const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
             )
           ),
           disabled: cx("input-disabled"),
-          error: cx("form-error text-error"),
+          error: cx(clsx("form-error text-error", errorSrOnly && "sr-only")),
+          wrapper: cx(clsx(errorSrOnly && "mb-0")),
           label: cx("form-label"),
           required: cx("text-error"),
           icon: cx(inputState === "invalid" && "text-error"),
