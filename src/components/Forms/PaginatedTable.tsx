@@ -5,7 +5,7 @@ import {
   IconChevronLeft,
   IconChevronRight,
   IconChevronsLeft,
-  IconChevronsRight
+  IconChevronsRight,
 } from "@tabler/icons";
 import {
   ColumnDef,
@@ -15,11 +15,10 @@ import {
   getSortedRowModel,
   Row,
   SortingState,
-  useReactTable
+  useReactTable,
 } from "@tanstack/react-table";
 import clsx from "clsx";
 import React from "react";
-} from "tabler-icons";
 
 interface PaginatedTableContextResponse {
   setPageNumber: React.Dispatch<React.SetStateAction<number>>;
