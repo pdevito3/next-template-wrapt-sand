@@ -1,12 +1,10 @@
 import { SearchInput } from "@/components";
+import { PaginatedTableProvider, useGlobalFilter } from "@/components/forms";
 import {
-  Button,
-  PaginatedTableProvider,
-  useGlobalFilter,
-} from "@/components/forms";
-import { RolePermissionListTable } from "@/domain/rolePermissions";
+  RolePermissionForm,
+  RolePermissionListTable,
+} from "@/domain/rolePermissions";
 import "@tanstack/react-table";
-import { IconCirclePlus } from "tabler-icons";
 
 function RolePermissionsTab() {
   const { globalFilter, queryFilter, calculateAndSetQueryFilter } =
@@ -14,30 +12,37 @@ function RolePermissionsTab() {
 
   return (
     <>
-      <h2 className="h2">Role Permissions</h2>
-      <div className="py-4">
-        <PaginatedTableProvider>
-          <div className="flex items-center justify-between">
-            <div className="mt-1">
-              <SearchInput
-                value={globalFilter ?? ""}
-                onChange={(value) => calculateAndSetQueryFilter(String(value))}
-                placeholder="Search all columns..."
-              />
+      <div className="space-y-12">
+        <div className="space-y-2">
+          <h2 className="h2">Add a Role Permission</h2>
+          <div className="hidden md:block">
+            <RolePermissionForm direction="horizontal" />
+          </div>
+          <div className="block md:hidden">
+            <RolePermissionForm direction="vertical" />
+          </div>
+        </div>
+        <div className="flex-1">
+          <PaginatedTableProvider>
+            <div className="flex-col items-start space-y-4 lg:space-y-0 lg:flex-row lg:flex lg:items-center lg:justify-between">
+              <h2 className="block h2">Role Permissions</h2>
+              <div className="py-1">
+                <SearchInput
+                  value={globalFilter ?? ""}
+                  onChange={(value) =>
+                    calculateAndSetQueryFilter(String(value))
+                  }
+                  placeholder="Search all columns..."
+                  className="block"
+                />
+              </div>
             </div>
 
-            <Button
-              href="settings/rolepermissions/new"
-              icon={<IconCirclePlus className="w-5 h-5" />}
-            >
-              Add Role Permission
-            </Button>
-          </div>
-
-          <div className="pt-2">
-            <RolePermissionListTable queryFilter={queryFilter} />
-          </div>
-        </PaginatedTableProvider>
+            <div className="pt-2">
+              <RolePermissionListTable queryFilter={queryFilter} />
+            </div>
+          </PaginatedTableProvider>
+        </div>
       </div>
     </>
   );

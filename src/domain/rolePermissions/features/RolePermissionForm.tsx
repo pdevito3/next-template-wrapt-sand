@@ -1,44 +1,36 @@
 import { Button, ComboBox, TextInput } from "@/components/forms";
 import { Notifications } from "@/components/notifications";
 import {
-  RolePermissionDto,
   RolePermissionForCreationDto,
   RolePermissionForUpdateDto,
   rolePermissionValidationSchema,
   useAddRolePermission,
-  useUpdateRolePermission,
 } from "@/domain/rolePermissions";
 import { useGetRoles } from "@/domain/roles";
 import { FormMode } from "@/types";
-import { getSimpleDirtyFields, useAutosave } from "@/utils";
 import { DevTool } from "@hookform/devtools";
 import { yupResolver } from "@hookform/resolvers/yup";
+import clsx from "clsx";
 import { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
 interface RolePermissionFormProps {
   rolePermissionId?: string | undefined;
-  rolePermissionData?: RolePermissionDto;
+  direction?: "horizontal" | "vertical";
 }
 
 function RolePermissionForm({
   rolePermissionId,
-  rolePermissionData,
+  direction = "vertical",
 }: RolePermissionFormProps) {
   const formMode = (
     rolePermissionId ? "Edit" : "Add"
   ) as typeof FormMode[number];
 
   const focusField = "role";
-  const {
-    handleSubmit,
-    reset,
-    control,
-    setFocus,
-    setValue,
-    watch,
-    formState: { dirtyFields, isValid },
-  } = useForm<RolePermissionForCreationDto | RolePermissionForUpdateDto>({
+  const { handleSubmit, reset, control, setFocus } = useForm<
+    RolePermissionForCreationDto | RolePermissionForUpdateDto
+  >({
     mode: "onBlur",
     resolver: yupResolver(rolePermissionValidationSchema),
     defaultValues: {
@@ -54,10 +46,8 @@ function RolePermissionForm({
   const onSubmit: SubmitHandler<
     RolePermissionForCreationDto | RolePermissionForUpdateDto
   > = (data) => {
-    formMode === "Add"
-      ? createRolePermission(data)
-      : updateRolePermission(data);
-    if (formMode === "Add") setFocus(focusField);
+    createRolePermission(data);
+    setFocus(focusField);
   };
 
   const createRolePermissionApi = useAddRolePermission();
@@ -76,51 +66,6 @@ function RolePermissionForm({
       });
   }
 
-  const updateRolePermissionApi = useUpdateRolePermission();
-  function updateRolePermission(data: RolePermissionForUpdateDto) {
-    const id = rolePermissionId;
-    if (id === null || id === undefined) return;
-
-    updateRolePermissionApi
-      .mutateAsync({ id, data })
-      .then(() => {
-        Notifications.success("RolePermission updated successfully");
-      })
-      .then(() => {
-        reset(
-          { ...data },
-          {
-            keepValues: true,
-          }
-        );
-      })
-      .catch((e) => {
-        Notifications.error("There was an error updating the RolePermission");
-        console.error(e);
-      });
-  }
-
-  useEffect(() => {
-    if (formMode === "Edit") {
-      setValue("role", rolePermissionData?.role ?? "");
-      setValue("permission", rolePermissionData?.permission ?? "");
-      reset(
-        {},
-        {
-          keepValues: true,
-        }
-      );
-    }
-  }, [formMode, rolePermissionData, reset, setValue]);
-
-  const watchAllFields = watch();
-  useAutosave({
-    handleSubmission: handleSubmit(onSubmit),
-    isDirty: getSimpleDirtyFields(dirtyFields),
-    isValid,
-    formFields: watchAllFields,
-  });
-
   const { data: rolesList } = useGetRoles();
   function getRolesList() {
     return rolesList?.map((role) => ({ value: role, label: role })) ?? [];
@@ -129,7 +74,14 @@ function RolePermissionForm({
   return (
     <>
       {/* Need `noValidate` to allow RHF validation to trump browser validation when field is required */}
-      <form className="space-y-4" onSubmit={handleSubmit(onSubmit)} noValidate>
+      <form
+        className={clsx(
+          "space-y-4",
+          direction === "horizontal" && "flex items-end space-x-4"
+        )}
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+      >
         <div className="w-full sm:w-80 lg:w-96">
           <Controller
             name="role"
@@ -147,6 +99,7 @@ function RolePermissionForm({
                 searchable
                 disabled={getRolesList()?.length <= 0}
                 error={fieldState.error?.message}
+                errorSrOnly={direction === "horizontal"}
               />
             )}
           />
@@ -168,13 +121,18 @@ function RolePermissionForm({
                 }
                 error={fieldState.error?.message}
                 {...field}
+                errorSrOnly={direction === "horizontal"}
               />
             )}
           />
         </div>
 
         {formMode === "Add" && (
-          <Button buttonStyle="primary" type="submit">
+          <Button
+            buttonStyle="primary"
+            type="submit"
+            className="w-full sm:w-auto"
+          >
             Submit
           </Button>
         )}

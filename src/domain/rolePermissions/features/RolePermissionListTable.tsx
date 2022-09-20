@@ -86,7 +86,6 @@ export function RolePermissionListTable({
       apiPagination={rolePermissionPagination}
       entityPlural="RolePermissions"
       isLoading={isLoading}
-      onRowClick={(row) => router.push(`settings/rolepermissions/${row.id}`)}
     />
   );
 }

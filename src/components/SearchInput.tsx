@@ -1,5 +1,6 @@
 import { DebouncedInput } from "@/components/forms";
 import "@tanstack/react-table";
+import clsx from "clsx";
 import { IconSearch } from "tabler-icons";
 
 function SearchInput({
@@ -21,12 +22,16 @@ function SearchInput({
       </div>
 
       <DebouncedInput
+        {...props}
         value={value}
         onChange={onChange}
         debounce={debounce}
-        className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg outline-none w-80 bg-gray-50 focus:border-violet-500 focus:ring-violet-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-violet-500 dark:focus:ring-violet-500"
         placeholder={placeholder}
-        {...props}
+        className={clsx(
+          "block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg outline-none w-80 bg-gray-50 focus:border-violet-500 focus:ring-violet-500",
+          "dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-violet-500 dark:focus:ring-violet-500",
+          props.className
+        )}
       />
     </div>
   );
