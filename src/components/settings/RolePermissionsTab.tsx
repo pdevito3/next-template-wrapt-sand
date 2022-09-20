@@ -12,7 +12,7 @@ function RolePermissionsTab() {
 
   return (
     <>
-      <div className="space-y-12">
+      <div className="space-y-8">
         <div className="space-y-2">
           <h2 className="h2">Add a Role Permission</h2>
           <div className="hidden md:block">

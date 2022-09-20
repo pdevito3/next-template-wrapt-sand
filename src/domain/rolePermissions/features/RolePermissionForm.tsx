@@ -1,5 +1,6 @@
-import { Button, ComboBox, TextInput } from "@/components/forms";
+import { Button, ComboBox } from "@/components/forms";
 import { Notifications } from "@/components/notifications";
+import { useGetPermissions } from "@/domain/permissions";
 import {
   RolePermissionForCreationDto,
   RolePermissionForUpdateDto,
@@ -70,6 +71,15 @@ function RolePermissionForm({
   function getRolesList() {
     return rolesList?.map((role) => ({ value: role, label: role })) ?? [];
   }
+  const { data: permissionsList } = useGetPermissions();
+  function getPermissionsList() {
+    return (
+      permissionsList?.map((permission) => ({
+        value: permission,
+        label: permission,
+      })) ?? []
+    );
+  }
 
   return (
     <>
@@ -104,23 +114,23 @@ function RolePermissionForm({
             )}
           />
         </div>
-
         <div className="w-full sm:w-80 lg:w-96">
           <Controller
             name="permission"
             control={control}
+            rules={{ required: true }}
             render={({ field, fieldState }) => (
-              <TextInput
+              <ComboBox
+                {...field}
                 label={"Permission"}
                 placeholder="Permission..."
                 testSelector="permission"
-                required={
-                  // @ts-ignore
-                  rolePermissionValidationSchema.fields?.permission
-                    ?.exclusiveTests?.required
-                }
+                data={getPermissionsList() ?? []}
+                clearable
+                required={true}
+                searchable
+                disabled={getPermissionsList()?.length <= 0}
                 error={fieldState.error?.message}
-                {...field}
                 errorSrOnly={direction === "horizontal"}
               />
             )}
