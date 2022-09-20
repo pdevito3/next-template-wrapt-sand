@@ -21,8 +21,8 @@ interface ApiClientProps {
 }
 
 async function buildApiClient({ baseURL, customHeaders }: ApiClientProps) {
-  var session = await getSession();
-  var token = session?.accessToken;
+  const session = await getSession();
+  const token = session?.accessToken;
 
   const client = Axios.create({
     baseURL,

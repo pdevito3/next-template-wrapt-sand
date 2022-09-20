@@ -12,7 +12,6 @@ import {
 } from "@/domain/rolePermissions";
 import "@tanstack/react-table";
 import { createColumnHelper, SortingState } from "@tanstack/react-table";
-import { useRouter } from "next/router";
 
 interface RolePermissionListTableProps {
   queryFilter?: string | undefined;
@@ -21,7 +20,6 @@ interface RolePermissionListTableProps {
 export function RolePermissionListTable({
   queryFilter,
 }: RolePermissionListTableProps) {
-  const router = useRouter();
   const { sorting, pageSize, pageNumber } = usePaginatedTableContext();
 
   const openDeleteModal = useDeleteModal();

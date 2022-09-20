@@ -33,7 +33,7 @@ export const authOptions: NextAuthOptions = {
   ],
   events: {
     async signOut({ token }) {
-      var refreshToken = token.refreshToken;
+      const refreshToken = token.refreshToken;
       let headers = { "Content-Type": "application/x-www-form-urlencoded" };
       try {
         await clients.authServer.post(
@@ -119,7 +119,7 @@ function parseJwt(token) {
  */
 async function refreshAccessToken(token: JWT) {
   try {
-    var params = {
+    const params = {
       client_secret: env.auth.secret,
       client_id: "recipe_management.next",
       grant_type: "refresh_token",

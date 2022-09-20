@@ -1,7 +1,10 @@
+import {
+  RolePermissionDto,
+  RolePermissionKeys,
+} from "@/domain/rolePermissions";
 import { clients } from "@/lib/axios";
 import { AxiosResponse } from "axios";
 import { useQuery } from "react-query";
-import { RolePermissionDto, RolePermissionKeys } from "@/domain/rolePermissions";
 
 const getRolePermission = async (id: string) => {
   const axios = await clients.recipeManagement();
@@ -12,8 +15,11 @@ const getRolePermission = async (id: string) => {
 };
 
 export const useGetRolePermission = (id: string | null | undefined) => {
-  return useQuery(RolePermissionKeys.detail(id!), () => getRolePermission(id!), {
-    enabled: id !== null && id !== undefined,
-  });
+  return useQuery(
+    RolePermissionKeys.detail(id!),
+    () => getRolePermission(id!),
+    {
+      enabled: id !== null && id !== undefined,
+    }
+  );
 };
-;

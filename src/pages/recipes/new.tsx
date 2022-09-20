@@ -1,17 +1,13 @@
 import { PrivateLayout } from "@/components";
 import { Button } from "@/components/forms";
 import { RecipeForm } from "@/domain/recipes";
-import { useRouter } from "next/router";
 
 export default function NewRecipe() {
-  const router = useRouter();
-
   return (
     <PrivateLayout>
       <div className="space-y-6">
         <Button
           className="px-3 py-2 border rounded-md border-slate-700 dark:border-white"
-          // onClick={() => router.back()}
           href={"/recipes"}
         >
           Back

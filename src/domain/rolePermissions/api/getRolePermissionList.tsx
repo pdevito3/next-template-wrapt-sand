@@ -1,10 +1,14 @@
+import {
+  QueryParams,
+  RolePermissionDto,
+  RolePermissionKeys,
+} from "@/domain/rolePermissions";
 import { clients } from "@/lib/axios";
 import { PagedResponse, Pagination } from "@/types/apis";
 import { generateSieveSortOrder } from "@/utils/sorting";
 import { AxiosResponse } from "axios";
 import queryString from "query-string";
 import { useQuery } from "react-query";
-import { QueryParams, RolePermissionDto, RolePermissionKeys } from "@/domain/rolePermissions";
 
 interface delayProps {
   hasArtificialDelay?: boolean;
@@ -59,7 +63,10 @@ export const useRolePermissions = ({
   });
 
   return useQuery(RolePermissionKeys.list(queryParams ?? ""), () =>
-    getRolePermissions({ queryString: queryParams, hasArtificialDelay, delayInMs })
+    getRolePermissions({
+      queryString: queryParams,
+      hasArtificialDelay,
+      delayInMs,
+    })
   );
 };
-;

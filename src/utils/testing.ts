@@ -5,7 +5,7 @@ function formatTestSelectorString(string: string) {
     .toLowerCase();
 }
 
-export function getTestSelector(field?: string, prefix: string = "") {
+export function getTestSelector(field?: string, prefix = "") {
   return field
     ? formatTestSelectorString(`${prefix ? `${prefix}-` : ""}${field}`)
     : "";

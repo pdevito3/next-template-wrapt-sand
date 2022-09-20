@@ -1,7 +1,7 @@
+import { RolePermissionKeys } from "@/domain/rolePermissions";
 import { clients } from "@/lib/axios";
 import { AxiosError } from "axios";
 import { useMutation, UseMutationOptions, useQueryClient } from "react-query";
-import { RolePermissionKeys } from "@/domain/rolePermissions";
 
 async function deleteRolePermission(id: string) {
   const axios = await clients.recipeManagement();

@@ -35,7 +35,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     if (error) inputState = "invalid";
     if (disabled) inputState = "disabled";
 
-    var resizeClass = "resize-none";
+    let resizeClass = "resize-none";
     if (resize === "x") resizeClass = "resize-x";
     if (resize === "y") resizeClass = "resize-y";
     if (resize === "both") resizeClass = "resize";

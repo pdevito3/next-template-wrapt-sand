@@ -1,4 +1,3 @@
-// @ts-ignore
 import { getTestSelector } from "@/utils";
 import clsx from "clsx";
 import Link from "next/link";
