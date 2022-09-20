@@ -6,6 +6,7 @@ import {
   IconChevronRight,
   IconChevronsLeft,
   IconChevronsRight,
+  IconChevronUp,
 } from "@tabler/icons";
 import {
   ColumnDef,
