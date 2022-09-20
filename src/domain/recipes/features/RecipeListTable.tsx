@@ -1,4 +1,5 @@
 import {
+  Checkbox,
   PaginatedTable,
   TrashButton,
   usePaginatedTableContext,
@@ -68,6 +69,18 @@ export function RecipeListTable({ queryFilter }: RecipeListTableProps) {
       id: "dateOfOrigin",
       cell: (info) => <p className="">{info.getValue()?.toLocaleString()}</p>,
       header: () => <span className="">Date Of Origin</span>,
+    }),
+    columnHelper.accessor((row) => row.haveMadeItMyself, {
+      id: "haveMadeItMyself",
+      cell: (info) => (
+        <Checkbox
+          isSelected={info.getValue()}
+          required={false}
+          testSelector={"haveMadeItMyself"}
+          label={""}
+        />
+      ),
+      header: () => <span className="">Have</span>,
     }),
     columnHelper.accessor("id", {
       enableSorting: false,

@@ -84,7 +84,9 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             </svg>
           </div>
           <span className={clsx(labelClassName, "form-label")}>{label}</span>
-          <span className={clsx("text-red-400 pl-1 not-sr-only")}>*</span>
+          {required && (
+            <span className={clsx("text-red-400 pl-1 not-sr-only")}>*</span>
+          )}
         </label>
         {error && <p className="text-sm text-error pt-0.5">{error}</p>}
       </>

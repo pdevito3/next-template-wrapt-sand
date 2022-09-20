@@ -272,6 +272,7 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
             control={control}
             render={({ field, fieldState }) => (
               <Checkbox
+                {...field}
                 label={"Have Made It Myself"}
                 testSelector="haveMadeItMyself"
                 required={
@@ -280,7 +281,7 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
                 }
                 isSelected={field.value}
                 error={fieldState?.error?.message}
-                {...field}
+                value={field.value?.toString()}
               />
             )}
           />
