@@ -22,7 +22,6 @@ import { DevTool } from "@hookform/devtools";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 
 interface RecipeFormProps {
   recipeId?: string | undefined;
@@ -104,20 +103,6 @@ function RecipeForm({ recipeId, recipeData }: RecipeFormProps) {
         Notifications.error("There was an error updating the recipe");
         console.error(e);
       });
-  }
-
-  function makeToast() {
-    toast.custom(
-      (t) => (
-        // TODO framer motion
-        <div className={`bg-white px-6 py-4 shadow-md rounded-full `}>
-          Hello TailwindCSS! 👋
-        </div>
-      ),
-      {
-        duration: 1500,
-      }
-    );
   }
 
   useEffect(() => {

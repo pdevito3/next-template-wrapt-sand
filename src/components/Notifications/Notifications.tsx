@@ -31,6 +31,17 @@ const Notifications = () => {
 
 Notifications.success = (message: string, options?: ToastOptions) => {
   toast.success(message);
+  // toast.custom(
+  //   (t) => (
+  //     // TODO framer motion
+  //     <div className={`bg-white px-6 py-4 shadow-md rounded-full `}>
+  //       Hello TailwindCSS! 👋
+  //     </div>
+  //   ),
+  //   {
+  //     duration: 1500,
+  //   }
+  // );
 };
 Notifications.error = (message: string, options?: ToastOptions) => {
   toast.error(message);
