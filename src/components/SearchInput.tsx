@@ -1,7 +1,7 @@
 import { DebouncedInput } from "@/components/forms";
+import { IconSearch } from "@tabler/icons";
 import "@tanstack/react-table";
 import clsx from "clsx";
-import { IconSearch } from "tabler-icons";
 
 function SearchInput({
   value,

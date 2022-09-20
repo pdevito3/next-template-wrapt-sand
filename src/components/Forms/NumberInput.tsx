@@ -6,9 +6,9 @@ import {
   NumberInputHandlers,
   NumberInputProps as MantineNumberInputProps,
 } from "@mantine/core";
+import { IconAlertCircle, IconMinus, IconPlus } from "@tabler/icons";
 import clsx from "clsx";
 import { forwardRef, useRef } from "react";
-import { IconAlertCircle, IconMinus, IconPlus } from "tabler-icons";
 
 interface NumberInputProps extends MantineNumberInputProps {
   testSelector: string;

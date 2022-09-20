@@ -1,6 +1,6 @@
+import { IconTrash } from "@tabler/icons";
 import clsx from "clsx";
 import { MouseEvent } from "react";
-import { IconTrash } from "tabler-icons";
 
 interface TrashButtonProps {
   onClick: (e: MouseEvent<HTMLButtonElement>) => void;

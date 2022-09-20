@@ -5,8 +5,8 @@ import {
   useGlobalFilter,
 } from "@/components/forms";
 import { UserListTable } from "@/domain/users";
+import { IconCirclePlus } from "@tabler/icons";
 import "@tanstack/react-table";
-import { IconCirclePlus } from "tabler-icons";
 
 function UsersTab() {
   const { globalFilter, queryFilter, calculateAndSetQueryFilter } =

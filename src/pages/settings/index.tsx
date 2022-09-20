@@ -1,8 +1,8 @@
 import { Tabs } from "@/components/forms";
 import { RolePermissionsTab, UsersTab } from "@/components/settings";
+import { IconShieldLock, IconUser } from "@tabler/icons";
 import "@tanstack/react-table";
 import Head from "next/head";
-import { IconShieldLock, IconUser } from "tabler-icons";
 import { PrivateLayout } from "../../components/PrivateLayout";
 
 Settings.isPublic = false;

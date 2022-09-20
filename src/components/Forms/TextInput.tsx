@@ -5,9 +5,9 @@ import {
   TextInput as MantineTextInput,
   TextInputProps as MantineTextInputProps,
 } from "@mantine/core";
+import { IconAlertCircle } from "@tabler/icons";
 import clsx from "clsx";
 import { forwardRef } from "react";
-import { IconAlertCircle } from "tabler-icons";
 
 interface TextInputProps extends MantineTextInputProps {
   testSelector: string;

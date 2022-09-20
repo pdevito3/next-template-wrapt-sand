@@ -1,9 +1,9 @@
 import { FormControlState } from "@/types";
 import { getTestSelector } from "@/utils/testing";
 import { createStyles, Select, SelectProps } from "@mantine/core";
+import { IconAlertCircle, IconCheck, IconChevronDown } from "@tabler/icons";
 import clsx from "clsx";
 import { forwardRef } from "react";
-import { IconAlertCircle, IconCheck, IconChevronDown } from "tabler-icons";
 import { useTailwindColors } from "../../hooks/useTailwindConfig";
 import { useSetting } from "../ThemeToggle";
 

@@ -5,9 +5,9 @@ import {
   Textarea as MantineTextarea,
   TextareaProps as MantineTextareaProps,
 } from "@mantine/core";
+import { IconAlertCircle } from "@tabler/icons";
 import clsx from "clsx";
 import { forwardRef } from "react";
-import { IconAlertCircle } from "tabler-icons";
 
 interface TextareaProps extends MantineTextareaProps {
   testSelector: string;

@@ -1,10 +1,5 @@
 import logo from "@/images/logo.svg";
 import { Dialog, Transition } from "@headlessui/react";
-import clsx from "clsx";
-import Image from "next/future/image";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { Fragment, useEffect, useState } from "react";
 import {
   IconFolder,
   IconHome,
@@ -12,7 +7,12 @@ import {
   IconMenu2,
   IconSettings,
   IconX,
-} from "tabler-icons";
+} from "@tabler/icons";
+import clsx from "clsx";
+import Image from "next/future/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { Fragment, useEffect, useState } from "react";
 
 const navigation = [
   { name: "Home", href: "/", icon: IconHome },

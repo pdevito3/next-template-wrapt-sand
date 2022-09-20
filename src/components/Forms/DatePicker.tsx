@@ -5,10 +5,10 @@ import {
   DatePicker as MantineDatePicker,
   DatePickerProps as MantineDatePickerProps,
 } from "@mantine/dates";
+import { IconAlertCircle, IconCalendar } from "@tabler/icons";
 import clsx from "clsx";
 import dayjs from "dayjs";
 import { forwardRef } from "react";
-import { IconAlertCircle, IconCalendar } from "tabler-icons";
 import { useTailwindColors } from "../../hooks/useTailwindConfig";
 import { useSetting } from "../ThemeToggle";
 

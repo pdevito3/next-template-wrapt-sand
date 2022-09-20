@@ -5,8 +5,8 @@ import {
   useGlobalFilter,
 } from "@/components/forms";
 import { RecipeListTable } from "@/domain/recipes";
+import { IconCirclePlus } from "@tabler/icons";
 import "@tanstack/react-table";
-import { IconCirclePlus } from "tabler-icons";
 
 RecipeList.isPublic = false;
 export default function RecipeList() {

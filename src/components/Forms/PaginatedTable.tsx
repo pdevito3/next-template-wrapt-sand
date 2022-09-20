@@ -1,6 +1,13 @@
 import { ComboBox } from "@/components/forms";
 import { Pagination } from "@/types";
 import {
+  IconChevronDown,
+  IconChevronLeft,
+  IconChevronRight,
+  IconChevronsLeft,
+  IconChevronsRight
+} from "@tabler/icons";
+import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
@@ -8,17 +15,10 @@ import {
   getSortedRowModel,
   Row,
   SortingState,
-  useReactTable,
+  useReactTable
 } from "@tanstack/react-table";
 import clsx from "clsx";
 import React from "react";
-import {
-  IconChevronDown,
-  IconChevronLeft,
-  IconChevronRight,
-  IconChevronsLeft,
-  IconChevronsRight,
-  IconChevronUp,
 } from "tabler-icons";
 
 interface PaginatedTableContextResponse {

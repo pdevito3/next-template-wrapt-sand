@@ -5,8 +5,8 @@ import {
   AutocompleteProps as MantineAutocompleteProps,
   createStyles,
 } from "@mantine/core";
+import { IconAlertCircle } from "@tabler/icons";
 import clsx from "clsx";
-import { IconAlertCircle } from "tabler-icons";
 import { useTailwindColors } from "../../hooks/useTailwindConfig";
 import { useSetting } from "../ThemeToggle";
 
