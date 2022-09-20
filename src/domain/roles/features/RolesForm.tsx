@@ -114,7 +114,7 @@ function RolesForm({
           </Button>
         </div>
       </form>
-      <h2 className="h2">Assigned Roles</h2>
+      <h3 className="h3">Assigned Roles</h3>
       <div className="p-2 mt-3 space-y-2 border rounded-md shadow dark:border-slate-800">
         {
           <>

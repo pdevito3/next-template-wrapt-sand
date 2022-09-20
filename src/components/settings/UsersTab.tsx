@@ -17,7 +17,7 @@ function UsersTab() {
 
   return (
     <>
-      <h2 className="h2">Users</h2>
+      <h3 className="h3">Users</h3>
       <div className="py-4">
         <PaginatedTableProvider>
           <div className="flex items-center justify-between">

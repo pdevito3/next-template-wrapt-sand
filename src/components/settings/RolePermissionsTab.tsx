@@ -14,7 +14,7 @@ function RolePermissionsTab() {
     <>
       <div className="space-y-8">
         <div className="space-y-2">
-          <h2 className="h2">Add a Role Permission</h2>
+          <h3 className="h3">Add a Role Permission</h3>
           <div className="hidden md:block">
             <RolePermissionForm direction="horizontal" />
           </div>
@@ -25,7 +25,7 @@ function RolePermissionsTab() {
         <div className="flex-1">
           <PaginatedTableProvider>
             <div className="flex-col items-start space-y-4 lg:space-y-0 lg:flex-row lg:flex lg:items-center lg:justify-between">
-              <h2 className="block h2">Role Permissions</h2>
+              <h3 className="block h3">Role Permissions</h3>
               <div className="py-1">
                 <SearchInput
                   value={globalFilter ?? ""}

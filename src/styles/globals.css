@@ -15,6 +15,10 @@
     @apply text-xl font-medium tracking-tight font-display text-slate-900 dark:text-gray-50 sm:text-3xl
   }
 
+  .h3 {
+    @apply text-lg font-medium tracking-tight font-display text-slate-900 dark:text-gray-50 sm:text-2xl
+  }
+
 
   /* Mantine */
   .input-root {
